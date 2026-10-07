@@ -1,0 +1,6 @@
+{
+  "name": "Veracy Immobilien – Schweizer Premium Immobilienmakler",
+  "description": "Veracy Immobilien verbindet Vertrauen, schnelle Reaktionszeiten und Schweizer Maklerqualität zu fairen Festpreisen. Verkaufen, Kaufen und professionelle Schätzung.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

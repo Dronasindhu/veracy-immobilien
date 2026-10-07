@@ -1,0 +1,381 @@
+import { Property, SellingPackage } from '../types';
+
+export const HERO_IMAGE = '/src/assets/images/hero_swiss_architecture_1791369734883.jpg';
+export const ZURICH_PENTHOUSE_IMG = '/src/assets/images/property_zurich_penthouse_1791369745743.jpg';
+export const LUZERN_VILLA_IMG = '/src/assets/images/property_luzern_villa_1791369755498.jpg';
+export const ZUG_APARTMENT_IMG = '/src/assets/images/property_zug_apartment_1791369765957.jpg';
+
+export const PROPERTIES: Property[] = [
+  {
+    id: 'prop-1',
+    title: {
+      de: 'Exklusives Penthouse mit Seeblick & Privatterrasse',
+      en: 'Exclusive Penthouse with Lake View & Private Terrace',
+    },
+    type: 'sale',
+    category: 'penthouse',
+    price: 3250000,
+    currency: 'CHF',
+    priceFormatted: "CHF 3'250'000",
+    location: {
+      address: 'Seestrasse 142',
+      city: 'Zürich',
+      canton: 'Zürich (ZH)',
+      zip: '8008',
+    },
+    livingArea: 185,
+    rooms: 4.5,
+    bathrooms: 2,
+    yearBuilt: 2021,
+    availableFrom: 'Sofort / Nach Vereinbarung',
+    description: {
+      de: 'Dieses meisterhaft gestaltete Attika-Apartment im prestigeträchtigen Seefeld vereint unverbaubaren Blick auf den Zürichsee mit puristischer Schweizer Architektur. Edles Räuchereichen-Parkett, offene Bulthaup-Küche mit Naturstein und raumhohe Schiebefenster schaffen ein lichtdurchflutetes Wohngefühl auf höchstem Niveau.',
+      en: 'This masterfully designed penthouse in prestigious Zurich Seefeld merges unobstructed views of Lake Zurich with purist Swiss architecture. Smoked oak parquet, open designer kitchen with natural stone, and floor-to-ceiling sliding glass provide refined living at the highest standard.',
+    },
+    features: ['Seesicht', 'Terrasse (65 m²)', 'Lift direkt in Wohnung', 'Minergie-P', '2 Tiefgaragenplätze', 'Weinklimaschrank'],
+    imageUrl: ZURICH_PENTHOUSE_IMG,
+    gallery: [ZURICH_PENTHOUSE_IMG, HERO_IMAGE, ZUG_APARTMENT_IMG],
+    monthlyExpenses: 650,
+    energyLabel: 'Minergie-P (A)',
+    parkingSpaces: 2,
+  },
+  {
+    id: 'prop-2',
+    title: {
+      de: 'Moderne Architekturvilla am Vierwaldstättersee',
+      en: 'Contemporary Architectural Villa on Lake Lucerne',
+    },
+    type: 'sale',
+    category: 'villa',
+    price: 4480000,
+    currency: 'CHF',
+    priceFormatted: "CHF 4'480'000",
+    location: {
+      address: 'Kastanienbaumstrasse 28',
+      city: 'Luzern / Horw',
+      canton: 'Luzern (LU)',
+      zip: '6048',
+    },
+    livingArea: 295,
+    rooms: 6.5,
+    bathrooms: 3.5,
+    yearBuilt: 2023,
+    availableFrom: 'Nach Vereinbarung',
+    description: {
+      de: 'Ein architektonisches Solitär an sonnenverwöhnter Hanglage. Sichtbeton trifft auf warmes Lärchenholz und weitläufige Glasfronten mit Panoramablick auf den Pilatus und den See. Großzügige Gartenanlage mit Natursteinpool, diskrete Privatsphäre und modernste Smarthome-Haustechnik (Erdsonde, Photovoltaik).',
+      en: 'An architectural statement set on a sun-drenched hillside. Exposed concrete meets warm larch wood and expansive glazing with panoramic views of Mount Pilatus and the lake. Expansive landscaped garden with reflection pool, absolute privacy, and state-of-the-art geothermal heat pump technology.',
+    },
+    features: ['Privater Garten', 'Pool & Wellness', 'Panoramasicht', 'Erdsondenheizung', 'Doppelgarage + 3 Aussenplätze', 'Smart Home'],
+    imageUrl: LUZERN_VILLA_IMG,
+    gallery: [LUZERN_VILLA_IMG, HERO_IMAGE, ZURICH_PENTHOUSE_IMG],
+    monthlyExpenses: 820,
+    energyLabel: 'GEAK A/A',
+    parkingSpaces: 4,
+  },
+  {
+    id: 'prop-3',
+    title: {
+      de: 'Elegante Designer-Wohnung im Bäderquartier',
+      en: 'Refined Designer Residence in Prime Baden',
+    },
+    type: 'rent',
+    category: 'apartment',
+    price: 3850,
+    currency: 'CHF',
+    priceFormatted: "CHF 3'850 / Mt.",
+    location: {
+      address: 'Bäderstrasse 18',
+      city: 'Baden',
+      canton: 'Aargau (AG)',
+      zip: '5400',
+    },
+    livingArea: 135,
+    rooms: 3.5,
+    bathrooms: 2,
+    yearBuilt: 2022,
+    availableFrom: '01. November 2026',
+    description: {
+      de: 'Exklusives Wohnen in Gehdistanz zur Limmat und zum Bahnhof Baden (nur 15 Minuten Direktverbindung nach Zürich HB). Diese repräsentative Residenz besticht durch fliessende Grundrisse, massgefertigte Einbauschränke, Miele-Exklusivgeräte und einen sonnigen Südbalkon.',
+      en: 'Prime residential living within walking distance to the Limmat river and Baden station (only 15 minutes direct to Zurich HB). Features tailored joinery, premium Miele appliances, sunny south-facing balcony, and exceptional acoustic insulation.',
+    },
+    features: ['15 Min nach Zürich HB', 'Balkon', 'Waschturm im Reduit', 'Concierge Service optional', '1 Einstellplatz inklusive', 'Klimaanlage'],
+    imageUrl: ZUG_APARTMENT_IMG,
+    gallery: [ZUG_APARTMENT_IMG, ZURICH_PENTHOUSE_IMG, HERO_IMAGE],
+    monthlyExpenses: 380,
+    energyLabel: 'Minergie',
+    parkingSpaces: 1,
+  },
+  {
+    id: 'prop-4',
+    title: {
+      de: 'Repräsentatives Landhaus mit unverbaubarem Alpenblick',
+      en: 'Prestigious Country Residence with Unobstructed Alpine Vista',
+    },
+    type: 'sale',
+    category: 'house',
+    price: 2890000,
+    currency: 'CHF',
+    priceFormatted: "CHF 2'890'000",
+    location: {
+      address: 'Kirchweg 12',
+      city: 'Küsnacht ZH',
+      canton: 'Zürich (ZH)',
+      zip: '8700',
+    },
+    livingArea: 220,
+    rooms: 5.5,
+    bathrooms: 2.5,
+    yearBuilt: 2019,
+    availableFrom: 'Nach Vereinbarung',
+    description: {
+      de: 'Goldküsten-Idylle in Perfektion: Grosszügiger Wohn- und Essbereich mit stilvollem Cheminée, weitläufige Terrassen und herrlicher Ausblick über den See bis in die Glarner Alpen. Hochwertige Materialisierung und nachhaltige Haustechnik.',
+      en: 'Gold Coast prestige: generous living and dining quarters with bespoke open fireplace, extensive wrap-around terraces, and splendid vistas over Lake Zurich to the Glarus Alps. Premium natural stone finishes and eco-friendly climate systems.',
+    },
+    features: ['Cheminée', 'Goldküste Lage', 'Grosser Umschwung', 'Weinkeller', 'Doppelgarage', 'Alpensicht'],
+    imageUrl: HERO_IMAGE,
+    gallery: [HERO_IMAGE, LUZERN_VILLA_IMG, ZURICH_PENTHOUSE_IMG],
+    monthlyExpenses: 590,
+    energyLabel: 'Minergie',
+    parkingSpaces: 2,
+  },
+  {
+    id: 'prop-5',
+    title: {
+      de: 'Stilvolle 4.5-Zimmer-Attikawohnung im Kirchenfeld',
+      en: 'Sophisticated 4.5-Room Penthouse in Bern Kirchenfeld',
+    },
+    type: 'rent',
+    category: 'penthouse',
+    price: 3650,
+    currency: 'CHF',
+    priceFormatted: "CHF 3'650 / Mt.",
+    location: {
+      address: 'Thunstrasse 45',
+      city: 'Bern',
+      canton: 'Bern (BE)',
+      zip: '3005',
+    },
+    livingArea: 148,
+    rooms: 4.5,
+    bathrooms: 2,
+    yearBuilt: 2020,
+    availableFrom: '01. Dezember 2026',
+    description: {
+      de: 'In Berns begehrtestem Botschaftsviertel Kirchenfeld: Großzügige Raumhöhen, offenes Küchenkonzept mit Kochinsel, geräumige Master-Suite mit Ensuite-Bad und sonniger Rundumbalkon mit Blick auf die Berner Alpen.',
+      en: 'Located in Bern’s prime diplomatic quarter of Kirchenfeld: generous ceiling heights, open-concept kitchen island, spacious master suite with en-suite bath, and panoramic wrap-around terrace overlooking the Bernese Alps.',
+    },
+    features: ['Botschaftsquartier', 'Rundumbalkon', 'Lift', 'Master-Suite', 'Einstellplatz vorhanden', 'Minergie'],
+    imageUrl: ZURICH_PENTHOUSE_IMG,
+    gallery: [ZURICH_PENTHOUSE_IMG, ZUG_APARTMENT_IMG, HERO_IMAGE],
+    monthlyExpenses: 340,
+    energyLabel: 'A/B',
+    parkingSpaces: 1,
+  },
+  {
+    id: 'prop-6',
+    title: {
+      de: 'Moderne Gartenmaisonette mit privater Oase in Aarau',
+      en: 'Modern Garden Maisonette with Private Oasis in Aarau',
+    },
+    type: 'sale',
+    category: 'apartment',
+    price: 1850000,
+    currency: 'CHF',
+    priceFormatted: "CHF 1'850'000",
+    location: {
+      address: 'Sonnenrain 8',
+      city: 'Aarau',
+      canton: 'Aargau (AG)',
+      zip: '5000',
+    },
+    livingArea: 152,
+    rooms: 4.5,
+    bathrooms: 2,
+    yearBuilt: 2021,
+    availableFrom: 'Frühjahr 2027',
+    description: {
+      de: 'Familienfreundliche Luxusmaisonette mit über 180 m² privatem Gartenanteil in ruhigem Quartier in Aarau. Hochwertiger Ausbaustandard, Erdsonden-Wärmepumpe, kontrollierte Wohnraumlüftung und direkter Zugang zur Tiefgarage. Nur 25 Minuten bis Zürich HB.',
+      en: 'Family luxury maisonette featuring over 180 m² of private garden in a serene residential quarter in Aarau. Geothermal heat pump, controlled ventilation, and direct underground garage access. Only 25 minutes to Zurich HB.',
+    },
+    features: ['180m² Privatgarten', 'Maisonette', 'Familienfreundlich', 'Minergie-Standard', '2 Einstellplätze', 'Erdsonde'],
+    imageUrl: LUZERN_VILLA_IMG,
+    gallery: [LUZERN_VILLA_IMG, ZUG_APARTMENT_IMG, HERO_IMAGE],
+    monthlyExpenses: 460,
+    energyLabel: 'Minergie-A',
+    parkingSpaces: 2,
+  },
+];
+
+export const SELLING_PACKAGES: SellingPackage[] = [
+  {
+    id: 'digital-direct',
+    name: {
+      de: 'Starter / Digital Direkt',
+      en: 'Starter / Digital Direct',
+    },
+    tagline: {
+      de: 'Für Eigentümer, die Besichtigungen selbst leiten möchten, aber professionelle Vermarktung wünschen.',
+      en: 'For owners who prefer conducting viewings themselves with professional marketing support.',
+    },
+    priceDisplay: {
+      de: "CHF 3'900",
+      en: "CHF 3'900",
+    },
+    priceNote: {
+      de: 'Transparenter Festpreis bei erfolgreichem Verkauf',
+      en: 'Transparent flat fee upon successful sale',
+    },
+    idealFor: {
+      de: 'Selbständige Eigentümer, Eigentumswohnungen & Reihenhäuser',
+      en: 'Independent owners, standard apartments & row houses',
+    },
+    features: {
+      de: [
+        'Kostenlose Marktwertschätzung & Preisfindung',
+        'Professionelle HDR-Fotografie & 2D/3D Grundrisse',
+        'Erstellung eines hochwertigen Verkaufsdossiers',
+        'Top-Platzierung auf Homegate, ImmoScout24 & Flatfox',
+        'Gezielte Social Media Vermarktung in der Region',
+        'Digitale Vorqualifizierung aller Kaufinteressenten',
+        'Eigentümer-Dashboard mit Echtzeit-Statistiken',
+        'Rechtssichere Schweizer Vorvertrags-Vorlagen',
+      ],
+      en: [
+        'Complimentary market valuation & price strategy',
+        'Professional HDR photography & 2D/3D floor plans',
+        'High-end sales exposé dossier creation',
+        'Top placement on Homegate, ImmoScout24 & Flatfox',
+        'Targeted regional digital marketing campaigns',
+        'Digital pre-qualification of prospective buyers',
+        'Owner dashboard with live inquiry telemetry',
+        'Swiss-law compliant preliminary contract templates',
+      ],
+    },
+  },
+  {
+    id: 'standard-full',
+    name: {
+      de: 'Standard / Makler Full Service',
+      en: 'Standard / Full Broker Service',
+    },
+    popular: true,
+    tagline: {
+      de: 'Unser beliebtester Rundum-Sorglos-Service: Persönliche Betreuung von A bis Z zum fairen Festpreis.',
+      en: 'Our most popular end-to-end service: Personal Swiss brokerage at a fair transparent flat rate.',
+    },
+    priceDisplay: {
+      de: "CHF 7'900",
+      en: "CHF 7'900",
+    },
+    priceNote: {
+      de: 'Festpreis nur bei Erfolg (Keine Vorkosten, 0 CHF Risiko)',
+      en: 'Flat fee only on success (Zero upfront costs, zero risk)',
+    },
+    idealFor: {
+      de: 'Einfamilienhäuser, gehobene Eigentumswohnungen & Mehrfamilienhäuser',
+      en: 'Single-family homes, prime apartments & multi-family properties',
+    },
+    features: {
+      de: [
+        'Alles aus dem Starter-Paket inklusive',
+        'Persönlicher SVIT-zertifizierter Makler als Festansprechpartner',
+        'Durchführung ALLER Besichtigungen vor Ort durch Veracy',
+        'Professionelle Preisverhandlung & strukturiertes Bieterverfahren',
+        'Bank- & Bonitätsprüfung der Käufer vor Reservation',
+        'Koordination des Notartermins & Grundbuchamtes',
+        'Steuerliche Ersteinschätzung der Grundstückgewinnsteuer',
+        'Rechtssichere Kaufvertragsprüfung & Schlüsselübergabe',
+      ],
+      en: [
+        'Includes everything in the Starter package',
+        'Dedicated SVIT-certified broker as your personal advisor',
+        'Veracy conducts ALL in-person viewings on-site',
+        'Expert price negotiations & structured bidding process',
+        'Mortgage & solvency verification of final buyers',
+        'Complete coordination with notary and land registry',
+        'Preliminary Swiss real estate capital gains tax assessment',
+        'Contract review and official handover protocol',
+      ],
+    },
+  },
+  {
+    id: 'exclusive-mandate',
+    name: {
+      de: 'Exklusiv / Premium Mandat',
+      en: 'Exclusive / Premium Mandate',
+    },
+    tagline: {
+      de: 'Maßgeschneiderter Concierge-Service für Luxusobjekte, Villen & diskrete Off-Market-Transaktionen.',
+      en: 'Tailored concierge service for luxury estates, villas & confidential off-market transactions.',
+    },
+    priceDisplay: {
+      de: '1.0% Erfolgshonorar',
+      en: '1.0% Success Fee',
+    },
+    priceNote: {
+      de: 'Maximal 1.0% (Traditionelle Makler verlangen 2.5% – 3.0%)',
+      en: 'Max 1.0% (Traditional brokers charge 2.5% – 3.0%)',
+    },
+    idealFor: {
+      de: 'Villen ab CHF 2.5M, Bauland, Portfolios & diskreter Verkauf',
+      en: 'Villas above CHF 2.5M, development land & confidential sales',
+    },
+    features: {
+      de: [
+        'Alles aus Standard Full Service inklusive',
+        'Diskrete Off-Market Vermittlung über Veracy VIP-Investorennetzwerk',
+        '4K Drohnenaufnahmen & cinematic Video-Rundgang',
+        'Interaktive 3D Matterport Virtual Tour',
+        'High-End Printdossier in Leder-Prägung für solvente Käufer',
+        'Vollständige juristische & steuerliche Begleitung',
+        'Home Staging & Dekorations-Beratung vor dem Fotoshooting',
+        '24/7 VIP-Verfügbarkeit Ihres Senior Partners',
+      ],
+      en: [
+        'Includes everything in Standard Full Service',
+        'Confidential off-market placement via VIP investor network',
+        '4K drone aerial cinematography & lifestyle video tour',
+        'Interactive 3D Matterport virtual tour',
+        'Bespoke hardcover leather-bound presentation exposé',
+        'Full legal and tax structuring assistance',
+        'Professional home staging & aesthetic styling consultation',
+        '24/7 dedicated Senior Partner hotline',
+      ],
+    },
+  },
+];
+
+export const SWISS_CANTONS = [
+  'Zürich (ZH)',
+  'Zug (ZG)',
+  'Luzern (LU)',
+  'Bern (BE)',
+  'Basel (BS/BL)',
+  'Schwyz (SZ)',
+  'St. Gallen (SG)',
+  'Aargau (AG)',
+];
+
+export const TESTIMONIALS = [
+  {
+    author: 'Dr. Beat Meier',
+    role: 'Verkäufer Einfamilienhaus in Meilen ZH',
+    quote:
+      'Statt der üblichen 3% Provision (rund CHF 75’000) zahlten wir bei Veracy den fairen Festpreis. Unser Haus war nach nur 24 Tagen zum Spitzenpreis verkauft. Schnelle Reaktionszeiten, absolute Verlässlichkeit.',
+    rating: 5,
+  },
+  {
+    author: 'Familie von Allmen',
+    role: 'Käufer Attikawohnung in Luzern',
+    quote:
+      'Vom ersten Kontakt bis zum Notariat in Luzern fühlten wir uns exzellent betreut. Fragen wurden ausnahmslos innert weniger Stunden präzise beantwortet. Höchste Schweizer Professionalität.',
+    rating: 5,
+  },
+  {
+    author: 'Laurent & Sophie C.',
+    role: 'Eigentümer Mehrfamilienhaus in Baden AG',
+    quote:
+      'Transparenz statt versteckter Spesen. Veracy hat die Marktwertermittlung wissenschaftlich fundiert durchgeführt und die Käufer bonitätsgeprüft. Wir haben über CHF 42’000 Maklerkosten im Aargau gespart.',
+    rating: 5,
+  },
+];
