@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { Language, SellingPackage } from '../types';
-import { X, CheckCircle2, Phone, Mail, Clock, ShieldCheck, ArrowRight } from 'lucide-react';
+import { sendEmailInquiry } from '../services/emailService';
+import { X, CheckCircle2, Phone, Mail, Clock, ShieldCheck, ArrowRight, Loader2 } from 'lucide-react';
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
   language: Language;
   preselectedPackage?: SellingPackage | null;
+  propertyContext?: { title: string; location?: string; type: 'viewing' | 'expose' } | null;
 }
 
 export const ContactModal: React.FC<ContactModalProps> = ({
@@ -14,21 +16,41 @@ export const ContactModal: React.FC<ContactModalProps> = ({
   onClose,
   language,
   preselectedPackage,
+  propertyContext,
 }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [location, setLocation] = useState('');
+  const [location, setLocation] = useState(propertyContext?.location || '');
   const [message, setMessage] = useState('');
   const [interest, setInterest] = useState<string>(
-    preselectedPackage ? `package-${preselectedPackage.id}` : 'sell'
+    propertyContext
+      ? `${propertyContext.type === 'viewing' ? 'Besichtigungstermin' : 'Exposé (PDF)'}: ${propertyContext.title}`
+      : preselectedPackage
+      ? `package-${preselectedPackage.id}`
+      : 'sell'
   );
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSending(true);
+
+    await sendEmailInquiry({
+      formType: 'Kostenlose Beratung / Verkaufspaket',
+      subject: `Beratungsanfrage: ${name} (${interest})`,
+      name,
+      email,
+      phone,
+      location,
+      interest: preselectedPackage ? `Paket: ${preselectedPackage.name.de}` : interest,
+      message,
+    });
+
+    setIsSending(false);
     setSubmitted(true);
   };
 
@@ -87,7 +109,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   : 'Connect with a Swiss Real Estate Expert'}
               </h3>
               <p className="text-xs text-neutral-500 mt-1">
-                {preselectedPackage
+                {propertyContext
+                  ? language === 'de'
+                    ? `Anfrage zu: ${propertyContext.title}`
+                    : `Inquiry for: ${propertyContext.title}`
+                  : preselectedPackage
                   ? language === 'de'
                     ? `Ihre Anfrage zum Paket: ${preselectedPackage.name.de}`
                     : `Inquiry regarding: ${preselectedPackage.name.en}`
@@ -188,10 +214,20 @@ export const ContactModal: React.FC<ContactModalProps> = ({
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all shadow"
+                  disabled={isSending}
+                  className="w-full py-3 bg-neutral-900 hover:bg-neutral-800 disabled:opacity-60 text-white rounded text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all shadow"
                 >
-                  <span>{language === 'de' ? 'Beratung kostenlos anfragen' : 'Send Free Consultation Request'}</span>
-                  <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
+                  {isSending ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-amber-400" />
+                      <span>{language === 'de' ? 'Wird übermittelt...' : 'Sending request...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{language === 'de' ? 'Beratung kostenlos anfragen' : 'Send Free Consultation Request'}</span>
+                      <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
+                    </>
+                  )}
                 </button>
               </div>
 

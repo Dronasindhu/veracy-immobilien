@@ -6,11 +6,13 @@ import { Search, SlidersHorizontal, MapPin, Maximize2, BedDouble, Calendar, Arro
 interface BuyRentPageProps {
   language: Language;
   onOpenConsultation: () => void;
+  onOpenPropertyInquiry?: (context: { title: string; location?: string; type: 'viewing' | 'expose' }) => void;
 }
 
 export const BuyRentPage: React.FC<BuyRentPageProps> = ({
   language,
   onOpenConsultation,
+  onOpenPropertyInquiry,
 }) => {
   const [activeType, setActiveType] = useState<'all' | 'sale' | 'rent'>('all');
   const [selectedCanton, setSelectedCanton] = useState<string>('all');
@@ -424,8 +426,17 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
               <div className="pt-4 border-t border-neutral-200 flex flex-col sm:flex-row gap-4">
                 <button
                   onClick={() => {
+                    const prop = selectedProperty;
                     setSelectedProperty(null);
-                    onOpenConsultation();
+                    if (onOpenPropertyInquiry) {
+                      onOpenPropertyInquiry({
+                        title: prop.title[language],
+                        location: `${prop.location.city} (${prop.location.canton})`,
+                        type: 'viewing',
+                      });
+                    } else {
+                      onOpenConsultation();
+                    }
                   }}
                   className="flex-1 py-3 px-6 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow"
                 >
@@ -435,11 +446,17 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
 
                 <button
                   onClick={() => {
-                    alert(
-                      language === 'de'
-                        ? `Vielen Dank! Das vollständige Verkaufsdossier für "${selectedProperty.title.de}" wird Ihnen per E-Mail zugestellt.`
-                        : `Thank you! The full sales dossier for "${selectedProperty.title.en}" will be sent to your email.`
-                    );
+                    const prop = selectedProperty;
+                    setSelectedProperty(null);
+                    if (onOpenPropertyInquiry) {
+                      onOpenPropertyInquiry({
+                        title: prop.title[language],
+                        location: `${prop.location.city} (${prop.location.canton})`,
+                        type: 'expose',
+                      });
+                    } else {
+                      onOpenConsultation();
+                    }
                   }}
                   className="py-3 px-6 bg-neutral-100 hover:bg-neutral-200 text-neutral-900 rounded text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer"
                 >

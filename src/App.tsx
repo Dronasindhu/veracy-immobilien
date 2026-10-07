@@ -22,6 +22,7 @@ export default function App() {
   const [language, setLanguage] = useState<Language>('de');
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<SellingPackage | null>(null);
+  const [propertyContext, setPropertyContext] = useState<{ title: string; location?: string; type: 'viewing' | 'expose' } | null>(null);
   const [valuationInitialQuery, setValuationInitialQuery] = useState<string>('');
 
   const handleToggleLanguage = () => {
@@ -30,6 +31,7 @@ export default function App() {
 
   const handleSelectPackage = (pkg: SellingPackage) => {
     setSelectedPackage(pkg);
+    setPropertyContext(null);
     setIsConsultationOpen(true);
   };
 
@@ -54,6 +56,7 @@ export default function App() {
         onToggleLanguage={handleToggleLanguage}
         onOpenConsultation={() => {
           setSelectedPackage(null);
+          setPropertyContext(null);
           setIsConsultationOpen(true);
         }}
       />
@@ -108,6 +111,12 @@ export default function App() {
             language={language}
             onOpenConsultation={() => {
               setSelectedPackage(null);
+              setPropertyContext(null);
+              setIsConsultationOpen(true);
+            }}
+            onOpenPropertyInquiry={(ctx) => {
+              setSelectedPackage(null);
+              setPropertyContext(ctx);
               setIsConsultationOpen(true);
             }}
           />
@@ -119,6 +128,7 @@ export default function App() {
             initialQuery={valuationInitialQuery}
             onOpenConsultation={() => {
               setSelectedPackage(null);
+              setPropertyContext(null);
               setIsConsultationOpen(true);
             }}
           />
@@ -131,6 +141,7 @@ export default function App() {
         onNavigate={handleNavigate}
         onOpenConsultation={() => {
           setSelectedPackage(null);
+          setPropertyContext(null);
           setIsConsultationOpen(true);
         }}
       />
@@ -138,9 +149,13 @@ export default function App() {
       {/* Global Consultation Modal */}
       <ContactModal
         isOpen={isConsultationOpen}
-        onClose={() => setIsConsultationOpen(false)}
+        onClose={() => {
+          setIsConsultationOpen(false);
+          setPropertyContext(null);
+        }}
         language={language}
         preselectedPackage={selectedPackage}
+        propertyContext={propertyContext}
       />
     </div>
   );

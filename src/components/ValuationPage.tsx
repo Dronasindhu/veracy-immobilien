@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
-import { Check, ArrowRight, ArrowLeft, ShieldCheck, Clock, Calculator, Home, Building2, Sparkles, CheckCircle2 } from 'lucide-react';
+import { sendEmailInquiry } from '../services/emailService';
+import { Check, ArrowRight, ArrowLeft, ShieldCheck, Clock, Calculator, Home, Building2, Sparkles, CheckCircle2, Loader2 } from 'lucide-react';
 
 interface ValuationPageProps {
   language: Language;
@@ -15,6 +16,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
 }) => {
   // Step state (1: Type, 2: Specs, 3: Quality/Extras, 4: Contact, 5: Result)
   const [step, setStep] = useState<number>(1);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   // Form values
   const [propertyType, setPropertyType] = useState<string>(
@@ -83,6 +85,40 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
 
   const handleNext = () => {
     setStep((prev) => Math.min(prev + 1, 5));
+    window.scrollTo({ top: 300, behavior: 'smooth' });
+  };
+
+  const handleSubmitStep4 = async () => {
+    if (!fullName || !email) {
+      alert(language === 'de' ? 'Bitte geben Sie Ihren Namen und Ihre E-Mail-Adresse an.' : 'Please enter your name and email address.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    await sendEmailInquiry({
+      formType: 'Immobilienschätzung',
+      subject: `Schätzungsanfrage: ${fullName} (${zipCity || 'ZH/AG'})`,
+      name: fullName,
+      email,
+      phone,
+      location: zipCity,
+      interest: intent,
+      message: `Objektart: ${propertyType}, ${livingArea}m², ${rooms} Zimmer, Baujahr: ${buildYear}, Zustand: ${condition}, Extras: ${features.join(', ')}`,
+      propertyDetails: {
+        'Objektart': propertyType,
+        'Wohnfläche': `${livingArea} m²`,
+        'Zimmer': rooms,
+        'Baujahr': buildYear,
+        'Zustand': condition,
+        'Ausstattung': features.join(', '),
+        'Geschätzter Richtwert': `CHF ${valuationResult.avg.toLocaleString('de-CH')}`,
+        'Berechnete Preisspanne': `CHF ${valuationResult.lower.toLocaleString('de-CH')} – CHF ${valuationResult.upper.toLocaleString('de-CH')}`,
+        'Verkaufsabsicht': intent,
+      },
+    });
+
+    setIsSubmitting(false);
+    setStep(5);
     window.scrollTo({ top: 300, behavior: 'smooth' });
   };
 
@@ -484,11 +520,22 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
                   <span>{language === 'de' ? 'Zurück' : 'Back'}</span>
                 </button>
                 <button
-                  onClick={handleNext}
-                  className="px-6 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-xs font-semibold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow"
+                  type="button"
+                  disabled={isSubmitting}
+                  onClick={handleSubmitStep4}
+                  className="px-6 py-2.5 bg-neutral-900 hover:bg-neutral-800 disabled:opacity-60 text-white rounded text-xs font-semibold uppercase tracking-wider flex items-center gap-2 cursor-pointer shadow"
                 >
-                  <Sparkles className="w-4 h-4 text-amber-400" />
-                  <span>{language === 'de' ? 'Marktwert jetzt berechnen' : 'Calculate Valuation Now'}</span>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-amber-400" />
+                      <span>{language === 'de' ? 'Wird berechnet...' : 'Calculating...'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Sparkles className="w-4 h-4 text-amber-400" />
+                      <span>{language === 'de' ? 'Marktwert jetzt berechnen' : 'Calculate Valuation Now'}</span>
+                    </>
+                  )}
                 </button>
               </div>
             </div>
