@@ -1,9 +1,13 @@
 import { Property, SellingPackage } from '../types';
+import heroImg from '../assets/images/hero_swiss_architecture_1791369734883.jpg';
+import zurichPenthouseImg from '../assets/images/property_zurich_penthouse_1791369745743.jpg';
+import luzernVillaImg from '../assets/images/property_luzern_villa_1791369755498.jpg';
+import zugApartmentImg from '../assets/images/property_zug_apartment_1791369765957.jpg';
 
-export const HERO_IMAGE = '/src/assets/images/hero_swiss_architecture_1791369734883.jpg';
-export const ZURICH_PENTHOUSE_IMG = '/src/assets/images/property_zurich_penthouse_1791369745743.jpg';
-export const LUZERN_VILLA_IMG = '/src/assets/images/property_luzern_villa_1791369755498.jpg';
-export const ZUG_APARTMENT_IMG = '/src/assets/images/property_zug_apartment_1791369765957.jpg';
+export const HERO_IMAGE = heroImg;
+export const ZURICH_PENTHOUSE_IMG = zurichPenthouseImg;
+export const LUZERN_VILLA_IMG = luzernVillaImg;
+export const ZUG_APARTMENT_IMG = zugApartmentImg;
 
 export const PROPERTIES: Property[] = [
   {
