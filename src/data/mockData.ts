@@ -183,9 +183,9 @@ export const PROPERTIES: Property[] = [
     },
     type: 'sale',
     category: 'apartment',
-    price: 1850000,
+    price: 1180000,
     currency: 'CHF',
-    priceFormatted: "CHF 1'850'000",
+    priceFormatted: "CHF 1'180'000",
     location: {
       address: 'Sonnenrain 8',
       city: 'Aarau',

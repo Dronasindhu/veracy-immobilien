@@ -15,7 +15,7 @@ export const SellPage: React.FC<SellPageProps> = ({
   onSelectPackage,
   onOpenConsultation,
 }) => {
-  const [salesPrice, setSalesPrice] = useState<number>(1650000);
+  const [salesPrice, setSalesPrice] = useState<number>(1250000);
 
   const traditionalCommission = Math.round(salesPrice * 0.025);
   const veracyStandardFee = 7900;
@@ -252,17 +252,17 @@ export const SellPage: React.FC<SellPageProps> = ({
                 </div>
                 <input
                   type="range"
-                  min={800000}
-                  max={4000000}
+                  min={500000}
+                  max={3500000}
                   step={50000}
                   value={salesPrice}
                   onChange={(e) => setSalesPrice(Number(e.target.value))}
                   className="w-full h-2.5 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-amber-400"
                 />
                 <div className="flex justify-between text-xs text-neutral-400 mt-1 font-mono">
-                  <span>CHF 800'000</span>
-                  <span>CHF 2'400'000</span>
-                  <span>CHF 4'000'000</span>
+                  <span>CHF 500'000</span>
+                  <span>CHF 1'800'000</span>
+                  <span>CHF 3'500'000</span>
                 </div>
               </div>
 

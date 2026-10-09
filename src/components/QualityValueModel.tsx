@@ -12,7 +12,7 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
   language,
   onOpenConsultation,
 }) => {
-  const [propertyPrice, setPropertyPrice] = useState<number>(1800000);
+  const [propertyPrice, setPropertyPrice] = useState<number>(1250000);
 
   // Traditional Swiss broker commission (typically 2.5% - 3.0% + MWST)
   const traditionalRate = 0.025;
@@ -81,17 +81,17 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
                 </div>
                 <input
                   type="range"
-                  min={800000}
-                  max={4500000}
+                  min={500000}
+                  max={3500000}
                   step={50000}
                   value={propertyPrice}
                   onChange={(e) => setPropertyPrice(Number(e.target.value))}
                   className="w-full h-2 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-amber-400"
                 />
                 <div className="flex justify-between text-xs text-neutral-500 mt-2 font-mono">
-                  <span>CHF 800'000</span>
-                  <span>CHF 2'500'000</span>
-                  <span>CHF 4'500'000</span>
+                  <span>CHF 500'000</span>
+                  <span>CHF 1'800'000</span>
+                  <span>CHF 3'500'000</span>
                 </div>
               </div>
 

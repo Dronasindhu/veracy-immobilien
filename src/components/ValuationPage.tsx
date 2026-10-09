@@ -46,39 +46,133 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
     }
   };
 
-  // Swiss hedonic calculation heuristic
+  // Swiss hedonic calculation model with real-world Swiss market calibration
   const calculateValuation = () => {
-    // Base price per m² according to region heuristic or average
-    let baseM2 = 12500;
-    const lowerZip = zipCity.toLowerCase();
-    if (lowerZip.includes('800') || lowerZip.includes('zürich') || lowerZip.includes('zurich')) {
-      baseM2 = 15800;
-    } else if (lowerZip.includes('540') || lowerZip.includes('baden') || lowerZip.includes('500') || lowerZip.includes('aarau') || lowerZip.includes('aargau')) {
-      baseM2 = 12900;
+    // Baseline price per m² for average Swiss suburban / agglomeration housing
+    let baseM2 = 6200;
+    const lowerZip = zipCity.toLowerCase().trim();
+
+    // Regional calibration based on Swiss cantonal benchmarks
+    if (
+      lowerZip.includes('800') ||
+      lowerZip.includes('zürich') ||
+      lowerZip.includes('zurich') ||
+      lowerZip.includes('zh')
+    ) {
+      if (
+        lowerZip.includes('8001') ||
+        lowerZip.includes('8002') ||
+        lowerZip.includes('8008') ||
+        lowerZip.includes('seefeld') ||
+        lowerZip.includes('küsnacht') ||
+        lowerZip.includes('zollikon') ||
+        lowerZip.includes('erlenbach') ||
+        lowerZip.includes('8700')
+      ) {
+        baseM2 = 9600; // Prime Lake Zurich / City center
+      } else if (
+        lowerZip.includes('800') ||
+        lowerZip.includes('803') ||
+        lowerZip.includes('804') ||
+        lowerZip.includes('805')
+      ) {
+        baseM2 = 8200; // Zurich City general
+      } else {
+        baseM2 = 7100; // Canton Zurich suburban (Winterthur, Uster, Dietikon, Bülach)
+      }
+    } else if (
+      lowerZip.includes('540') ||
+      lowerZip.includes('baden') ||
+      lowerZip.includes('wettingen') ||
+      lowerZip.includes('ennetbaden')
+    ) {
+      baseM2 = 6400; // Baden & Wettingen area
+    } else if (
+      lowerZip.includes('500') ||
+      lowerZip.includes('aarau') ||
+      lowerZip.includes('lenzburg') ||
+      lowerZip.includes('wohlen') ||
+      lowerZip.includes('aargau') ||
+      lowerZip.includes('ag')
+    ) {
+      baseM2 = 5800; // Canton Aargau general
     } else if (lowerZip.includes('600') || lowerZip.includes('luzern')) {
-      baseM2 = 13400;
+      baseM2 = 6900;
     } else if (lowerZip.includes('300') || lowerZip.includes('bern')) {
-      baseM2 = 11200;
+      baseM2 = 6200;
+    } else if (lowerZip.includes('400') || lowerZip.includes('basel')) {
+      baseM2 = 6800;
+    } else if (lowerZip.includes('630') || lowerZip.includes('zug')) {
+      baseM2 = 9200;
     }
 
-    if (propertyType === 'penthouse') baseM2 *= 1.25;
-    if (propertyType === 'house') baseM2 *= 1.15;
-    if (condition === 'luxury') baseM2 *= 1.2;
-    if (condition === 'renovation') baseM2 *= 0.85;
+    // Property type adjustment
+    if (propertyType === 'apartment') {
+      baseM2 *= 1.0;
+    } else if (propertyType === 'house') {
+      baseM2 *= 1.03;
+    } else if (propertyType === 'penthouse') {
+      baseM2 *= 1.12;
+    } else if (propertyType === 'villa') {
+      baseM2 *= 1.20;
+    } else if (propertyType === 'multi-family') {
+      baseM2 *= 0.82;
+    } else if (propertyType === 'land') {
+      baseM2 = Math.min(baseM2 * 0.16, 1100);
+    }
 
-    if (features.includes('Seesicht / Bergblick')) baseM2 *= 1.15;
-    if (features.includes('Minergie-Standard')) baseM2 *= 1.05;
+    // Building age & technical lifecycle depreciation (e.g. 1967 house)
+    let ageFactor = 1.0;
+    if (buildYear >= 2022) {
+      ageFactor = 1.04;
+    } else if (buildYear >= 2012) {
+      ageFactor = 1.00;
+    } else if (buildYear >= 2000) {
+      ageFactor = 0.92;
+    } else if (buildYear >= 1990) {
+      ageFactor = 0.85;
+    } else if (buildYear >= 1980) {
+      ageFactor = 0.78;
+    } else if (buildYear >= 1965) {
+      // 1967 house is right here (~50-60 years old)
+      ageFactor = 0.70; // ~30% technical building lifecycle depreciation
+    } else if (buildYear >= 1950) {
+      ageFactor = 0.66;
+    } else {
+      ageFactor = 0.64;
+    }
 
-    const baseTotal = livingArea * baseM2;
-    const lowerEstimate = Math.round((baseTotal * 0.94) / 10000) * 10000;
-    const upperEstimate = Math.round((baseTotal * 1.06) / 10000) * 10000;
+    // Condition adjustment
+    let conditionFactor = 1.0;
+    if (condition === 'renovation') {
+      conditionFactor = 0.78; // -22% for required renovation
+    } else if (condition === 'modern') {
+      conditionFactor = 1.00; // Well-maintained
+    } else if (condition === 'luxury') {
+      conditionFactor = 1.12; // Prime luxury finishes
+    }
+
+    // Features
+    let featureMultiplier = 1.0;
+    if (features.includes('Seesicht / Bergblick')) featureMultiplier += 0.06;
+    if (features.includes('Minergie-Standard')) featureMultiplier += 0.03;
+    if (features.includes('Terrasse / Balkon')) featureMultiplier += 0.02;
+    if (features.includes('Tiefgaragenplatz')) featureMultiplier += 0.02;
+    if (features.includes('Lift im Gebäude')) featureMultiplier += 0.02;
+    if (features.includes('Cheminée / Kamin')) featureMultiplier += 0.01;
+
+    const finalM2 = baseM2 * ageFactor * conditionFactor * featureMultiplier;
+    const baseTotal = livingArea * finalM2;
+
+    const lowerEstimate = Math.round((baseTotal * 0.93) / 10000) * 10000;
+    const upperEstimate = Math.round((baseTotal * 1.07) / 10000) * 10000;
     const avgEstimate = Math.round(baseTotal / 10000) * 10000;
 
     return {
       lower: lowerEstimate,
       upper: upperEstimate,
       avg: avgEstimate,
-      pricePerM2: Math.round(baseM2),
+      pricePerM2: Math.round(finalM2),
     };
   };
 
@@ -325,7 +419,21 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
                       </label>
                       <select
                         value={rooms}
-                        onChange={(e) => setRooms(Number(e.target.value))}
+                        onChange={(e) => {
+                          const val = Number(e.target.value);
+                          setRooms(val);
+                          const roomToAreaMap: Record<number, number> = {
+                            1.5: 45,
+                            2.5: 70,
+                            3.5: 95,
+                            4.5: 130,
+                            5.5: 165,
+                            6.5: 200,
+                          };
+                          if (roomToAreaMap[val]) {
+                            setLivingArea(roomToAreaMap[val]);
+                          }
+                        }}
                         className="w-full text-sm rounded border border-neutral-300 p-2.5 focus:ring-1 focus:ring-neutral-900 focus:outline-none"
                       >
                         <option value={1.5}>1.5 Zimmer</option>
