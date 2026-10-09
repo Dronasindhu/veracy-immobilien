@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Language, SellingPackage } from '../types';
 import { SELLING_PACKAGES } from '../data/mockData';
 import { Check, ArrowRight, ShieldCheck, Clock, HelpCircle, FileText, Sparkles } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface SellPageProps {
   language: Language;
@@ -74,7 +75,12 @@ export const SellPage: React.FC<SellPageProps> = ({
       {/* Page Header */}
       <div className="bg-neutral-900 text-white py-16 sm:py-24 border-b border-neutral-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-3xl"
+          >
             <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-amber-400 font-medium mb-3">
               <span>{language === 'de' ? 'Immobilie verkaufen' : 'Sell Property'}</span>
               <span aria-hidden="true" className="text-neutral-500">·</span>
@@ -92,14 +98,20 @@ export const SellPage: React.FC<SellPageProps> = ({
                 ? 'Wählen Sie aus drei transparenten Verkaufspaketen. Vom digitalen Einstieg bis zum vollumfänglichen Concierge-Service: Bei Veracy bezahlen Sie nur für echte Leistung bei garantierter Schnelligkeit und Schweizer Diskretion.'
                 : 'Choose from three clear selling packages. From digital-direct marketing to end-to-end concierge representation: with Veracy, you enjoy full Swiss broker quality with guaranteed speed and discretion.'}
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* The 3 Selling Packages */}
-      <section className="py-20 sm:py-28 bg-neutral-50">
+      <section className="py-20 sm:py-28 bg-neutral-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
             <div className="text-xs uppercase tracking-[0.2em] text-neutral-500 font-semibold mb-2">
               {language === 'de' ? 'Transparente Preismodelle' : 'Transparent Packages'}
             </div>
@@ -113,22 +125,27 @@ export const SellPage: React.FC<SellPageProps> = ({
                 ? 'Keine versteckten Gebühren. Erfolgshonorar wird erst nach erfolgreicher notarieller Beurkundung fällig.'
                 : 'No hidden fees. Invoiced only upon successful notarization and transfer of ownership.'}
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-            {SELLING_PACKAGES.map((pkg) => {
+            {SELLING_PACKAGES.map((pkg, idx) => {
               const isPopular = pkg.popular;
               return (
-                <div
+                <motion.div
                   key={pkg.id}
-                  className={`relative flex flex-col justify-between rounded-xl bg-white transition-all duration-200 ${
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-40px' }}
+                  transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                  whileHover={{ y: -8, transition: { duration: 0.25 } }}
+                  className={`relative flex flex-col justify-between rounded-xl bg-white transition-shadow duration-300 ${
                     isPopular
-                      ? 'border-2 border-neutral-900 shadow-xl lg:-translate-y-2'
-                      : 'border border-neutral-200/90 shadow-sm hover:shadow-md'
+                      ? 'border-2 border-neutral-900 shadow-xl hover:shadow-2xl'
+                      : 'border border-neutral-200/90 shadow-sm hover:shadow-xl hover:border-neutral-300'
                   }`}
                 >
                   {isPopular && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-neutral-900 text-amber-400 text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded">
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-neutral-900 text-amber-400 text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded shadow-sm">
                       {language === 'de' ? 'Meistgewähltes Paket' : 'Most Popular Choice'}
                     </div>
                   )}
@@ -164,8 +181,8 @@ export const SellPage: React.FC<SellPageProps> = ({
                         {language === 'de' ? 'Leistungsumfang:' : 'Included Services:'}
                       </div>
                       <ul className="space-y-2.5">
-                        {pkg.features[language].map((feat, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5 text-xs text-neutral-600 leading-snug">
+                        {pkg.features[language].map((feat, idx2) => (
+                          <li key={idx2} className="flex items-start gap-2.5 text-xs text-neutral-600 leading-snug">
                             <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                             <span>{feat}</span>
                           </li>
@@ -176,7 +193,9 @@ export const SellPage: React.FC<SellPageProps> = ({
 
                   {/* Action button */}
                   <div className="p-7 sm:p-8 pt-0">
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                       onClick={() => onSelectPackage(pkg)}
                       className={`w-full py-3 px-4 rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
                         isPopular
@@ -185,10 +204,10 @@ export const SellPage: React.FC<SellPageProps> = ({
                       }`}
                     >
                       <span>{language === 'de' ? 'Paket unverbindlich anfragen' : 'Request Package Consultation'}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </button>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                    </motion.button>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -196,9 +215,15 @@ export const SellPage: React.FC<SellPageProps> = ({
       </section>
 
       {/* Real Estate Savings Calculator in Switzerland */}
-      <section className="py-20 bg-white border-t border-b border-neutral-200">
+      <section className="py-20 bg-white border-t border-b border-neutral-200 overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-neutral-900 text-white rounded-2xl p-8 sm:p-12 shadow-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="bg-neutral-900 text-white rounded-2xl p-8 sm:p-12 shadow-xl"
+          >
             <div className="max-w-2xl mb-8">
               <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold">
                 {language === 'de' ? 'Transparenz im Schweizer Vergleich' : 'Transparent Swiss Comparison'}
@@ -260,24 +285,33 @@ export const SellPage: React.FC<SellPageProps> = ({
                   </div>
                 </div>
 
-                <div className="bg-amber-400 text-neutral-950 p-4 rounded-lg flex flex-col justify-between">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-amber-400 text-neutral-950 p-4 rounded-lg flex flex-col justify-between shadow"
+                >
                   <div className="text-xs uppercase tracking-wider font-semibold text-neutral-900">
                     {language === 'de' ? 'Ihre Netto-Ersparnis' : 'Your Net Savings'}
                   </div>
                   <div className="text-2xl font-extrabold font-mono tabular-nums">
                     +{formatChf(netSavings)}
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Selling Journey in 4 Steps */}
-      <section className="py-20 sm:py-28 bg-white">
+      <section className="py-20 sm:py-28 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
             <div className="text-xs uppercase tracking-[0.2em] text-neutral-500 font-semibold mb-2">
               {language === 'de' ? 'Der Verkaufsprozess' : 'The Selling Journey'}
             </div>
@@ -289,19 +323,24 @@ export const SellPage: React.FC<SellPageProps> = ({
                 ? 'Strukturiert, transparent und mit persönlicher Begleitung in jeder Phase.'
                 : 'Structured, transparent, and personally guided through every phase.'}
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {sellingSteps.map((step) => (
-              <div
+            {sellingSteps.map((step, idx) => (
+              <motion.div
                 key={step.step}
-                className="p-6 rounded-lg bg-neutral-50 border border-neutral-200/80 flex flex-col justify-between"
+                initial={{ opacity: 0, y: 25 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                className="group p-6 rounded-lg bg-neutral-50 border border-neutral-200/80 hover:border-neutral-300 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="text-3xl font-mono font-bold text-neutral-300 mb-4">
+                  <div className="text-3xl font-mono font-bold text-neutral-300 group-hover:text-amber-500 transition-colors mb-4">
                     {step.step}
                   </div>
-                  <h3 className="text-base font-semibold text-neutral-900 mb-2">
+                  <h3 className="text-base font-semibold text-neutral-900 mb-2 group-hover:text-amber-950 transition-colors">
                     {step.title[language]}
                   </h3>
                   <p className="text-xs text-neutral-600 font-light leading-relaxed">
@@ -312,19 +351,21 @@ export const SellPage: React.FC<SellPageProps> = ({
                   <Clock className="w-3 h-3 text-neutral-400" />
                   <span>{language === 'de' ? 'Reaktion innert 24h' : 'Response in 24h'}</span>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
           {/* Bottom Free Consultation Callout */}
           <div className="mt-16 text-center">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.025 }}
+              whileTap={{ scale: 0.975 }}
               onClick={onOpenConsultation}
               className="px-8 py-3.5 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold uppercase tracking-wider rounded transition-all shadow cursor-pointer inline-flex items-center gap-2"
             >
               <span>{language === 'de' ? 'Kostenlose Verkaufsberatung vereinbaren' : 'Schedule Free Selling Consultation'}</span>
               <ArrowRight className="w-4 h-4 text-amber-400" />
-            </button>
+            </motion.button>
           </div>
         </div>
       </section>

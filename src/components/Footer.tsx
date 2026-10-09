@@ -1,6 +1,7 @@
 import React from 'react';
 import { MainCategory, Language } from '../types';
 import { ShieldCheck, Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface FooterProps {
   language: Language;
@@ -14,8 +15,14 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenConsultation,
 }) => {
   return (
-    <footer className="bg-neutral-950 text-neutral-400 text-xs border-t border-neutral-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <footer className="bg-neutral-950 text-neutral-400 text-xs border-t border-neutral-800 overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20"
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           {/* Brand info (Col 1-4) */}
           <div className="lg:col-span-4 space-y-4">
@@ -143,7 +150,7 @@ export const Footer: React.FC<FooterProps> = ({
             <span>SVIT Partner</span>
           </div>
         </div>
-      </div>
+      </motion.div>
     </footer>
   );
 };

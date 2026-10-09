@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MainCategory, Language } from '../types';
 import { Menu, X, PhoneCall, ArrowRight, ShieldCheck, Clock } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface NavbarProps {
   currentCategory: MainCategory;
@@ -18,6 +19,15 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenConsultation,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navItems: { id: MainCategory; label: { de: string; en: string } }[] = [
     {
@@ -50,7 +60,11 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-200/80 transition-all">
+    <header
+      className={`sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b transition-all duration-300 ${
+        scrolled ? 'border-neutral-200/90 shadow-sm' : 'border-neutral-200/60'
+      }`}
+    >
       {/* Top micro reassurance bar */}
       <div className="bg-neutral-900 text-neutral-300 text-[11px] py-1 px-4 sm:px-8 border-b border-neutral-800">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -93,10 +107,10 @@ export const Navbar: React.FC<NavbarProps> = ({
           className="text-left group cursor-pointer focus:outline-none"
         >
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-semibold tracking-tight text-neutral-900 group-hover:text-neutral-800 transition-colors">
+            <span className="text-2xl font-semibold tracking-tight text-neutral-900 group-hover:text-neutral-700 transition-colors">
               VERACY
             </span>
-            <span className="text-xs uppercase tracking-[0.25em] text-neutral-500 font-medium">
+            <span className="text-xs uppercase tracking-[0.25em] text-neutral-500 font-medium group-hover:text-amber-700 transition-colors">
               Immobilien
             </span>
           </div>
@@ -110,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.id)}
-                className={`text-sm font-medium tracking-normal transition-all relative py-2 cursor-pointer ${
+                className={`text-sm font-medium tracking-normal transition-colors relative py-2 cursor-pointer ${
                   isActive
                     ? 'text-neutral-950 font-semibold'
                     : 'text-neutral-600 hover:text-neutral-900'
@@ -118,7 +132,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 {item.label[language]}
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-neutral-900 rounded-full" />
+                  <motion.span
+                    layoutId="navbar-indicator"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-neutral-900 rounded-full"
+                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                  />
                 )}
               </button>
             );
@@ -127,20 +145,22 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Zone 3: Primary Action */}
         <div className="hidden sm:flex items-center gap-4">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             onClick={onOpenConsultation}
-            className="group px-5 py-2.5 text-xs font-semibold tracking-wide uppercase text-neutral-900 bg-amber-400 hover:bg-amber-300 transition-all rounded shadow-sm hover:shadow active:scale-[0.99] flex items-center gap-2 cursor-pointer"
+            className="group px-5 py-2.5 text-xs font-semibold tracking-wide uppercase text-neutral-900 bg-amber-400 hover:bg-amber-300 transition-colors rounded shadow-sm hover:shadow active:scale-[0.99] flex items-center gap-2 cursor-pointer"
           >
             <span>{language === 'de' ? 'Kostenlose Beratung' : 'Free Consultation'}</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-          </button>
+            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+          </motion.button>
         </div>
 
         {/* Mobile menu trigger */}
         <div className="flex items-center gap-2 md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-neutral-700 hover:text-neutral-900 focus:outline-none"
+            className="p-2 text-neutral-700 hover:text-neutral-900 focus:outline-none cursor-pointer"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -149,36 +169,44 @@ export const Navbar: React.FC<NavbarProps> = ({
       </div>
 
       {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-neutral-200 bg-white px-4 pt-3 pb-6 shadow-lg animate-in fade-in slide-in-from-top-2 duration-150">
-          <div className="flex flex-col space-y-3">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`text-left py-2.5 px-3 rounded text-base font-medium transition-colors ${
-                  currentCategory === item.id
-                    ? 'bg-neutral-100 text-neutral-900 font-semibold'
-                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
-                }`}
-              >
-                {item.label[language]}
-              </button>
-            ))}
-            <div className="pt-2 border-t border-neutral-100">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenConsultation();
-                }}
-                className="w-full py-3 text-center text-xs font-semibold tracking-wide uppercase text-neutral-900 bg-amber-400 hover:bg-amber-300 rounded"
-              >
-                {language === 'de' ? 'Kostenlose Beratung anfragen' : 'Request Free Consultation'}
-              </button>
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="md:hidden border-t border-neutral-200 bg-white px-4 pt-3 pb-6 shadow-lg overflow-hidden"
+          >
+            <div className="flex flex-col space-y-3">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`text-left py-2.5 px-3 rounded text-base font-medium transition-colors cursor-pointer ${
+                    currentCategory === item.id
+                      ? 'bg-neutral-100 text-neutral-900 font-semibold'
+                      : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                  }`}
+                >
+                  {item.label[language]}
+                </button>
+              ))}
+              <div className="pt-2 border-t border-neutral-100">
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenConsultation();
+                  }}
+                  className="w-full py-3 text-center text-xs font-semibold tracking-wide uppercase text-neutral-900 bg-amber-400 hover:bg-amber-300 rounded cursor-pointer"
+                >
+                  {language === 'de' ? 'Kostenlose Beratung anfragen' : 'Request Free Consultation'}
+                </button>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

@@ -2,6 +2,7 @@ import React from 'react';
 import { Language, MainCategory } from '../types';
 import { ArrowRight, Tag, KeyRound, Calculator } from 'lucide-react';
 import { ZURICH_PENTHOUSE_IMG, LUZERN_VILLA_IMG, ZUG_APARTMENT_IMG } from '../data/mockData';
+import { motion } from 'motion/react';
 
 interface CategoryOverviewProps {
   language: Language;
@@ -91,10 +92,16 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
   ];
 
   return (
-    <section className="py-20 sm:py-28 bg-white border-b border-neutral-200">
+    <section className="py-20 sm:py-28 bg-white border-b border-neutral-200 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl mb-16"
+        >
           <div className="text-xs uppercase tracking-[0.2em] text-neutral-500 font-semibold mb-2">
             {language === 'de' ? 'Das Veracy Leistungsspektrum' : 'The Veracy Core Portfolio'}
           </div>
@@ -108,16 +115,21 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
               ? 'Kein unübersichtlicher Dienstleistungsdschungel. Wir fokussieren uns präzise auf die drei entscheidenden Kernbereiche: Verkauf, Erwerb/Miete und fundierte Bewertung.'
               : 'No convoluted service catalog. We focus strictly on the three vital pillars: selling, acquiring/renting, and accurate valuation.'}
           </p>
-        </div>
+        </motion.div>
 
         {/* 3 Main Categories Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {categories.map((cat) => {
+          {categories.map((cat, index) => {
             const Icon = cat.icon;
             return (
-              <div
+              <motion.div
                 key={cat.id}
-                className="group flex flex-col justify-between bg-neutral-50/60 rounded-lg border border-neutral-200/90 overflow-hidden hover:border-neutral-400/80 transition-all duration-200 hover:shadow-lg"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.6, delay: index * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -6, transition: { duration: 0.25 } }}
+                className="group flex flex-col justify-between bg-neutral-50/60 rounded-lg border border-neutral-200/90 overflow-hidden hover:border-neutral-400/80 transition-colors duration-200 hover:shadow-xl"
               >
                 {/* Visual Image Header */}
                 <div className="relative h-48 overflow-hidden bg-neutral-200">
@@ -125,10 +137,10 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
                     src={cat.image}
                     alt={cat.title[language]}
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/20 to-transparent" />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded text-neutral-900 shadow-sm">
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded text-neutral-900 shadow-sm group-hover:bg-amber-400 transition-colors">
                     <Icon className="w-4 h-4 text-neutral-900" />
                   </div>
                   <div className="absolute bottom-3 left-4 text-xs font-medium text-amber-300">
@@ -139,7 +151,7 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
                 {/* Content Body */}
                 <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-xl font-semibold tracking-tight text-neutral-900 mb-1">
+                    <h3 className="text-xl font-semibold tracking-tight text-neutral-900 mb-1 group-hover:text-amber-900 transition-colors">
                       {cat.title[language]}
                     </h3>
                     <div className="text-xs font-medium text-neutral-500 mb-3">
@@ -156,14 +168,14 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
                         onNavigate(cat.id);
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                       }}
-                      className="w-full py-2.5 px-4 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-300 text-neutral-900 rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-between cursor-pointer group-hover:border-neutral-900"
+                      className="w-full py-2.5 px-4 bg-white hover:bg-neutral-900 hover:text-white border border-neutral-300 text-neutral-900 rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-between cursor-pointer group-hover:border-neutral-900 shadow-xs"
                     >
                       <span>{cat.actionText[language]}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>

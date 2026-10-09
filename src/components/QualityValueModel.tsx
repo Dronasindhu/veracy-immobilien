@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { Check, X, ShieldAlert, Sparkles, ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
 
 interface QualityValueModelProps {
   language: Language;
@@ -27,7 +28,13 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
     <section className="py-20 sm:py-28 bg-neutral-900 text-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-16"
+        >
           <div className="text-xs uppercase tracking-[0.2em] text-amber-400 font-semibold mb-2">
             {language === 'de' ? 'Das Veracy Wertmodell' : 'The Veracy Value Model'}
           </div>
@@ -41,10 +48,16 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
               ? 'Warum 2.5% bis 3% Maklerprovision für dieselben Portalinserate und Notariatsabläufe bezahlen? Durch modernste digitale Workflows und schlanke Strukturen bieten wir vollwertigen Maklerservice vor Ort – ohne überhöhte Provisionen.'
               : 'Why pay 2.5% to 3.0% in broker commissions for the same property listings and notary filings? By eliminating unnecessary administrative overhead, we provide full on-site Swiss brokerage with massive savings.'}
           </p>
-        </div>
+        </motion.div>
 
         {/* Interactive Savings Calculator */}
-        <div className="bg-neutral-800/80 border border-neutral-700/80 rounded-xl p-6 sm:p-10 mb-16 shadow-xl">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="bg-neutral-800/80 border border-neutral-700/80 rounded-xl p-6 sm:p-10 mb-16 shadow-xl"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left: Input Slider */}
             <div className="lg:col-span-6 space-y-6">
@@ -117,7 +130,10 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
               </div>
 
               {/* Veracy Box */}
-              <div className="bg-gradient-to-b from-neutral-800 to-neutral-900 p-5 rounded-lg border-2 border-amber-400/80 flex flex-col justify-between relative shadow-lg">
+              <motion.div
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="bg-gradient-to-b from-neutral-800 to-neutral-900 p-5 rounded-lg border-2 border-amber-400/80 flex flex-col justify-between relative shadow-lg"
+              >
                 <div className="absolute -top-3 right-4 bg-amber-400 text-neutral-950 font-semibold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded">
                   {language === 'de' ? 'Ihre Ersparnis' : 'Your Net Savings'}
                 </div>
@@ -136,13 +152,19 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
                   <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
                   <span>{language === 'de' ? 'Voller Service vor Ort inklusive' : 'Full on-site broker service included'}</span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Feature Comparison Table */}
-        <div className="bg-neutral-950/60 rounded-xl border border-neutral-800 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.6 }}
+          className="bg-neutral-950/60 rounded-xl border border-neutral-800 overflow-hidden"
+        >
           <div className="px-6 py-4 bg-neutral-900 border-b border-neutral-800">
             <h4 className="text-base font-semibold text-white">
               {language === 'de'
@@ -178,7 +200,7 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
                 traditional: language === 'de' ? 'Teils Aufwandentschädigungen' : 'Often charges retainer / expense fee',
               },
             ].map((row, idx) => (
-              <div key={idx} className="grid grid-cols-1 md:grid-cols-12 p-4 sm:px-6 items-center gap-2">
+              <div key={idx} className="grid grid-cols-1 md:grid-cols-12 p-4 sm:px-6 items-center gap-2 hover:bg-neutral-900/40 transition-colors">
                 <div className="md:col-span-4 font-medium text-neutral-300">
                   {row.feature}
                 </div>
@@ -193,17 +215,19 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
               </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Call to action */}
         <div className="mt-12 text-center">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.025 }}
+            whileTap={{ scale: 0.975 }}
             onClick={onOpenConsultation}
             className="inline-flex items-center gap-2 px-8 py-3.5 bg-amber-400 hover:bg-amber-300 text-neutral-950 font-semibold text-xs uppercase tracking-wider rounded transition-all shadow-md active:scale-[0.99] cursor-pointer"
           >
             <span>{language === 'de' ? 'Kostenlose Beratung & Einsparung prüfen' : 'Check Your Potential Savings Today'}</span>
             <ArrowRight className="w-4 h-4" />
-          </button>
+          </motion.button>
         </div>
       </div>
     </section>
