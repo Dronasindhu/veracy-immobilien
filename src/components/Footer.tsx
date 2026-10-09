@@ -26,14 +26,13 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           {/* Brand info (Col 1-4) */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="flex items-baseline gap-2">
-              <span className="text-xl font-bold tracking-tight text-white">
-                VERACY
-              </span>
-              <span className="text-xs uppercase tracking-[0.25em] text-neutral-400 font-medium">
-                Immobilien
-              </span>
-            </div>
+            <img
+              src="./veracy-logo-alt.png"
+              alt="Veracy Immobilien"
+              width={1800}
+              height={1575}
+              className="w-40 sm:w-52 rounded-xl ring-1 ring-white/10"
+            />
             <p className="text-neutral-400 font-light leading-relaxed max-w-sm">
               {language === 'de'
                 ? 'Schweizer Immobilienmakler für transparente Festpreise, verlässliche Marktwertschätzungen und persönliche Betreuung vor Ort in den Kantonen Zürich und Aargau.'

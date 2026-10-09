@@ -101,19 +101,19 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Main Top Bar Contract: Brand — 3 Clean Nav Categories — Primary Action */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        {/* Zone 1: Brand Wordmark (Single clean text element) */}
+        {/* Zone 1: Brand Logo */}
         <button
           onClick={() => handleNavClick('home')}
-          className="text-left group cursor-pointer focus:outline-none"
+          aria-label="Veracy Immobilien – Startseite"
+          className="shrink-0 text-left group cursor-pointer focus:outline-none"
         >
-          <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-semibold tracking-tight text-neutral-900 group-hover:text-neutral-700 transition-colors">
-              VERACY
-            </span>
-            <span className="text-xs uppercase tracking-[0.25em] text-neutral-500 font-medium group-hover:text-amber-700 transition-colors">
-              Immobilien
-            </span>
-          </div>
+          <img
+            src="./veracy-logo-main.png"
+            alt="Veracy Immobilien"
+            width={1467}
+            height={377}
+            className="h-8 sm:h-9 md:h-10 w-auto transition-opacity group-hover:opacity-75"
+          />
         </button>
 
         {/* Zone 2: Strictly the 3 Main Navigation Categories */}
