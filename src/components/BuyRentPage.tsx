@@ -51,7 +51,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-3xl"
           >
-            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-amber-400 font-medium mb-2">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#E6CA85] font-medium mb-2">
               <span>{language === 'de' ? 'Kaufen & Mieten' : 'Buy & Rent'}</span>
               <span aria-hidden="true" className="text-neutral-500">·</span>
               <span>{language === 'de' ? 'Kuratierte Schweizer Objekte' : 'Curated Swiss Properties'}</span>
@@ -214,7 +214,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
 
                       {/* Canton Location Badge */}
                       <div className="absolute bottom-3 left-3 text-white text-xs font-medium flex items-center gap-1">
-                        <MapPin className="w-3.5 h-3.5 text-amber-400" />
+                        <MapPin className="w-3.5 h-3.5 text-[#E6CA85]" />
                         <span>{property.location.city} ({property.location.canton})</span>
                       </div>
                     </div>
@@ -226,7 +226,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
                         {property.priceFormatted}
                       </div>
 
-                      <h3 className="text-base font-semibold text-neutral-900 leading-snug line-clamp-2 mb-4 group-hover:text-amber-800 transition-colors">
+                      <h3 className="text-base font-semibold text-neutral-900 leading-snug line-clamp-2 mb-4 group-hover:text-[#8C6D1F] transition-colors">
                         {property.title[language]}
                       </h3>
 
@@ -243,7 +243,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
                       <div className="mt-4 flex flex-wrap gap-x-2 gap-y-1 text-[11px] text-neutral-500">
                         {property.features.slice(0, 3).map((f, i) => (
                           <span key={i} className="flex items-center gap-1">
-                            <span className="w-1 h-1 rounded-full bg-amber-500" />
+                            <span className="w-1 h-1 rounded-full bg-[#C5A059]" />
                             <span>{f}</span>
                           </span>
                         ))}
@@ -303,7 +303,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent" />
                 <div className="absolute bottom-6 left-6 right-6 text-white">
-                  <div className="text-xs uppercase tracking-widest text-amber-400 font-semibold mb-1">
+                  <div className="text-xs uppercase tracking-widest text-[#E6CA85] font-semibold mb-1">
                     {selectedProperty.type === 'sale'
                       ? language === 'de' ? 'Kaufobjekt' : 'Property For Sale'
                       : language === 'de' ? 'Mietobjekt' : 'Property For Rent'}
@@ -312,7 +312,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
                     {selectedProperty.title[language]}
                   </h2>
                   <div className="flex items-center gap-2 text-sm text-neutral-300 mt-2">
-                    <MapPin className="w-4 h-4 text-amber-400" />
+                    <MapPin className="w-4 h-4 text-[#E6CA85]" />
                     <span>
                       {selectedProperty.location.address}, {selectedProperty.location.zip}{' '}
                       {selectedProperty.location.city} ({selectedProperty.location.canton})
@@ -395,7 +395,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
                 {/* Swiss Mortgage Calculator Preview for Sale Properties */}
                 {selectedProperty.type === 'sale' && (
                   <div className="p-6 bg-neutral-900 text-white rounded-xl">
-                    <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-amber-400 font-semibold mb-2">
+                    <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-[#E6CA85] font-semibold mb-2">
                       <Calculator className="w-4 h-4" />
                       <span>{language === 'de' ? 'Schweizer Hypothekenrechner (Richtwert)' : 'Swiss Mortgage Estimator'}</span>
                     </div>
@@ -411,7 +411,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
                           step={5}
                           value={equityDown}
                           onChange={(e) => setEquityDown(Number(e.target.value))}
-                          className="w-full accent-amber-400"
+                          className="w-full accent-[#C5A059]"
                         />
                         <div className="text-xs text-neutral-400 font-mono mt-1">
                           CHF {Math.round((selectedProperty.price * equityDown) / 100).toLocaleString('de-CH')}
@@ -429,7 +429,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
                           step={0.1}
                           value={mortgageRate}
                           onChange={(e) => setMortgageRate(Number(e.target.value))}
-                          className="w-full accent-amber-400"
+                          className="w-full accent-[#C5A059]"
                         />
                         <div className="text-xs text-neutral-400 font-mono mt-1">
                           SARON / Festhypothek
@@ -440,7 +440,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
                         <div className="text-xs text-neutral-400">
                           {language === 'de' ? 'Geschätzte Zinskosten' : 'Estimated Interest'}
                         </div>
-                        <div className="text-lg font-bold text-amber-400 font-mono tabular-nums">
+                        <div className="text-lg font-bold text-[#E6CA85] font-mono tabular-nums">
                           CHF {Math.round((selectedProperty.price * (1 - equityDown / 100) * (mortgageRate / 100)) / 12).toLocaleString('de-CH')} / Mt.
                         </div>
                       </div>
@@ -468,7 +468,7 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
                     }}
                     className="flex-1 py-3 px-6 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow"
                   >
-                    <Calendar className="w-4 h-4 text-amber-400" />
+                    <Calendar className="w-4 h-4 text-[#DFB76C]" />
                     <span>{language === 'de' ? 'Besichtigungstermin vereinbaren' : 'Schedule Viewing'}</span>
                   </motion.button>
 

@@ -81,7 +81,7 @@ export const SellPage: React.FC<SellPageProps> = ({
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-3xl"
           >
-            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-amber-400 font-medium mb-3">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#E6CA85] font-medium mb-3">
               <span>{language === 'de' ? 'Immobilie verkaufen' : 'Sell Property'}</span>
               <span aria-hidden="true" className="text-neutral-500">·</span>
               <span>{language === 'de' ? 'Transparente Festpreise' : 'Transparent Flat Fees'}</span>
@@ -145,7 +145,7 @@ export const SellPage: React.FC<SellPageProps> = ({
                   }`}
                 >
                   {isPopular && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-neutral-900 text-amber-400 text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded shadow-sm">
+                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-neutral-900 text-[#E6CA85] text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded shadow-sm border border-[#C5A059]/40">
                       {language === 'de' ? 'Meistgewähltes Paket' : 'Most Popular Choice'}
                     </div>
                   )}
@@ -169,7 +169,7 @@ export const SellPage: React.FC<SellPageProps> = ({
                       <div className="text-xs text-neutral-500 mt-1">
                         {pkg.priceNote[language]}
                       </div>
-                      <div className="mt-3 text-[11px] text-amber-800 bg-amber-50 rounded px-2.5 py-1 inline-block font-medium">
+                      <div className="mt-3 text-[11px] text-[#8C6D1F] bg-[#FAF6EE] border border-[#EBDCB7] rounded px-2.5 py-1 inline-block font-medium">
                         {language === 'de' ? 'Ideal für: ' : 'Ideal for: '}
                         {pkg.idealFor[language]}
                       </div>
@@ -222,10 +222,10 @@ export const SellPage: React.FC<SellPageProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-neutral-900 text-white rounded-2xl p-8 sm:p-12 shadow-xl"
+            className="bg-neutral-900 text-white rounded-2xl p-8 sm:p-12 shadow-xl border border-[#C5A059]/30"
           >
             <div className="max-w-2xl mb-8">
-              <span className="text-xs uppercase tracking-widest text-amber-400 font-semibold">
+              <span className="text-xs uppercase tracking-widest text-[#E6CA85] font-semibold">
                 {language === 'de' ? 'Transparenz im Schweizer Vergleich' : 'Transparent Swiss Comparison'}
               </span>
               <h2 className="text-2xl sm:text-3xl font-display font-normal text-white mt-2">
@@ -246,7 +246,7 @@ export const SellPage: React.FC<SellPageProps> = ({
                   <span className="text-sm text-neutral-300">
                     {language === 'de' ? 'Verkaufspreis Liegenschaft:' : 'Property Sale Price:'}
                   </span>
-                  <span className="text-2xl font-bold font-mono text-amber-400 tabular-nums">
+                  <span className="text-2xl font-bold font-mono text-[#E6CA85] tabular-nums">
                     {formatChf(salesPrice)}
                   </span>
                 </div>
@@ -257,7 +257,7 @@ export const SellPage: React.FC<SellPageProps> = ({
                   step={50000}
                   value={salesPrice}
                   onChange={(e) => setSalesPrice(Number(e.target.value))}
-                  className="w-full h-2.5 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                  className="w-full h-2.5 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-[#C5A059]"
                 />
                 <div className="flex justify-between text-xs text-neutral-400 mt-1 font-mono">
                   <span>CHF 500'000</span>
@@ -277,7 +277,7 @@ export const SellPage: React.FC<SellPageProps> = ({
                 </div>
 
                 <div className="bg-neutral-800/80 p-4 rounded-lg">
-                  <div className="text-xs text-amber-300 mb-1">
+                  <div className="text-xs text-[#E6CA85] mb-1 font-medium">
                     {language === 'de' ? 'Veracy Full Service' : 'Veracy Full Service'}
                   </div>
                   <div className="text-xl font-bold text-white font-mono tabular-nums">
@@ -287,9 +287,9 @@ export const SellPage: React.FC<SellPageProps> = ({
 
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  className="bg-amber-400 text-neutral-950 p-4 rounded-lg flex flex-col justify-between shadow"
+                  className="bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] text-neutral-950 p-4 rounded-lg flex flex-col justify-between shadow border border-[#C5A059]/40"
                 >
-                  <div className="text-xs uppercase tracking-wider font-semibold text-neutral-900">
+                  <div className="text-xs uppercase tracking-wider font-bold text-neutral-950">
                     {language === 'de' ? 'Ihre Netto-Ersparnis' : 'Your Net Savings'}
                   </div>
                   <div className="text-2xl font-extrabold font-mono tabular-nums">
@@ -337,10 +337,10 @@ export const SellPage: React.FC<SellPageProps> = ({
                 className="group p-6 rounded-lg bg-neutral-50 border border-neutral-200/80 hover:border-neutral-300 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="text-3xl font-mono font-bold text-neutral-300 group-hover:text-amber-500 transition-colors mb-4">
+                  <div className="text-3xl font-mono font-bold text-neutral-300 group-hover:text-[#C5A059] transition-colors mb-4">
                     {step.step}
                   </div>
-                  <h3 className="text-base font-semibold text-neutral-900 mb-2 group-hover:text-amber-950 transition-colors">
+                  <h3 className="text-base font-semibold text-neutral-900 mb-2 group-hover:text-[#8C6D1F] transition-colors">
                     {step.title[language]}
                   </h3>
                   <p className="text-xs text-neutral-600 font-light leading-relaxed">
@@ -364,7 +364,7 @@ export const SellPage: React.FC<SellPageProps> = ({
               className="px-8 py-3.5 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold uppercase tracking-wider rounded transition-all shadow cursor-pointer inline-flex items-center gap-2"
             >
               <span>{language === 'de' ? 'Kostenlose Verkaufsberatung vereinbaren' : 'Schedule Free Selling Consultation'}</span>
-              <ArrowRight className="w-4 h-4 text-amber-400" />
+              <ArrowRight className="w-4 h-4 text-[#DFB76C]" />
             </motion.button>
           </div>
         </div>

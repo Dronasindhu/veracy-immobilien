@@ -125,7 +125,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             ) : (
               <div>
                 <div className="mb-6">
-                  <div className="text-[11px] uppercase tracking-wider text-amber-700 font-semibold mb-1">
+                  <div className="text-[11px] uppercase tracking-wider text-[#8C6D1F] font-semibold mb-1">
                     {language === 'de' ? 'Kostenlose Erstberatung' : 'Free Consultation'}
                   </div>
                   <h3 className="text-2xl font-display font-medium text-neutral-950">
@@ -246,13 +246,13 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                     >
                       {isSending ? (
                         <>
-                          <Loader2 className="w-4 h-4 animate-spin text-amber-400" />
+                          <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
                           <span>{language === 'de' ? 'Wird übermittelt...' : 'Sending request...'}</span>
                         </>
                       ) : (
                         <>
                           <span>{language === 'de' ? 'Beratung kostenlos anfragen' : 'Send Free Consultation Request'}</span>
-                          <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
+                          <ArrowRight className="w-3.5 h-3.5 text-[#DFB76C]" />
                         </>
                       )}
                     </motion.button>

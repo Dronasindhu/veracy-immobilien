@@ -49,7 +49,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
   // Swiss hedonic calculation model with real-world Swiss market calibration
   const calculateValuation = () => {
     // Baseline price per m² for average Swiss suburban / agglomeration housing
-    let baseM2 = 6200;
+    let baseM2 = 7400;
     const lowerZip = zipCity.toLowerCase().trim();
 
     // Regional calibration based on Swiss cantonal benchmarks
@@ -69,16 +69,16 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
         lowerZip.includes('erlenbach') ||
         lowerZip.includes('8700')
       ) {
-        baseM2 = 9600; // Prime Lake Zurich / City center
+        baseM2 = 10800; // Prime Lake Zurich / City center
       } else if (
         lowerZip.includes('800') ||
         lowerZip.includes('803') ||
         lowerZip.includes('804') ||
         lowerZip.includes('805')
       ) {
-        baseM2 = 8200; // Zurich City general
+        baseM2 = 9200; // Zurich City general
       } else {
-        baseM2 = 7100; // Canton Zurich suburban (Winterthur, Uster, Dietikon, Bülach)
+        baseM2 = 8200; // Canton Zurich suburban (Winterthur, Uster, Dietikon, Bülach)
       }
     } else if (
       lowerZip.includes('540') ||
@@ -86,7 +86,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
       lowerZip.includes('wettingen') ||
       lowerZip.includes('ennetbaden')
     ) {
-      baseM2 = 6400; // Baden & Wettingen area
+      baseM2 = 7600; // Baden & Wettingen area
     } else if (
       lowerZip.includes('500') ||
       lowerZip.includes('aarau') ||
@@ -95,57 +95,57 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
       lowerZip.includes('aargau') ||
       lowerZip.includes('ag')
     ) {
-      baseM2 = 5800; // Canton Aargau general
+      baseM2 = 7200; // Canton Aargau general
     } else if (lowerZip.includes('600') || lowerZip.includes('luzern')) {
-      baseM2 = 6900;
+      baseM2 = 7800;
     } else if (lowerZip.includes('300') || lowerZip.includes('bern')) {
-      baseM2 = 6200;
+      baseM2 = 7200;
     } else if (lowerZip.includes('400') || lowerZip.includes('basel')) {
-      baseM2 = 6800;
+      baseM2 = 7600;
     } else if (lowerZip.includes('630') || lowerZip.includes('zug')) {
-      baseM2 = 9200;
+      baseM2 = 10500;
     }
 
-    // Property type adjustment
+    // Property type adjustment (Single-family house includes valuable land plot share)
     if (propertyType === 'apartment') {
       baseM2 *= 1.0;
     } else if (propertyType === 'house') {
-      baseM2 *= 1.03;
+      baseM2 *= 1.08;
     } else if (propertyType === 'penthouse') {
-      baseM2 *= 1.12;
+      baseM2 *= 1.15;
     } else if (propertyType === 'villa') {
-      baseM2 *= 1.20;
+      baseM2 *= 1.25;
     } else if (propertyType === 'multi-family') {
-      baseM2 *= 0.82;
+      baseM2 *= 0.85;
     } else if (propertyType === 'land') {
-      baseM2 = Math.min(baseM2 * 0.16, 1100);
+      baseM2 = Math.min(baseM2 * 0.18, 1200);
     }
 
-    // Building age & technical lifecycle depreciation (e.g. 1967 house)
+    // Building age & technical lifecycle depreciation (Swiss hedonic & land-retaining model)
     let ageFactor = 1.0;
     if (buildYear >= 2022) {
       ageFactor = 1.04;
     } else if (buildYear >= 2012) {
       ageFactor = 1.00;
     } else if (buildYear >= 2000) {
-      ageFactor = 0.92;
+      ageFactor = 0.95;
     } else if (buildYear >= 1990) {
-      ageFactor = 0.85;
+      ageFactor = 0.90;
     } else if (buildYear >= 1980) {
-      ageFactor = 0.78;
+      ageFactor = 0.86;
     } else if (buildYear >= 1965) {
-      // 1967 house is right here (~50-60 years old)
-      ageFactor = 0.70; // ~30% technical building lifecycle depreciation
+      // 1967 house is right here: building depreciated but plot retains prime Swiss value
+      ageFactor = 0.83;
     } else if (buildYear >= 1950) {
-      ageFactor = 0.66;
+      ageFactor = 0.79;
     } else {
-      ageFactor = 0.64;
+      ageFactor = 0.76;
     }
 
     // Condition adjustment
     let conditionFactor = 1.0;
     if (condition === 'renovation') {
-      conditionFactor = 0.78; // -22% for required renovation
+      conditionFactor = 0.82; // -18% for required renovation
     } else if (condition === 'modern') {
       conditionFactor = 1.00; // Well-maintained
     } else if (condition === 'luxury') {
@@ -154,7 +154,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
 
     // Features
     let featureMultiplier = 1.0;
-    if (features.includes('Seesicht / Bergblick')) featureMultiplier += 0.06;
+    if (features.includes('Seesicht / Bergblick')) featureMultiplier += 0.05;
     if (features.includes('Minergie-Standard')) featureMultiplier += 0.03;
     if (features.includes('Terrasse / Balkon')) featureMultiplier += 0.02;
     if (features.includes('Tiefgaragenplatz')) featureMultiplier += 0.02;
@@ -162,10 +162,19 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
     if (features.includes('Cheminée / Kamin')) featureMultiplier += 0.01;
 
     const finalM2 = baseM2 * ageFactor * conditionFactor * featureMultiplier;
-    const baseTotal = livingArea * finalM2;
 
-    const lowerEstimate = Math.round((baseTotal * 0.93) / 10000) * 10000;
-    const upperEstimate = Math.round((baseTotal * 1.07) / 10000) * 10000;
+    // Plausible living space correlation for room count
+    let calcArea = livingArea;
+    if (rooms >= 6.5 && calcArea < 180) {
+      calcArea = 200;
+    } else if (rooms >= 5.5 && calcArea < 150) {
+      calcArea = 160;
+    }
+
+    const baseTotal = calcArea * finalM2;
+
+    const lowerEstimate = Math.round((baseTotal * 0.94) / 10000) * 10000;
+    const upperEstimate = Math.round((baseTotal * 1.06) / 10000) * 10000;
     const avgEstimate = Math.round(baseTotal / 10000) * 10000;
 
     return {
@@ -234,7 +243,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-3xl"
           >
-            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-amber-400 font-medium mb-2">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#E6CA85] font-medium mb-2">
               <span>{language === 'de' ? 'Professionelle Schätzung' : 'Property Valuation'}</span>
               <span aria-hidden="true" className="text-neutral-500">·</span>
               <span>{language === 'de' ? 'Hedonische Marktwerte' : 'Hedonic Market Values'}</span>
@@ -275,7 +284,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
               4. {language === 'de' ? 'Kontakt' : 'Contact'}
             </span>
             <span className="text-neutral-300">→</span>
-            <span className={step >= 5 ? 'text-amber-700 font-semibold' : ''}>
+            <span className={step >= 5 ? 'text-[#8C6D1F] font-semibold' : ''}>
               5. {language === 'de' ? 'Ergebnis' : 'Result'}
             </span>
           </div>
@@ -337,7 +346,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
                             : 'border-neutral-200 hover:border-neutral-400 bg-white'
                         }`}
                       >
-                        <Icon className={`w-5 h-5 shrink-0 mt-0.5 ${isSelected ? 'text-amber-600' : 'text-neutral-400'}`} />
+                        <Icon className={`w-5 h-5 shrink-0 mt-0.5 ${isSelected ? 'text-[#8C6D1F]' : 'text-neutral-400'}`} />
                         <div>
                           <div className="text-sm font-semibold text-neutral-900">
                             {language === 'de' ? item.labelDe : item.labelEn}
@@ -559,7 +568,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
                           }`}
                         >
                           <span>{feat}</span>
-                          {isChecked && <Check className="w-3.5 h-3.5 text-amber-400" />}
+                          {isChecked && <Check className="w-3.5 h-3.5 text-[#DFB76C]" />}
                         </motion.button>
                       );
                     })}
@@ -692,12 +701,12 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin text-amber-400" />
+                        <Loader2 className="w-4 h-4 animate-spin text-[#DFB76C]" />
                         <span>{language === 'de' ? 'Wird berechnet...' : 'Calculating...'}</span>
                       </>
                     ) : (
                       <>
-                        <Sparkles className="w-4 h-4 text-amber-400" />
+                        <Sparkles className="w-4 h-4 text-[#DFB76C]" />
                         <span>{language === 'de' ? 'Marktwert jetzt berechnen' : 'Calculate Valuation Now'}</span>
                       </>
                     )}
@@ -730,8 +739,8 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
                 </div>
 
                 {/* Big Result Box */}
-                <div className="bg-neutral-900 text-white rounded-xl p-6 sm:p-8 text-center space-y-4 shadow-xl">
-                  <div className="text-xs uppercase tracking-widest text-amber-400 font-semibold">
+                <div className="bg-neutral-900 text-white rounded-xl p-6 sm:p-8 text-center space-y-4 shadow-xl border border-[#C5A059]/30">
+                  <div className="text-xs uppercase tracking-widest text-[#E6CA85] font-semibold">
                     {language === 'de' ? 'Hedonische Preisspanne (Schweizer Markt)' : 'Hedonic Price Range (Swiss Market)'}
                   </div>
                   <div className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold text-white tracking-tight tabular-nums">
@@ -745,11 +754,11 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
 
                   <div className="pt-4 border-t border-neutral-800 grid grid-cols-2 gap-4 text-xs text-neutral-400">
                     <div className="flex items-center justify-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-amber-400" />
+                      <Clock className="w-3.5 h-3.5 text-[#DFB76C]" />
                       <span>{language === 'de' ? 'Erstantwort innert 24h' : 'Response within 24h'}</span>
                     </div>
                     <div className="flex items-center justify-center gap-1">
-                      <ShieldCheck className="w-3.5 h-3.5 text-amber-400" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#DFB76C]" />
                       <span>{language === 'de' ? '100% Unverbindlich' : '100% Confidential'}</span>
                     </div>
                   </div>

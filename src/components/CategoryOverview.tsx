@@ -140,10 +140,10 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 via-neutral-950/20 to-transparent" />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded text-neutral-900 shadow-sm group-hover:bg-amber-400 transition-colors">
-                    <Icon className="w-4 h-4 text-neutral-900" />
+                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded text-neutral-900 shadow-sm group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors">
+                    <Icon className="w-4 h-4 text-neutral-900 group-hover:text-neutral-950" />
                   </div>
-                  <div className="absolute bottom-3 left-4 text-xs font-medium text-amber-300">
+                  <div className="absolute bottom-3 left-4 text-xs font-medium text-[#E6CA85]">
                     {cat.highlight[language]}
                   </div>
                 </div>
@@ -151,7 +151,7 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
                 {/* Content Body */}
                 <div className="p-6 sm:p-7 flex-1 flex flex-col justify-between">
                   <div>
-                    <h3 className="text-xl font-semibold tracking-tight text-neutral-900 mb-1 group-hover:text-amber-900 transition-colors">
+                    <h3 className="text-xl font-semibold tracking-tight text-neutral-900 mb-1 group-hover:text-[#8C6D1F] transition-colors">
                       {cat.title[language]}
                     </h3>
                     <div className="text-xs font-medium text-neutral-500 mb-3">

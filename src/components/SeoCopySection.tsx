@@ -134,7 +134,7 @@ export const SeoCopySection: React.FC<SeoCopySectionProps> = ({ language }) => {
           className="mt-12 p-6 bg-white rounded-xl border border-neutral-200 text-xs text-neutral-600 space-y-2 shadow-sm hover:border-neutral-300 transition-colors"
         >
           <div className="font-semibold text-neutral-900 flex items-center gap-1.5 text-xs">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
             <span>
               {language === 'de'
                 ? 'Veracy Immobilien – Die neue Generation des Schweizer Immobilienverkaufs'

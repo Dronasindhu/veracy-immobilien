@@ -80,10 +80,10 @@ export const TrustSection: React.FC<TrustSectionProps> = ({ language }) => {
                 className="group bg-white p-8 rounded-lg border border-neutral-200 shadow-sm hover:shadow-xl hover:border-neutral-300 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-12 h-12 bg-neutral-900 rounded-md flex items-center justify-center text-amber-400 mb-6 group-hover:bg-amber-400 group-hover:text-neutral-950 transition-colors duration-300">
+                  <div className="w-12 h-12 bg-neutral-900 rounded-md flex items-center justify-center text-[#DFB76C] mb-6 group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors duration-300 shadow-sm">
                     <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
                   </div>
-                  <h3 className="text-lg font-semibold text-neutral-900 mb-2 group-hover:text-amber-900 transition-colors">
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-2 group-hover:text-[#8C6D1F] transition-colors">
                     {pillar.title}
                   </h3>
                   <p className="text-sm text-neutral-600 font-light leading-relaxed">
@@ -125,9 +125,9 @@ export const TrustSection: React.FC<TrustSectionProps> = ({ language }) => {
                 className="bg-white p-6 rounded-lg border border-neutral-200/90 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center gap-1 text-amber-400 mb-4">
+                  <div className="flex items-center gap-1 text-[#C5A059] mb-4">
                     {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400" />
+                      <Star key={i} className="w-4 h-4 fill-[#C5A059] text-[#C5A059]" />
                     ))}
                   </div>
                   <blockquote className="text-sm text-neutral-700 italic font-light leading-relaxed mb-6">

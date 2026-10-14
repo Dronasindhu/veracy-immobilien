@@ -27,11 +27,11 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Brand info (Col 1-4) */}
           <div className="lg:col-span-4 space-y-4">
             <img
-              src="./veracy-logo-alt.png"
+              src="/veracy-logo-alt.png"
               alt="Veracy Immobilien"
               width={1800}
               height={1575}
-              className="w-40 sm:w-52 rounded-xl ring-1 ring-white/10"
+              className="w-40 sm:w-52 rounded-xl ring-1 ring-[#C5A059]/40"
             />
             <p className="text-neutral-400 font-light leading-relaxed max-w-sm">
               {language === 'de'
@@ -39,7 +39,7 @@ export const Footer: React.FC<FooterProps> = ({
                 : 'Swiss real estate brokerage providing transparent flat fees, accurate valuations, and dedicated on-site representation across the cantons of Zurich and Aargau.'}
             </p>
             <div className="pt-2 flex items-center gap-2 text-neutral-300">
-              <ShieldCheck className="w-4 h-4 text-amber-400" />
+              <ShieldCheck className="w-4 h-4 text-[#DFB76C]" />
               <span className="text-[11px] font-medium">
                 {language === 'de' ? 'SVIT / USVT Standard-Konform' : 'Swiss SVIT / USVT Standards'}
               </span>
@@ -58,7 +58,7 @@ export const Footer: React.FC<FooterProps> = ({
                   className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group"
                 >
                   <span>{language === 'de' ? '01. Immobilie verkaufen' : '01. Sell Property'}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-amber-400" />
+                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
                 </button>
               </li>
               <li>
@@ -67,7 +67,7 @@ export const Footer: React.FC<FooterProps> = ({
                   className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group"
                 >
                   <span>{language === 'de' ? '02. Kaufen & Mieten' : '02. Buy & Rent'}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-amber-400" />
+                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
                 </button>
               </li>
               <li>
@@ -76,13 +76,13 @@ export const Footer: React.FC<FooterProps> = ({
                   className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group"
                 >
                   <span>{language === 'de' ? '03. Professionelle Schätzung' : '03. Valuation'}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-amber-400" />
+                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
                 </button>
               </li>
               <li>
                 <button
                   onClick={onOpenConsultation}
-                  className="hover:text-amber-400 transition-colors cursor-pointer text-left font-medium"
+                  className="hover:text-[#E6CA85] transition-colors cursor-pointer text-left font-medium"
                 >
                   {language === 'de' ? 'Kostenlose Erstberatung' : 'Free Consultation'}
                 </button>
@@ -112,17 +112,17 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
             <div className="space-y-2 text-neutral-300">
               <div className="flex items-start gap-2">
-                <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0 mt-0.5" />
+                <MapPin className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
                 <span>Bahnhofstrasse 45, 8001 Zürich</span>
               </div>
               <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <Phone className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
                 <a href="tel:+41442108800" className="hover:text-white font-mono">
                   +41 44 210 88 00
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                <Mail className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
                 <a href="mailto:kontakt@veracy-immobilien.ch" className="hover:text-white">
                   kontakt@veracy-immobilien.ch
                 </a>
@@ -130,7 +130,7 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
 
             <div className="pt-2">
-              <div className="text-[11px] text-amber-400 font-medium">
+              <div className="text-[11px] text-[#E6CA85] font-medium">
                 {language === 'de' ? 'Reaktionszeit < 24h an Werktagen' : 'Response time < 24h on business days'}
               </div>
             </div>

@@ -35,7 +35,7 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
           transition={{ duration: 0.6 }}
           className="max-w-3xl mb-16"
         >
-          <div className="text-xs uppercase tracking-[0.2em] text-amber-400 font-semibold mb-2">
+          <div className="text-xs uppercase tracking-[0.2em] text-[#E6CA85] font-semibold mb-2">
             {language === 'de' ? 'Das Veracy Wertmodell' : 'The Veracy Value Model'}
           </div>
           <h2 className="text-3xl sm:text-4xl font-normal font-display tracking-tight text-white text-balance">
@@ -75,7 +75,7 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
                   <span className="text-sm text-neutral-300 font-medium">
                     {language === 'de' ? 'Verkaufswert Ihrer Liegenschaft:' : 'Expected Property Sale Price:'}
                   </span>
-                  <span className="text-2xl font-semibold text-amber-400 font-mono tabular-nums">
+                  <span className="text-2xl font-semibold text-[#E6CA85] font-mono tabular-nums">
                     {formatChf(propertyPrice)}
                   </span>
                 </div>
@@ -86,7 +86,7 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
                   step={50000}
                   value={propertyPrice}
                   onChange={(e) => setPropertyPrice(Number(e.target.value))}
-                  className="w-full h-2 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-amber-400"
+                  className="w-full h-2 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-[#C5A059]"
                 />
                 <div className="flex justify-between text-xs text-neutral-500 mt-2 font-mono">
                   <span>CHF 500'000</span>
@@ -132,24 +132,24 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
               {/* Veracy Box */}
               <motion.div
                 whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="bg-gradient-to-b from-neutral-800 to-neutral-900 p-5 rounded-lg border-2 border-amber-400/80 flex flex-col justify-between relative shadow-lg"
+                className="bg-gradient-to-b from-neutral-800 to-neutral-900 p-5 rounded-lg border-2 border-[#C5A059] flex flex-col justify-between relative shadow-lg"
               >
-                <div className="absolute -top-3 right-4 bg-amber-400 text-neutral-950 font-semibold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded">
+                <div className="absolute -top-3 right-4 bg-gradient-to-r from-[#DFB76C] to-[#C5A059] text-neutral-950 font-bold text-[10px] uppercase tracking-wider px-2 py-0.5 rounded shadow">
                   {language === 'de' ? 'Ihre Ersparnis' : 'Your Net Savings'}
                 </div>
                 <div>
-                  <div className="text-xs text-amber-300 uppercase tracking-wider mb-1">
+                  <div className="text-xs text-[#E6CA85] uppercase tracking-wider mb-1 font-medium">
                     {language === 'de' ? 'Veracy Festpreis' : 'Veracy Flat Fee'}
                   </div>
                   <div className="text-2xl font-bold text-white font-mono tabular-nums">
                     {formatChf(veracyFlatFee)}
                   </div>
-                  <div className="mt-3 text-lg font-bold text-amber-400 font-mono tabular-nums">
+                  <div className="mt-3 text-lg font-bold text-[#E6CA85] font-mono tabular-nums">
                     +{formatChf(savings)} {language === 'de' ? 'gespart' : 'saved'}
                   </div>
                 </div>
                 <div className="mt-4 pt-3 border-t border-neutral-700/70 text-[11px] text-neutral-300 flex items-center gap-1">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
                   <span>{language === 'de' ? 'Voller Service vor Ort inklusive' : 'Full on-site broker service included'}</span>
                 </div>
               </motion.div>
@@ -204,8 +204,8 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
                 <div className="md:col-span-4 font-medium text-neutral-300">
                   {row.feature}
                 </div>
-                <div className="md:col-span-4 text-amber-300 font-medium flex items-center gap-2">
-                  <Check className="w-4 h-4 text-amber-400 shrink-0" />
+                <div className="md:col-span-4 text-[#E6CA85] font-medium flex items-center gap-2">
+                  <Check className="w-4 h-4 text-[#E6CA85] shrink-0" />
                   <span>{row.veracy}</span>
                 </div>
                 <div className="md:col-span-4 text-neutral-400 flex items-center gap-2">
@@ -223,7 +223,7 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
             whileHover={{ scale: 1.025 }}
             whileTap={{ scale: 0.975 }}
             onClick={onOpenConsultation}
-            className="inline-flex items-center gap-2 px-8 py-3.5 bg-amber-400 hover:bg-amber-300 text-neutral-950 font-semibold text-xs uppercase tracking-wider rounded transition-all shadow-md active:scale-[0.99] cursor-pointer"
+            className="inline-flex items-center gap-2 px-8 py-3.5 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 font-semibold text-xs uppercase tracking-wider rounded transition-all shadow-md active:scale-[0.99] cursor-pointer border border-[#C5A059]/40"
           >
             <span>{language === 'de' ? 'Kostenlose Beratung & Einsparung prüfen' : 'Check Your Potential Savings Today'}</span>
             <ArrowRight className="w-4 h-4" />

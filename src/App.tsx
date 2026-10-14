@@ -62,7 +62,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-neutral-900 flex flex-col font-sans selection:bg-amber-100 selection:text-amber-900 relative">
+    <div className="min-h-screen bg-white text-neutral-900 flex flex-col font-sans selection:bg-[#F5EEDB] selection:text-[#6E5516] relative">
       {/* Top Navigation Bar with strict 3 categories */}
       <Navbar
         currentCategory={currentCategory}
@@ -204,7 +204,7 @@ export default function App() {
             whileTap={{ scale: 0.94 }}
             onClick={scrollToTop}
             aria-label="Scroll to top"
-            className="fixed bottom-6 right-6 z-40 p-3 bg-neutral-900 text-amber-400 hover:text-white rounded-full shadow-lg border border-neutral-700 hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="fixed bottom-6 right-6 z-40 p-3 bg-neutral-900 text-[#DFB76C] hover:text-[#E6CA85] rounded-full shadow-lg border border-neutral-700 hover:bg-neutral-800 transition-colors cursor-pointer"
           >
             <ChevronUp className="w-5 h-5" />
           </motion.button>
