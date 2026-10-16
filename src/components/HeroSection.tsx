@@ -7,22 +7,14 @@ import { motion } from 'motion/react';
 interface HeroSectionProps {
   language: Language;
   onNavigate: (category: MainCategory) => void;
-  onStartValuation: (zipOrDetails: string) => void;
+  onOpenConsultation?: () => void;
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({
   language,
   onNavigate,
-  onStartValuation,
+  onOpenConsultation,
 }) => {
-  const [zipInput, setZipInput] = useState('');
-  const [propertyTypeInput, setPropertyTypeInput] = useState('apartment');
-
-  const handleQuickValuationSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    onStartValuation(`${propertyTypeInput}:${zipInput.trim()}`);
-  };
-
   return (
     <section className="relative overflow-hidden bg-neutral-900 text-white">
       {/* Background Image with Measured Contrast Scrim */}
@@ -131,7 +123,34 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               </div>
             </motion.div>
 
-            {/* Secondary Link Row */}
+            {/* Primary Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45, duration: 0.5 }}
+              className="pt-4 flex flex-wrap items-center gap-3 sm:gap-4"
+            >
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => onNavigate('sell')}
+                className="px-6 py-3.5 text-xs font-semibold tracking-wide uppercase text-neutral-950 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] rounded shadow-lg shadow-[#C5A059]/20 flex items-center gap-2 cursor-pointer transition-all border border-[#C5A059]/40"
+              >
+                <span>{language === 'de' ? 'Immobilie verkaufen' : 'Sell Property'}</span>
+                <ArrowRight className="w-4 h-4" />
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => onNavigate('buy-rent')}
+                className="px-6 py-3.5 text-xs font-medium tracking-wide uppercase text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded border border-white/20 flex items-center gap-2 cursor-pointer transition-all"
+              >
+                <span>{language === 'de' ? 'Objekte entdecken' : 'Browse Properties'}</span>
+                <ArrowRight className="w-4 h-4 text-[#DFB76C]" />
+              </motion.button>
+            </motion.div>
+
+            {/* Secondary Trust Row */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -149,92 +168,113 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Quick Property Valuation Lead-Capture Widget */}
+          {/* Right Column: Veracy Core Services Hub (Focused on Sell & Buy, No Valuation Highlight) */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5"
           >
-            <div className="bg-white text-neutral-900 rounded-lg p-6 sm:p-8 shadow-2xl border border-neutral-100 relative hover:shadow-[#C5A059]/10 transition-shadow">
-              <div className="mb-5">
+            <div className="bg-white text-neutral-900 rounded-xl p-6 sm:p-8 shadow-2xl border border-neutral-100 relative hover:shadow-[#C5A059]/10 transition-shadow space-y-6">
+              <div>
                 <div className="text-[11px] uppercase tracking-wider text-[#8C6D1F] font-semibold mb-1">
-                  {language === 'de' ? 'Kostenlose Schnell-Schätzung' : 'Complimentary Quick Valuation'}
+                  {language === 'de' ? 'Schweizer Maklerkompetenz' : 'Swiss Brokerage Excellence'}
                 </div>
-                <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-neutral-950">
+                <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-neutral-950 font-display">
                   {language === 'de'
-                    ? 'Was ist Ihre Immobilie heute wert?'
-                    : 'What is your property worth today?'}
+                    ? 'Ihr verlässlicher Partner für Verkauf & Kauf'
+                    : 'Your Trusted Partner for Buying & Selling'}
                 </h2>
-                <p className="text-xs text-neutral-500 mt-1.5">
+                <p className="text-xs text-neutral-500 mt-1.5 leading-relaxed">
                   {language === 'de'
-                    ? 'Erhalten Sie eine fundierte Ersteinschätzung für alle Schweizer Regionen in 2 Minuten.'
-                    : 'Receive an accurate preliminary estimation for any Swiss canton within 2 minutes.'}
+                    ? 'Professionelle Schweizer Maklerdienstleistung in den Kantonen Zürich und Aargau mit transparenter Kostenstruktur.'
+                    : 'Professional Swiss brokerage service across Zurich and Aargau with fully transparent pricing.'}
                 </p>
               </div>
 
-              <form onSubmit={handleQuickValuationSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-medium text-neutral-700 mb-1.5">
-                    {language === 'de' ? 'Objektart' : 'Property Type'}
-                  </label>
-                  <select
-                    value={propertyTypeInput}
-                    onChange={(e) => setPropertyTypeInput(e.target.value)}
-                    className="w-full text-sm rounded border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:bg-white transition-all cursor-pointer"
-                  >
-                    <option value="apartment">
-                      {language === 'de' ? 'Eigentumswohnung' : 'Condominium / Apartment'}
-                    </option>
-                    <option value="house">
-                      {language === 'de' ? 'Einfamilienhaus / Villa' : 'Single-Family Home / Villa'}
-                    </option>
-                    <option value="penthouse">
-                      {language === 'de' ? 'Attika / Penthouse' : 'Attic / Penthouse'}
-                    </option>
-                    <option value="multi-family">
-                      {language === 'de' ? 'Mehrfamilienhaus / Renditeobjekt' : 'Multi-Family / Investment Property'}
-                    </option>
-                  </select>
+              {/* Service Card 1: Sell Property */}
+              <div
+                onClick={() => onNavigate('sell')}
+                className="group p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-4"
+              >
+                <div className="p-2.5 rounded bg-white shadow-sm border border-neutral-200 group-hover:border-[#C5A059] shrink-0 text-[#8C6D1F]">
+                  <Award className="w-5 h-5" />
                 </div>
-
-                <div>
-                  <label className="block text-xs font-medium text-neutral-700 mb-1.5">
-                    {language === 'de' ? 'Postleitzahl oder Ortschaft (Schweiz)' : 'Postal Code or City (Switzerland)'}
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder={language === 'de' ? 'z.B. 8008 Zürich oder 5400 Baden' : 'e.g. 8008 Zurich or 5400 Baden'}
-                    value={zipInput}
-                    onChange={(e) => setZipInput(e.target.value)}
-                    className="w-full text-sm rounded border border-neutral-300 bg-neutral-50 px-3.5 py-2.5 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:bg-white transition-all"
-                  />
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-neutral-900 group-hover:text-[#8C6D1F] transition-colors">
+                      {language === 'de' ? '01. Immobilie verkaufen' : '01. Sell Property'}
+                    </span>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] px-2 py-0.5 rounded">
+                      {language === 'de' ? 'ab CHF 3’900' : 'from CHF 3,900'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-neutral-600 mt-1 font-light leading-relaxed">
+                    {language === 'de'
+                      ? 'Festpreise statt überrissene 2–3% Provision. Bis zu CHF 35’000 sparen bei vollem Makler-Einsatz.'
+                      : 'Flat fees instead of 2–3% broker fees. Save up to CHF 35,000 with full brokerage service.'}
+                  </p>
+                  <div className="mt-2 text-xs font-medium text-[#8C6D1F] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>{language === 'de' ? 'Verkaufspakete ansehen' : 'View Selling Packages'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
                 </div>
+              </div>
 
-                <div className="pt-2">
+              {/* Service Card 2: Buy & Rent */}
+              <div
+                onClick={() => onNavigate('buy-rent')}
+                className="group p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-4"
+              >
+                <div className="p-2.5 rounded bg-white shadow-sm border border-neutral-200 group-hover:border-[#C5A059] shrink-0 text-[#8C6D1F]">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-neutral-900 group-hover:text-[#8C6D1F] transition-colors">
+                      {language === 'de' ? '02. Kaufen & Mieten' : '02. Buy & Rent'}
+                    </span>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-neutral-200/60 text-neutral-700 px-2 py-0.5 rounded">
+                      {language === 'de' ? 'Kuriert' : 'Curated'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-neutral-600 mt-1 font-light leading-relaxed">
+                    {language === 'de'
+                      ? 'Geprüfte Wohn- und Anlageobjekte in Zürich & Aargau sowie diskrete Off-Market Gelegenheiten.'
+                      : 'Verified prime residences in Zurich & Aargau plus discreet off-market opportunities.'}
+                  </p>
+                  <div className="mt-2 text-xs font-medium text-[#8C6D1F] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>{language === 'de' ? 'Objekte durchsuchen' : 'Browse Properties'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Consultation Action */}
+              {onOpenConsultation && (
+                <div className="pt-2 border-t border-neutral-100">
                   <motion.button
                     whileHover={{ scale: 1.015 }}
                     whileTap={{ scale: 0.985 }}
-                    type="submit"
-                    className="w-full group py-3 px-4 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-sm font-medium tracking-wide flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm"
+                    onClick={onOpenConsultation}
+                    className="w-full py-3 px-4 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
                   >
-                    <span>{language === 'de' ? 'Jetzt Schätzung starten' : 'Start Instant Valuation'}</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5 text-[#DFB76C]" />
+                    <span>{language === 'de' ? 'Kostenlose Erstberatung vereinbaren' : 'Request Free Consultation'}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-[#DFB76C]" />
                   </motion.button>
                 </div>
+              )}
 
-                <div className="flex items-center justify-between text-[11px] text-neutral-500 pt-2 border-t border-neutral-100">
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3 text-neutral-400" />
-                    {language === 'de' ? 'Dauer: ca. 60 Sek.' : 'Takes ~60 seconds'}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <ShieldCheck className="w-3 h-3 text-neutral-400" />
-                    {language === 'de' ? '100% Kostenlos & Unverbindlich' : '100% Free & No obligation'}
-                  </span>
-                </div>
-              </form>
+              <div className="flex items-center justify-between text-[11px] text-neutral-500 pt-2 border-t border-neutral-100">
+                <span className="flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-[#C5A059]" />
+                  {language === 'de' ? 'Antwort innert 24h' : 'Response within 24h'}
+                </span>
+                <span className="flex items-center gap-1">
+                  <ShieldCheck className="w-3 h-3 text-[#C5A059]" />
+                  {language === 'de' ? '100% Unverbindlich' : '100% No obligation'}
+                </span>
+              </div>
             </div>
           </motion.div>
         </div>

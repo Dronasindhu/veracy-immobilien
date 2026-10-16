@@ -87,11 +87,15 @@ export default function App() {
               exit={{ opacity: 0, y: -14 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* 1. Hero Section with Quick Valuation Widget */}
+              {/* 1. Hero Section - Veracy Brokerage & Core Proposition */}
               <HeroSection
                 language={language}
                 onNavigate={handleNavigate}
-                onStartValuation={handleStartValuationFromHero}
+                onOpenConsultation={() => {
+                  setSelectedPackage(null);
+                  setPropertyContext(null);
+                  setIsConsultationOpen(true);
+                }}
               />
 
               {/* 2. Overview of the 3 Main Categories */}

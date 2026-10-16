@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { sendEmailInquiry } from '../services/emailService';
-import { Check, ArrowRight, ArrowLeft, ShieldCheck, Clock, Calculator, Home, Building2, Sparkles, CheckCircle2, Loader2 } from 'lucide-react';
+import { Check, ArrowRight, ArrowLeft, ShieldCheck, Clock, Calculator, Home, Building2, Sparkles, CheckCircle2, Loader2, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface ValuationPageProps {
@@ -49,7 +49,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
   // Swiss hedonic calculation model with real-world Swiss market calibration
   const calculateValuation = () => {
     // Baseline price per m² for average Swiss suburban / agglomeration housing
-    let baseM2 = 7400;
+    let baseM2 = 7250;
     const lowerZip = zipCity.toLowerCase().trim();
 
     // Regional calibration based on Swiss cantonal benchmarks
@@ -95,7 +95,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
       lowerZip.includes('aargau') ||
       lowerZip.includes('ag')
     ) {
-      baseM2 = 7200; // Canton Aargau general
+      baseM2 = 7250; // Canton Aargau general
     } else if (lowerZip.includes('600') || lowerZip.includes('luzern')) {
       baseM2 = 7800;
     } else if (lowerZip.includes('300') || lowerZip.includes('bern')) {
@@ -106,17 +106,17 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
       baseM2 = 10500;
     }
 
-    // Property type adjustment (Single-family house includes valuable land plot share)
+    // Property type adjustment (Single-family house includes valuable land plot 450-800m²)
     if (propertyType === 'apartment') {
       baseM2 *= 1.0;
     } else if (propertyType === 'house') {
-      baseM2 *= 1.08;
+      baseM2 *= 1.30;
     } else if (propertyType === 'penthouse') {
-      baseM2 *= 1.15;
+      baseM2 *= 1.18;
     } else if (propertyType === 'villa') {
-      baseM2 *= 1.25;
+      baseM2 *= 1.38;
     } else if (propertyType === 'multi-family') {
-      baseM2 *= 0.85;
+      baseM2 *= 0.88;
     } else if (propertyType === 'land') {
       baseM2 = Math.min(baseM2 * 0.18, 1200);
     }
@@ -128,24 +128,24 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
     } else if (buildYear >= 2012) {
       ageFactor = 1.00;
     } else if (buildYear >= 2000) {
-      ageFactor = 0.95;
+      ageFactor = 0.96;
     } else if (buildYear >= 1990) {
-      ageFactor = 0.90;
+      ageFactor = 0.93;
     } else if (buildYear >= 1980) {
-      ageFactor = 0.86;
+      ageFactor = 0.90;
     } else if (buildYear >= 1965) {
-      // 1967 house is right here: building depreciated but plot retains prime Swiss value
-      ageFactor = 0.83;
+      // 1967 house: building depreciated but plot retains prime Swiss value
+      ageFactor = 0.88;
     } else if (buildYear >= 1950) {
-      ageFactor = 0.79;
+      ageFactor = 0.84;
     } else {
-      ageFactor = 0.76;
+      ageFactor = 0.80;
     }
 
     // Condition adjustment
     let conditionFactor = 1.0;
     if (condition === 'renovation') {
-      conditionFactor = 0.82; // -18% for required renovation
+      conditionFactor = 0.84; // Renovation required
     } else if (condition === 'modern') {
       conditionFactor = 1.00; // Well-maintained
     } else if (condition === 'luxury') {
@@ -166,22 +166,37 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
     // Plausible living space correlation for room count
     let calcArea = livingArea;
     if (rooms >= 6.5 && calcArea < 180) {
-      calcArea = 200;
+      calcArea = 180;
     } else if (rooms >= 5.5 && calcArea < 150) {
-      calcArea = 160;
+      calcArea = 150;
     }
 
     const baseTotal = calcArea * finalM2;
+    const baseAvg = Math.round(baseTotal / 10000) * 10000;
 
-    const lowerEstimate = Math.round((baseTotal * 0.94) / 10000) * 10000;
-    const upperEstimate = Math.round((baseTotal * 1.06) / 10000) * 10000;
-    const avgEstimate = Math.round(baseTotal / 10000) * 10000;
+    // Add 7.5% margin above current calculated value to show good, reasonable, attractive market value
+    const marginPercent = 7.5;
+    const attractiveMultiplier = 1 + marginPercent / 100;
+    const attractiveAvg = Math.round((baseAvg * attractiveMultiplier) / 10000) * 10000;
+    const attractiveLower = Math.round((attractiveAvg * 0.955) / 10000) * 10000;
+    const attractiveUpper = Math.round((attractiveAvg * 1.045) / 10000) * 10000;
+
+    const baseLower = Math.round((baseAvg * 0.94) / 10000) * 10000;
+    const baseUpper = Math.round((baseAvg * 1.06) / 10000) * 10000;
 
     return {
-      lower: lowerEstimate,
-      upper: upperEstimate,
-      avg: avgEstimate,
-      pricePerM2: Math.round(finalM2),
+      lower: attractiveLower,
+      upper: attractiveUpper,
+      avg: attractiveAvg,
+      attractiveLower,
+      attractiveUpper,
+      attractiveAvg,
+      baseLower,
+      baseUpper,
+      baseAvg,
+      marginPercent,
+      pricePerM2: Math.round(finalM2 * attractiveMultiplier),
+      basePricePerM2: Math.round(finalM2),
     };
   };
 
@@ -738,33 +753,63 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
                   </p>
                 </div>
 
-                {/* Big Result Box */}
-                <div className="bg-neutral-900 text-white rounded-xl p-6 sm:p-8 text-center space-y-4 shadow-xl border border-[#C5A059]/30">
-                  <div className="text-xs uppercase tracking-widest text-[#E6CA85] font-semibold">
-                    {language === 'de' ? 'Hedonische Preisspanne (Schweizer Markt)' : 'Hedonic Price Range (Swiss Market)'}
+                {/* Big Result Box with 7.5% Market Potential Margin */}
+                <div className="bg-neutral-900 text-white rounded-xl p-6 sm:p-8 text-center space-y-4 shadow-xl border border-[#C5A059]/35">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF6EE]/10 border border-[#C5A059]/40 text-[#E6CA85] text-xs font-medium">
+                    <Sparkles className="w-3.5 h-3.5 text-[#C5A059]" />
+                    <span>
+                      {language === 'de'
+                        ? 'Empfohlener attraktiver Marktwert (+7.5% Marktpotenzial-Marge)'
+                        : 'Recommended Attractive Market Value (+7.5% Market Margin)'}
+                    </span>
                   </div>
+
                   <div className="text-3xl sm:text-4xl lg:text-5xl font-mono font-bold text-white tracking-tight tabular-nums">
                     {formatChf(valuationResult.lower)} – {formatChf(valuationResult.upper)}
                   </div>
-                  <div className="text-sm text-neutral-300 font-light">
-                    {language === 'de' ? 'Mittlerer Richtwert:' : 'Median Market Benchmark:'}{' '}
-                    <span className="font-semibold text-white font-mono">{formatChf(valuationResult.avg)}</span>
-                    {' '}(ca. {formatChf(valuationResult.pricePerM2)} / m²)
+
+                  <div className="text-sm text-neutral-300 font-light flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+                    <span>
+                      {language === 'de' ? 'Attraktiver Richtwert:' : 'Attractive Market Benchmark:'}{' '}
+                      <span className="font-semibold text-white font-mono">{formatChf(valuationResult.avg)}</span>
+                    </span>
+                    <span className="text-neutral-500">·</span>
+                    <span className="text-neutral-400 text-xs">
+                      {language === 'de' ? 'Basis-Hedonik:' : 'Hedonic Baseline:'}{' '}
+                      <span className="font-mono text-neutral-300">{formatChf(valuationResult.baseAvg)}</span>
+                    </span>
+                    <span className="text-neutral-500">·</span>
+                    <span className="text-neutral-400 text-xs">
+                      ca. {formatChf(valuationResult.pricePerM2)} / m²
+                    </span>
                   </div>
 
                   <div className="pt-4 border-t border-neutral-800 grid grid-cols-2 gap-4 text-xs text-neutral-400">
-                    <div className="flex items-center justify-center gap-1">
+                    <div className="flex items-center justify-center gap-1.5">
                       <Clock className="w-3.5 h-3.5 text-[#DFB76C]" />
                       <span>{language === 'de' ? 'Erstantwort innert 24h' : 'Response within 24h'}</span>
                     </div>
-                    <div className="flex items-center justify-center gap-1">
+                    <div className="flex items-center justify-center gap-1.5">
                       <ShieldCheck className="w-3.5 h-3.5 text-[#DFB76C]" />
                       <span>{language === 'de' ? '100% Unverbindlich' : '100% Confidential'}</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Next Steps: Detailed Broker Review */}
+                {/* Required Disclaimer Box regarding viewing appointment & value factors */}
+                <div className="bg-[#FAF6EE] border border-[#EBDCB7] rounded-xl p-5 sm:p-6 text-left space-y-2.5">
+                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8C6D1F]">
+                    <Info className="w-4 h-4 text-[#C5A059] shrink-0" />
+                    <span>{language === 'de' ? 'Wichtiger Hinweis zum Marktwert & Besichtigung' : 'Important Note on Valuation & Viewing Appointment'}</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-neutral-700 leading-relaxed font-light">
+                    {language === 'de'
+                      ? 'Der oben berechnete Wert beinhaltet eine realistische Marktpotenzial-Marge von +7.5% über dem rein statistischen Mindestwert, um Ihnen eine optimale und marktgerechte Positionierung für den Verkauf zu bieten. Bitte beachten Sie: Der tatsächliche, am Markt erzielbare Verkaufswert wird durch spezifische Qualitäts- und Lagefaktoren (wie die exakte Bausubstanz, den Ausbaustandard, die Mikrolage, Lichteinfall, Geräuschkulisse und Privatsphäre) beeinflusst, welche erst im Rahmen eines persönlichen Vor-Ort-Besichtigungstermins durch unsere lizenzierten Makler abschliessend berücksichtigt werden können.'
+                      : 'The valuation above incorporates a realistic market potential margin of +7.5% above statistical baseline to present an attractive, competitive market benchmark. Please note: The actual realizable sale price is influenced by property-specific characteristics (such as structural condition, interior finishes, exact micro-location, daylight, and privacy), which can only be definitively factored in after a personal in-person viewing appointment with our licensed Swiss brokers.'}
+                  </p>
+                </div>
+
+                {/* Next Steps: Detailed Broker Review & Viewing Appointment */}
                 <div className="bg-neutral-50 rounded-lg p-6 border border-neutral-200 space-y-3">
                   <h4 className="text-sm font-semibold text-neutral-900">
                     {language === 'de'
@@ -773,8 +818,8 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
                   </h4>
                   <p className="text-xs text-neutral-600 font-light leading-relaxed">
                     {language === 'de'
-                      ? `Vielen Dank, ${fullName || 'Eigentümer/in'}. Unser zuständiger Senior Makler für Ihre Region prüft die spezifischen Mikrolage-Faktoren und sendet Ihnen den vollständigen Bericht an ${email || 'Ihre E-Mail'}. Zudem kontaktieren wir Sie für eine kurze Abstimmung.`
-                      : `Thank you, ${fullName || 'property owner'}. Our senior regional broker is reviewing the specific micro-location metrics and will dispatch the comprehensive dossier to ${email || 'your email'}.`}
+                      ? `Vielen Dank, ${fullName || 'Eigentümer/in'}. Unser zuständiger Senior Makler für Ihre Region prüft die spezifischen Mikrolage-Faktoren und sendet Ihnen den vollständigen Bericht an ${email || 'Ihre E-Mail'}. Vereinbaren Sie direkt einen kostenlosen Vor-Ort-Termin für die definitive Wertfeststellung.`
+                      : `Thank you, ${fullName || 'property owner'}. Our senior regional broker is reviewing the specific micro-location metrics and will dispatch the comprehensive dossier to ${email || 'your email'}. Book your free in-person viewing appointment to finalize your valuation.`}
                   </p>
                   <div className="pt-2 flex flex-col sm:flex-row gap-3">
                     <motion.button
