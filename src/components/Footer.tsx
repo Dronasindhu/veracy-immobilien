@@ -27,11 +27,11 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Brand info (Col 1-4) */}
           <div className="lg:col-span-4 space-y-4">
             <img
-              src="/veracy-logo-alt.png"
+              src="/veracy-logo-light.png"
               alt="Veracy Immobilien"
-              width={1800}
-              height={1575}
-              className="w-40 sm:w-52 rounded-xl ring-1 ring-[#C5A059]/40"
+              width={1467}
+              height={377}
+              className="h-10 sm:h-12 w-auto object-contain"
             />
             <p className="text-neutral-400 font-light leading-relaxed max-w-sm">
               {language === 'de'

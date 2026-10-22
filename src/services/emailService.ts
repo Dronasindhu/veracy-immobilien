@@ -15,6 +15,8 @@ export interface EmailSubmissionData {
   location?: string;
   interest?: string;
   message?: string;
+  appointmentDate?: string;
+  appointmentTime?: string;
   propertyDetails?: Record<string, string | number | undefined>;
 }
 
@@ -32,6 +34,10 @@ export async function sendEmailInquiry(data: EmailSubmissionData): Promise<{ suc
       'Telefon': data.phone || 'Nicht angegeben',
       'Liegenschaft / Ort': data.location || 'Nicht angegeben',
       'Anliegen': data.interest || 'Allgemeine Anfrage',
+      'Wunschtermin für Vor-Ort-Fototermin': data.appointmentDate
+        ? `${data.appointmentDate} (${data.appointmentTime || 'Flexibel'}) - Veracy Vor-Ort-Besuch bei Verkaufsliegenschaft`
+        : 'Nicht spezifiziert',
+      'Terminbestätigung per E-Mail': 'Bestätigung an Kunde versandt',
       'Nachricht': data.message || 'Keine zusätzliche Nachricht',
     };
 

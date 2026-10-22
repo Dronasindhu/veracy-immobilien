@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Language, SellingPackage } from '../types';
 import { sendEmailInquiry } from '../services/emailService';
-import { X, CheckCircle2, Phone, Mail, Clock, ShieldCheck, ArrowRight, Loader2 } from 'lucide-react';
+import { X, CheckCircle2, Phone, Mail, Clock, ShieldCheck, ArrowRight, Loader2, Calendar, Camera, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface ContactModalProps {
@@ -25,6 +25,8 @@ export const ContactModal: React.FC<ContactModalProps> = ({
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [location, setLocation] = useState(propertyContext?.location || '');
+  const [appointmentDate, setAppointmentDate] = useState('');
+  const [appointmentTime, setAppointmentTime] = useState('morning');
   const [message, setMessage] = useState('');
   const [interest, setInterest] = useState<string>(
     propertyContext
@@ -38,14 +40,25 @@ export const ContactModal: React.FC<ContactModalProps> = ({
     e.preventDefault();
     setIsSending(true);
 
+    const timeLabel =
+      appointmentTime === 'morning'
+        ? (language === 'de' ? 'Vormittag (09:00 – 12:00 Uhr)' : 'Morning (09:00 – 12:00)')
+        : appointmentTime === 'afternoon'
+        ? (language === 'de' ? 'Nachmittag (13:00 – 16:00 Uhr)' : 'Afternoon (13:00 – 16:00)')
+        : appointmentTime === 'late'
+        ? (language === 'de' ? 'Spätnachmittag (16:00 – 19:00 Uhr)' : 'Late Afternoon (16:00 – 19:00)')
+        : (language === 'de' ? 'Ganztags flexibel nach Absprache' : 'Flexible all day');
+
     await sendEmailInquiry({
       formType: 'Kostenlose Beratung / Verkaufspaket',
-      subject: `Beratungsanfrage: ${name} (${interest})`,
+      subject: `Termin- & Fotobesuch: ${name} (${interest})${appointmentDate ? ` – ${appointmentDate}` : ''}`,
       name,
       email,
       phone,
       location,
       interest: preselectedPackage ? `Paket: ${preselectedPackage.name.de}` : interest,
+      appointmentDate,
+      appointmentTime: timeLabel,
       message,
     });
 
@@ -59,6 +72,8 @@ export const ContactModal: React.FC<ContactModalProps> = ({
     setEmail('');
     setPhone('');
     setLocation('');
+    setAppointmentDate('');
+    setAppointmentTime('morning');
     setMessage('');
     onClose();
   };
@@ -83,7 +98,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 16 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="bg-white rounded-xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-neutral-200 relative text-neutral-900 z-10"
+            className="bg-white rounded-xl max-w-lg w-full max-h-[92vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-neutral-200 relative text-neutral-900 z-10"
           >
             <button
               onClick={handleResetAndClose}
@@ -98,25 +113,60 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3 }}
-                className="text-center py-8 space-y-4"
+                className="text-center py-6 sm:py-8 space-y-4"
               >
-                <div className="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto">
+                <div className="w-14 h-14 bg-emerald-100 text-emerald-800 rounded-full flex items-center justify-center mx-auto shadow-sm">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-display font-medium text-neutral-950">
-                  {language === 'de' ? 'Vielen Dank für Ihre Anfrage' : 'Thank You for Reaching Out'}
+                  {language === 'de' ? 'Terminanfrage erfolgreich erhalten!' : 'Appointment Request Confirmed!'}
                 </h3>
                 <p className="text-xs text-neutral-600 font-light leading-relaxed max-w-sm mx-auto">
                   {language === 'de'
-                    ? `Wir haben Ihre Nachricht erhalten. Ein lizenzierter Senior-Makler von Veracy Immobilien meldet sich werktags garantiert innerhalb von 24 Stunden bei Ihnen unter ${phone || email}.`
-                    : `We received your request. A senior Veracy real estate advisor will contact you within 24 hours on business days at ${phone || email}.`}
+                    ? `Vielen Dank, ${name || 'Eigentümer/in'}. Wir haben Ihren Wunschtermin für den Vor-Ort-Besuch bei Ihrer Liegenschaft reserviert.`
+                    : `Thank you, ${name || 'property owner'}. We have reserved your requested appointment for our team to visit your property.`}
                 </p>
-                <div className="pt-4">
+
+                {/* Appointment & Email Confirmation Card */}
+                <div className="bg-[#FAF6EE] border border-[#EBDCB7] rounded-xl p-4 text-left space-y-2.5 text-xs">
+                  <div className="flex items-center gap-1.5 font-semibold text-[#8C6D1F]">
+                    <Calendar className="w-4 h-4 text-[#C5A059]" />
+                    <span>{language === 'de' ? 'Vorgemerkter Vor-Ort-Termin:' : 'Reserved On-Site Visit:'}</span>
+                  </div>
+                  <div className="font-mono text-neutral-900 font-semibold text-sm pl-5">
+                    {appointmentDate
+                      ? `${appointmentDate} · ${
+                          appointmentTime === 'morning'
+                            ? (language === 'de' ? 'Vormittag (09:00 – 12:00)' : 'Morning (09:00 – 12:00)')
+                            : appointmentTime === 'afternoon'
+                            ? (language === 'de' ? 'Nachmittag (13:00 – 16:00)' : 'Afternoon (13:00 – 16:00)')
+                            : appointmentTime === 'late'
+                            ? (language === 'de' ? 'Spätnachmittag (16:00 – 19:00)' : 'Late Afternoon (16:00 – 19:00)')
+                            : (language === 'de' ? 'Flexibel nach Absprache' : 'Flexible')
+                        }`
+                      : (language === 'de' ? 'Terminabstimmung erfolgt umgehend' : 'Date will be confirmed promptly')}
+                  </div>
+                  {location && (
+                    <div className="text-neutral-600 pl-5 text-[11px]">
+                      {language === 'de' ? 'Liegenschaft:' : 'Property:'} <span className="font-medium text-neutral-800">{location}</span>
+                    </div>
+                  )}
+                  <div className="pt-2 border-t border-[#EBDCB7] flex items-start gap-2 text-neutral-700 text-[11px] font-light leading-relaxed">
+                    <Mail className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                    <span>
+                      {language === 'de'
+                        ? `Bestätigungs-E-Mail versendet: Eine schriftliche Terminbestätigung mit allen Angaben und Vorbereitungstipps für die Fotoaufnahmen wurde an ${email} gesendet. Unser Fotografen- und Maklerteam meldet sich zudem telefonisch bei Ihnen.`
+                        : `Confirmation email dispatched: A written confirmation with all visit details and photo preparation guidance has been sent to ${email}. Our team will also contact you by phone.`}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-2">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleResetAndClose}
-                    className="px-6 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-xs font-semibold uppercase tracking-wider cursor-pointer"
+                    className="px-6 py-2.5 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-xs font-semibold uppercase tracking-wider cursor-pointer shadow-sm"
                   >
                     {language === 'de' ? 'Schliessen' : 'Close'}
                   </motion.button>
@@ -126,14 +176,14 @@ export const ContactModal: React.FC<ContactModalProps> = ({
               <div>
                 <div className="mb-6">
                   <div className="text-[11px] uppercase tracking-wider text-[#8C6D1F] font-semibold mb-1">
-                    {language === 'de' ? 'Kostenlose Erstberatung' : 'Free Consultation'}
+                    {language === 'de' ? 'Kostenlose Erstberatung & Vor-Ort-Termin' : 'Free Consultation & On-Site Visit'}
                   </div>
                   <h3 className="text-2xl font-display font-medium text-neutral-950">
                     {language === 'de'
                       ? 'Sprechen Sie mit unseren Schweizer Maklern'
                       : 'Connect with a Swiss Real Estate Expert'}
                   </h3>
-                  <p className="text-xs text-neutral-500 mt-1">
+                  <p className="text-xs text-neutral-500 mt-1 leading-relaxed">
                     {propertyContext
                       ? language === 'de'
                         ? `Anfrage zu: ${propertyContext.title}`
@@ -158,7 +208,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       onChange={(e) => setInterest(e.target.value)}
                       className="w-full text-xs rounded border border-neutral-300 p-2.5 bg-white text-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
                     >
-                      <option value="sell">{language === 'de' ? 'Immobilie verkaufen (Kostenlose Erstberatung)' : 'Selling Property (Free Consultation)'}</option>
+                      <option value="sell">{language === 'de' ? 'Immobilie verkaufen (Kostenlose Erstberatung & Fototermin)' : 'Selling Property (Free Consultation & Photos)'}</option>
                       <option value="buy">{language === 'de' ? 'Immobilie kaufen oder mieten' : 'Buying or Renting Property'}</option>
                       <option value="valuation">{language === 'de' ? 'Marktwertschätzung anfordern' : 'Requesting Valuation Dossier'}</option>
                       <option value="package-digital-direct">Paket: Starter / Digital Direkt (CHF 3'900)</option>
@@ -212,24 +262,95 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
                   <div>
                     <label className="block text-xs font-medium text-neutral-700 mb-1">
-                      {language === 'de' ? 'Liegenschaft / PLZ (optional)' : 'Property Location / ZIP (optional)'}
+                      {language === 'de' ? 'Liegenschaft / PLZ (Adresse der Verkaufsimmobilie)' : 'Property Address / Location (Property to be Sold)'}
                     </label>
                     <input
                       type="text"
-                      placeholder="z.B. 8008 Zürich Seefeld oder 5400 Baden"
+                      placeholder="z.B. Seestrasse 42, 8700 Küsnacht oder 5400 Baden"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
                       className="w-full text-xs rounded border border-neutral-300 p-2.5 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
                     />
                   </div>
 
+                  {/* On-Site Visit & Photography Appointment Section */}
+                  <div className="bg-[#FAF6EE] border border-[#EBDCB7] rounded-xl p-4 space-y-3">
+                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8C6D1F]">
+                      <Camera className="w-4 h-4 text-[#C5A059]" />
+                      <span>
+                        {language === 'de'
+                          ? 'Wunschtermin: Vor-Ort-Fototermin & Liegenschaftsaufnahme'
+                          : 'On-Site Photography & Assessment Visit'}
+                      </span>
+                    </div>
+
+                    <div className="bg-white/90 rounded-lg p-2.5 border border-[#EBDCB7]/70 text-xs text-neutral-700 font-light leading-relaxed">
+                      <p className="font-semibold text-neutral-900 mb-0.5">
+                        {language === 'de'
+                          ? '📌 Vor-Ort-Besuch durch Veracy Immobilien:'
+                          : '📌 On-Site Visit by Veracy Real Estate:'}
+                      </p>
+                      <p>
+                        {language === 'de'
+                          ? 'Dieser Termin ist dafür bestimmt, dass unser Veracy-Makler- und Fotografenteam persönlich zu Ihrer Liegenschaft kommt, um professionelle Fotoaufnahmen der Verkaufsimmobilie zu erstellen und den genauen Objektzustand vor Ort aufzunehmen.'
+                          : 'This appointment is for our Veracy brokerage and photography team to personally visit the property you are going to sell in order to take professional marketing photographs and record key property metrics on-site.'}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-semibold text-neutral-800 mb-1 flex items-center gap-1">
+                          <Calendar className="w-3.5 h-3.5 text-[#C5A059]" />
+                          <span>{language === 'de' ? 'Wunschdatum (Vor-Ort-Besuch)' : 'Preferred Date (On-site Visit)'}</span>
+                        </label>
+                        <input
+                          type="date"
+                          min={new Date().toISOString().split('T')[0]}
+                          value={appointmentDate}
+                          onChange={(e) => setAppointmentDate(e.target.value)}
+                          className="w-full text-xs rounded border border-neutral-300 bg-white p-2.5 text-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-[11px] font-semibold text-neutral-800 mb-1 flex items-center gap-1">
+                          <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
+                          <span>{language === 'de' ? 'Bevorzugtes Zeitfenster' : 'Preferred Time Window'}</span>
+                        </label>
+                        <select
+                          value={appointmentTime}
+                          onChange={(e) => setAppointmentTime(e.target.value)}
+                          className="w-full text-xs rounded border border-neutral-300 bg-white p-2.5 text-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
+                        >
+                          <option value="morning">{language === 'de' ? 'Vormittag (09:00 – 12:00 Uhr)' : 'Morning (09:00 – 12:00)'}</option>
+                          <option value="afternoon">{language === 'de' ? 'Nachmittag (13:00 – 16:00 Uhr)' : 'Afternoon (13:00 – 16:00)'}</option>
+                          <option value="late">{language === 'de' ? 'Spätnachmittag (16:00 – 19:00 Uhr)' : 'Late Afternoon (16:00 – 19:00)'}</option>
+                          <option value="flexible">{language === 'de' ? 'Ganztags flexibel nach Absprache' : 'Flexible all day by arrangement'}</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Email confirmation notice */}
+                    <div className="flex items-start gap-2 pt-2 border-t border-[#EBDCB7]/80 text-[11px] text-[#6E5516] leading-relaxed">
+                      <Mail className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                      <span>
+                        <strong className="font-semibold text-neutral-900">
+                          {language === 'de' ? 'Schriftliche Bestätigung per E-Mail: ' : 'Written Confirmation via Email: '}
+                        </strong>
+                        {language === 'de'
+                          ? 'Sie erhalten unmittelbar nach dem Absenden eine schriftliche Terminbestätigung per E-Mail mit allen Angaben sowie praktischen Vorbereitungshinweisen für die Fotoaufnahmen Ihrer Liegenschaft.'
+                          : 'Immediately after submitting, you will receive a written confirmation email with all appointment details and helpful preparation advice for the property photo session.'}
+                      </span>
+                    </div>
+                  </div>
+
                   <div>
                     <label className="block text-xs font-medium text-neutral-700 mb-1">
-                      {language === 'de' ? 'Ihre Nachricht oder Fragen' : 'Your Message'}
+                      {language === 'de' ? 'Ihre Nachricht oder ergänzende Details' : 'Your Message or Additional Notes'}
                     </label>
                     <textarea
-                      rows={3}
-                      placeholder={language === 'de' ? 'Worum geht es bei Ihrer Liegenschaft?' : 'Details about your property or inquiry...'}
+                      rows={2}
+                      placeholder={language === 'de' ? 'Besonderheiten der Liegenschaft, Zugang oder Fragen...' : 'Property highlights, access details or questions...'}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       className="w-full text-xs rounded border border-neutral-300 p-2.5 focus:outline-none focus:ring-1 focus:ring-neutral-900 resize-none transition-colors"
@@ -251,7 +372,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                         </>
                       ) : (
                         <>
-                          <span>{language === 'de' ? 'Beratung kostenlos anfragen' : 'Send Free Consultation Request'}</span>
+                          <span>{language === 'de' ? 'Termin & Beratung kostenlos anfragen' : 'Request Appointment & Free Consultation'}</span>
                           <ArrowRight className="w-3.5 h-3.5 text-[#DFB76C]" />
                         </>
                       )}
@@ -260,12 +381,16 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
                   <div className="flex items-center justify-between text-[11px] text-neutral-500 pt-2 border-t border-neutral-100">
                     <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-neutral-400" />
+                      <Clock className="w-3 h-3 text-[#C5A059]" />
                       {language === 'de' ? 'Antwort garantiert < 24h' : 'Response < 24h'}
                     </span>
                     <span className="flex items-center gap-1">
-                      <ShieldCheck className="w-3 h-3 text-neutral-400" />
-                      {language === 'de' ? '100% Schweizer Diskretion' : '100% Swiss Discretion'}
+                      <Mail className="w-3 h-3 text-[#C5A059]" />
+                      {language === 'de' ? 'Schriftliche E-Mail-Bestätigung' : 'Written Email Confirmation'}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <ShieldCheck className="w-3 h-3 text-[#C5A059]" />
+                      {language === 'de' ? '100% Unverbindlich' : '100% Confidential'}
                     </span>
                   </div>
                 </form>
