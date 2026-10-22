@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Language, MainCategory } from '../types';
 import { HERO_IMAGE } from '../data/mockData';
-import { ArrowRight, ShieldCheck, Clock, Award, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Clock, Award, CheckCircle2, KeyRound } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface HeroSectionProps {
@@ -168,44 +168,44 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             </motion.div>
           </motion.div>
 
-          {/* Right Column: Veracy Core Services Hub (Focused on Sell & Buy, No Valuation Highlight) */}
+          {/* Right Column: Veracy Core Services Hub (Sell, Rent Out & Buy/Rent) */}
           <motion.div
             initial={{ opacity: 0, y: 30, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-5"
           >
-            <div className="bg-white text-neutral-900 rounded-xl p-6 sm:p-8 shadow-2xl border border-neutral-100 relative hover:shadow-[#C5A059]/10 transition-shadow space-y-6">
+            <div className="bg-white text-neutral-900 rounded-xl p-5 sm:p-7 shadow-2xl border border-neutral-100 relative hover:shadow-[#C5A059]/10 transition-shadow space-y-4">
               <div>
                 <div className="text-[11px] uppercase tracking-wider text-[#8C6D1F] font-semibold mb-1">
                   {language === 'de' ? 'Schweizer Maklerkompetenz' : 'Swiss Brokerage Excellence'}
                 </div>
                 <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-neutral-950 font-display">
                   {language === 'de'
-                    ? 'Ihr verlässlicher Partner für Verkauf & Kauf'
-                    : 'Your Trusted Partner for Buying & Selling'}
+                    ? 'Ihr Partner für Verkauf, Vermietung & Kauf'
+                    : 'Your Partner for Selling, Renting & Buying'}
                 </h2>
-                <p className="text-xs text-neutral-500 mt-1.5 leading-relaxed">
+                <p className="text-xs text-neutral-500 mt-1 leading-relaxed">
                   {language === 'de'
                     ? 'Professionelle Schweizer Maklerdienstleistung in den Kantonen Zürich und Aargau mit transparenter Kostenstruktur.'
-                    : 'Professional Swiss brokerage service across Zurich and Aargau with fully transparent pricing.'}
+                    : 'Professional Swiss brokerage service across Zurich and Aargau with transparent pricing.'}
                 </p>
               </div>
 
               {/* Service Card 1: Sell Property */}
               <div
                 onClick={() => onNavigate('sell')}
-                className="group p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-4"
+                className="group p-3.5 sm:p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-3.5"
               >
                 <div className="p-2.5 rounded bg-white shadow-sm border border-neutral-200 group-hover:border-[#C5A059] shrink-0 text-[#8C6D1F]">
                   <Award className="w-5 h-5" />
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
                     <span className="text-xs font-semibold text-neutral-900 group-hover:text-[#8C6D1F] transition-colors">
                       {language === 'de' ? '01. Immobilie verkaufen' : '01. Sell Property'}
                     </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] px-2 py-0.5 rounded">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] px-2 py-0.5 rounded shrink-0">
                       {language === 'de' ? 'ab CHF 3’900' : 'from CHF 3,900'}
                     </span>
                   </div>
@@ -221,20 +221,55 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </div>
               </div>
 
-              {/* Service Card 2: Buy & Rent */}
+              {/* Service Card 2: Rent Out Property (Vermieten) */}
+              <div
+                onClick={() => {
+                  if (onOpenConsultation) {
+                    onOpenConsultation();
+                  } else {
+                    onNavigate('sell');
+                  }
+                }}
+                className="group p-3.5 sm:p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-3.5"
+              >
+                <div className="p-2.5 rounded bg-white shadow-sm border border-neutral-200 group-hover:border-[#C5A059] shrink-0 text-[#8C6D1F]">
+                  <KeyRound className="w-5 h-5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-semibold text-neutral-900 group-hover:text-[#8C6D1F] transition-colors">
+                      {language === 'de' ? '02. Immobilie vermieten' : '02. Rent out Property'}
+                    </span>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] px-2 py-0.5 rounded shrink-0">
+                      {language === 'de' ? 'Erst- & Wiedervermietung' : 'Tenant Placement'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-neutral-600 mt-1 font-light leading-relaxed">
+                    {language === 'de'
+                      ? 'Professionelle Mietersuche, umfassende Bonitätsprüfung, rechtssichere Mietverträge & lückenlose Übergabe.'
+                      : 'Professional tenant search, credit checks, Swiss lease contracts & seamless handover protocols.'}
+                  </p>
+                  <div className="mt-2 text-xs font-medium text-[#8C6D1F] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>{language === 'de' ? 'Vermietung anfragen' : 'Request Rental Service'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Service Card 3: Buy & Rent */}
               <div
                 onClick={() => onNavigate('buy-rent')}
-                className="group p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-4"
+                className="group p-3.5 sm:p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-3.5"
               >
                 <div className="p-2.5 rounded bg-white shadow-sm border border-neutral-200 group-hover:border-[#C5A059] shrink-0 text-[#8C6D1F]">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-center justify-between">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between gap-2">
                     <span className="text-xs font-semibold text-neutral-900 group-hover:text-[#8C6D1F] transition-colors">
-                      {language === 'de' ? '02. Kaufen & Mieten' : '02. Buy & Rent'}
+                      {language === 'de' ? '03. Kaufen & Mieten' : '03. Buy & Rent'}
                     </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-neutral-200/60 text-neutral-700 px-2 py-0.5 rounded">
+                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-neutral-200/60 text-neutral-700 px-2 py-0.5 rounded shrink-0">
                       {language === 'de' ? 'Kuriert' : 'Curated'}
                     </span>
                   </div>

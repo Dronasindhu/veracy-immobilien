@@ -209,6 +209,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       className="w-full text-xs rounded border border-neutral-300 p-2.5 bg-white text-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
                     >
                       <option value="sell">{language === 'de' ? 'Immobilie verkaufen (Kostenlose Erstberatung & Fototermin)' : 'Selling Property (Free Consultation & Photos)'}</option>
+                      <option value="rent-out">{language === 'de' ? 'Immobilie vermieten (Erst- & Wiedervermietung)' : 'Renting out Property (Tenant Placement)'}</option>
                       <option value="buy">{language === 'de' ? 'Immobilie kaufen oder mieten' : 'Buying or Renting Property'}</option>
                       <option value="valuation">{language === 'de' ? 'Marktwertschätzung anfordern' : 'Requesting Valuation Dossier'}</option>
                       <option value="package-digital-direct">Paket: Starter / Digital Direkt (CHF 3'900)</option>
