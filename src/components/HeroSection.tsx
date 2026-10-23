@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Language, MainCategory } from '../types';
 import { HERO_IMAGE } from '../data/mockData';
-import { ArrowRight, ShieldCheck, Clock, Award, CheckCircle2, KeyRound } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Clock, Award, CheckCircle2, KeyRound, Calendar } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface HeroSectionProps {
@@ -192,6 +192,53 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </p>
               </div>
 
+              {/* Standalone Primary Action: Free Consultation & Valuation Appointment */}
+              {onOpenConsultation && (
+                <div className="pt-1 pb-0.5">
+                  <motion.button
+                    whileHover={{ scale: 1.015, y: -1 }}
+                    whileTap={{ scale: 0.985 }}
+                    onClick={onOpenConsultation}
+                    className="w-full py-3.5 px-4 bg-neutral-950 hover:bg-neutral-900 text-white rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center justify-between gap-3 transition-all cursor-pointer shadow-md hover:shadow-xl hover:shadow-neutral-950/20 border border-neutral-900 group"
+                  >
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      <div className="w-8 h-8 rounded bg-[#FAF6EE] border border-[#EBDCB7] flex items-center justify-center shrink-0 text-[#8C6D1F]">
+                        <Calendar className="w-4 h-4" />
+                      </div>
+                      <div className="text-left min-w-0">
+                        <div className="font-bold tracking-wider text-white group-hover:text-[#E6CA85] transition-colors truncate">
+                          {language === 'de' ? 'Kostenlose Erstberatung vereinbaren' : 'Request Free Consultation'}
+                        </div>
+                        <div className="text-[10px] text-neutral-400 font-normal normal-case truncate">
+                          {language === 'de' ? 'Inkl. Vor-Ort-Besichtigung & Fototermin' : 'Incl. on-site viewing & photography'}
+                        </div>
+                      </div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-[#DFB76C] shrink-0 transition-transform group-hover:translate-x-1" />
+                  </motion.button>
+
+                  <div className="flex items-center justify-between text-[11px] text-neutral-500 mt-2 px-1">
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
+                      {language === 'de' ? 'Antwort innert 24h' : 'Response within 24h'}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+                      {language === 'de' ? '100% Unverbindlich' : '100% No obligation'}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Sub-services divider */}
+              <div className="relative flex items-center justify-center pt-1 pb-1">
+                <div className="border-t border-neutral-200 w-full" />
+                <span className="bg-white px-3 text-[10px] uppercase tracking-widest text-neutral-400 shrink-0 font-medium">
+                  {language === 'de' ? 'Oder Bereich wählen' : 'Or select a service'}
+                </span>
+                <div className="border-t border-neutral-200 w-full" />
+              </div>
+
               {/* Service Card 1: Sell Property */}
               <div
                 onClick={() => onNavigate('sell')}
@@ -283,32 +330,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>
-              </div>
-
-              {/* Consultation Action */}
-              {onOpenConsultation && (
-                <div className="pt-2 border-t border-neutral-100">
-                  <motion.button
-                    whileHover={{ scale: 1.015 }}
-                    whileTap={{ scale: 0.985 }}
-                    onClick={onOpenConsultation}
-                    className="w-full py-3 px-4 bg-neutral-900 hover:bg-neutral-800 text-white rounded text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-sm"
-                  >
-                    <span>{language === 'de' ? 'Kostenlose Erstberatung vereinbaren' : 'Request Free Consultation'}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-[#DFB76C]" />
-                  </motion.button>
-                </div>
-              )}
-
-              <div className="flex items-center justify-between text-[11px] text-neutral-500 pt-2 border-t border-neutral-100">
-                <span className="flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-[#C5A059]" />
-                  {language === 'de' ? 'Antwort innert 24h' : 'Response within 24h'}
-                </span>
-                <span className="flex items-center gap-1">
-                  <ShieldCheck className="w-3 h-3 text-[#C5A059]" />
-                  {language === 'de' ? '100% Unverbindlich' : '100% No obligation'}
-                </span>
               </div>
             </div>
           </motion.div>

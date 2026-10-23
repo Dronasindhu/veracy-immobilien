@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Language, SellingPackage } from '../types';
 import { SELLING_PACKAGES } from '../data/mockData';
-import { Check, ArrowRight, ShieldCheck, Clock, HelpCircle, FileText, Sparkles } from 'lucide-react';
+import { Check, ArrowRight, ShieldCheck, Clock, HelpCircle, FileText, Sparkles, Calendar } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface SellPageProps {
@@ -323,6 +323,30 @@ export const SellPage: React.FC<SellPageProps> = ({
                 ? 'Strukturiert, transparent und mit persönlicher Begleitung in jeder Phase.'
                 : 'Structured, transparent, and personally guided through every phase.'}
             </p>
+
+            {/* Standalone Primary Action Button moved to Top */}
+            <div className="mt-8 flex flex-col items-center gap-3">
+              <motion.button
+                whileHover={{ scale: 1.02, y: -1 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onOpenConsultation}
+                className="px-8 py-3.5 bg-neutral-950 hover:bg-neutral-900 text-white text-xs font-semibold uppercase tracking-wider rounded-lg transition-all shadow-md hover:shadow-xl cursor-pointer inline-flex items-center gap-2.5 border border-neutral-900 group"
+              >
+                <Calendar className="w-4 h-4 text-[#DFB76C]" />
+                <span>{language === 'de' ? 'Kostenlose Verkaufsberatung vereinbaren' : 'Schedule Free Selling Consultation'}</span>
+                <ArrowRight className="w-4 h-4 text-[#DFB76C] transition-transform group-hover:translate-x-1" />
+              </motion.button>
+              <div className="flex items-center gap-5 text-xs text-neutral-500">
+                <span className="flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
+                  {language === 'de' ? 'Reaktion innert 24h garantiert' : 'Response guaranteed < 24h'}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+                  {language === 'de' ? '100% Unverbindlich' : '100% Non-binding'}
+                </span>
+              </div>
+            </div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -353,19 +377,6 @@ export const SellPage: React.FC<SellPageProps> = ({
                 </div>
               </motion.div>
             ))}
-          </div>
-
-          {/* Bottom Free Consultation Callout */}
-          <div className="mt-16 text-center">
-            <motion.button
-              whileHover={{ scale: 1.025 }}
-              whileTap={{ scale: 0.975 }}
-              onClick={onOpenConsultation}
-              className="px-8 py-3.5 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold uppercase tracking-wider rounded transition-all shadow cursor-pointer inline-flex items-center gap-2"
-            >
-              <span>{language === 'de' ? 'Kostenlose Verkaufsberatung vereinbaren' : 'Schedule Free Selling Consultation'}</span>
-              <ArrowRight className="w-4 h-4 text-[#DFB76C]" />
-            </motion.button>
           </div>
         </div>
       </section>
