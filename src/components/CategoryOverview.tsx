@@ -46,20 +46,20 @@ export const CategoryOverview: React.FC<CategoryOverviewProps> = ({
         en: '02. Buy & Rent',
       },
       subtitle: {
-        de: 'Kuratierte Schweizer Premium-Objekte & Off-Market',
-        en: 'Curated Swiss prime properties & off-market deals',
+        de: 'Massgeschneiderter Suchauftrag & Off-Market Zugang',
+        en: 'Tailored Search Profile & Off-Market Access',
       },
       description: {
-        de: 'Entdecken Sie handverlesene Wohn- und Anlageimmobilien in begehrten Lagen von Zürich und Aargau mit transparenten Objektdossiers.',
-        en: 'Discover hand-picked residential and investment properties across top locations in Zurich and Aargau with comprehensive dossiers.',
+        de: 'Hinterlegen Sie Ihr detailliertes Suchprofil für Ihr Wunschhaus oder Ihre Eigentumswohnung in Zürich & Aargau. Erhalten Sie passende Liegenschaften und diskrete Off-Market Gelegenheiten vor der offiziellen Publikation.',
+        en: 'Submit your detailed search profile for your ideal house or apartment in Zurich & Aargau. Receive matched properties and discreet off-market opportunities before public release.',
       },
       actionText: {
-        de: 'Aktuelle Objekte durchsuchen',
-        en: 'Browse Current Listings',
+        de: 'Suchprofil anlegen',
+        en: 'Create Search Profile',
       },
       highlight: {
-        de: 'Geprüfte Qualität & Dossiers',
-        en: 'Verified Quality & Dossiers',
+        de: '100% Kostenloser Suchauftrag',
+        en: '100% Free Search Service',
       },
       icon: KeyRound,
       image: LUZERN_VILLA_IMG,

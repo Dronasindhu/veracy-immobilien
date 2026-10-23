@@ -145,7 +145,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 onClick={() => onNavigate('buy-rent')}
                 className="px-6 py-3.5 text-xs font-medium tracking-wide uppercase text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded border border-white/20 flex items-center gap-2 cursor-pointer transition-all"
               >
-                <span>{language === 'de' ? 'Objekte entdecken' : 'Browse Properties'}</span>
+                <span>{language === 'de' ? 'Suchprofil anlegen' : 'Create Search Profile'}</span>
                 <ArrowRight className="w-4 h-4 text-[#DFB76C]" />
               </motion.button>
             </motion.div>
@@ -316,17 +316,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     <span className="text-xs font-semibold text-neutral-900 group-hover:text-[#8C6D1F] transition-colors">
                       {language === 'de' ? '03. Kaufen & Mieten' : '03. Buy & Rent'}
                     </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-neutral-200/60 text-neutral-700 px-2 py-0.5 rounded shrink-0">
-                      {language === 'de' ? 'Kuriert' : 'Curated'}
+                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] px-2 py-0.5 rounded shrink-0">
+                      {language === 'de' ? 'Suchauftrag' : 'Search Profile'}
                     </span>
                   </div>
                   <p className="text-xs text-neutral-600 mt-1 font-light leading-relaxed">
                     {language === 'de'
-                      ? 'Geprüfte Wohn- und Anlageobjekte in Zürich & Aargau sowie diskrete Off-Market Gelegenheiten.'
-                      : 'Verified prime residences in Zurich & Aargau plus discreet off-market opportunities.'}
+                      ? 'Definieren Sie Ihr massgeschneidertes Suchprofil. Wir finden Ihr Wunschobjekt in Zürich & Aargau inkl. diskreter Off-Market Liegenschaften.'
+                      : 'Define your tailored search criteria. We find your dream residence across Zurich & Aargau including discreet off-market opportunities.'}
                   </p>
                   <div className="mt-2 text-xs font-medium text-[#8C6D1F] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                    <span>{language === 'de' ? 'Objekte durchsuchen' : 'Browse Properties'}</span>
+                    <span>{language === 'de' ? 'Suchprofil anlegen' : 'Create Search Profile'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </div>
                 </div>

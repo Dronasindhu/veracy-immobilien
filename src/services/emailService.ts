@@ -7,7 +7,7 @@
 export const RECIPIENT_EMAIL = 'writetoanju@gmail.com';
 
 export interface EmailSubmissionData {
-  formType: 'Kostenlose Beratung / Verkaufspaket' | 'Immobilienschätzung' | 'Besichtigungsanfrage' | 'Exposé Anforderung';
+  formType: 'Kostenlose Beratung / Verkaufspaket' | 'Immobilienschätzung' | 'Besichtigungsanfrage' | 'Exposé Anforderung' | 'Suchauftrag Kaufen / Mieten';
   subject: string;
   name: string;
   email: string;

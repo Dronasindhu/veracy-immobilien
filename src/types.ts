@@ -88,3 +88,26 @@ export interface ConsultationFormData {
   message: string;
   preferredContact: 'phone' | 'email';
 }
+
+export interface SearchProfileData {
+  transactionType: 'buy' | 'rent';
+  propertyTypes: string[];
+  cantons: string[];
+  specificLocations: string;
+  commuteFlexibility: string;
+  minRooms: number;
+  minLivingArea: number;
+  minPlotArea?: number;
+  minBathrooms: number;
+  parkingPreferences: string[];
+  maxBudget: number;
+  financialReadiness: string;
+  timeframe: string;
+  features: string[];
+  specialNotes: string;
+  name: string;
+  email: string;
+  phone: string;
+  wantsOffMarket: boolean;
+}
+
