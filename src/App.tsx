@@ -18,6 +18,7 @@ import { ContactModal } from './components/ContactModal';
 import { Footer } from './components/Footer';
 import { motion, AnimatePresence } from 'motion/react';
 import { ChevronUp } from 'lucide-react';
+import { trackPageView, trackEvent } from './services/analytics';
 
 export default function App() {
   const [currentCategory, setCurrentCategory] = useState<MainCategory>('home');
@@ -27,6 +28,16 @@ export default function App() {
   const [propertyContext, setPropertyContext] = useState<{ title: string; location?: string; type: 'viewing' | 'expose' } | null>(null);
   const [valuationInitialQuery, setValuationInitialQuery] = useState<string>('');
   const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const pageTitles: Record<MainCategory, string> = {
+      home: 'Veracy Immobilien – Startseite',
+      sell: 'Veracy Immobilien – Immobilie verkaufen',
+      'buy-rent': 'Veracy Immobilien – Kaufen & Mieten Suchauftrag',
+      valuation: 'Veracy Immobilien – Hedonische Schätzung',
+    };
+    trackPageView(`/${currentCategory === 'home' ? '' : currentCategory}`, pageTitles[currentCategory]);
+  }, [currentCategory]);
 
   useEffect(() => {
     const handleScroll = () => {

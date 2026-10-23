@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { sendEmailInquiry } from '../services/emailService';
+import { trackEvent } from '../services/analytics';
 import { Check, ArrowRight, ArrowLeft, ShieldCheck, Clock, Calculator, Home, Building2, Sparkles, CheckCircle2, Loader2, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -234,6 +235,13 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
         'Berechnete Preisspanne': `CHF ${valuationResult.lower.toLocaleString('de-CH')} – CHF ${valuationResult.upper.toLocaleString('de-CH')}`,
         'Verkaufsabsicht': intent,
       },
+    });
+
+    trackEvent('valuation_submitted', {
+      property_type: propertyType,
+      living_area: livingArea,
+      estimated_value: valuationResult.avg,
+      zip_city: zipCity,
     });
 
     setIsSubmitting(false);

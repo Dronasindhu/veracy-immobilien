@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Language, SearchProfileData } from '../types';
 import { sendEmailInquiry } from '../services/emailService';
+import { trackEvent } from '../services/analytics';
 import {
   Home,
   Building2,
@@ -171,6 +172,13 @@ export const BuyRentPage: React.FC<BuyRentPageProps> = ({
         'Gewünschte Ausstattungen & Kriterien': selectedFeatures.join(', ') || 'Keine speziellen Kriterien',
         'Off-Market Zugang gewünscht': wantsOffMarket ? 'Ja (Vorvermarktung & diskrete Objekte)' : 'Nein',
       },
+    });
+
+    trackEvent('search_profile_submitted', {
+      transaction_type: transactionType,
+      budget: maxBudget,
+      cantons: selectedCantons.join(','),
+      reference_id: generatedRef,
     });
 
     setIsSubmitting(false);

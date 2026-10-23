@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Language, SellingPackage } from '../types';
 import { sendEmailInquiry } from '../services/emailService';
+import { trackEvent } from '../services/analytics';
 import { X, CheckCircle2, Phone, Mail, Clock, ShieldCheck, ArrowRight, Loader2, Calendar, Camera, Info } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -60,6 +61,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
       appointmentDate,
       appointmentTime: timeLabel,
       message,
+    });
+
+    trackEvent('consultation_submitted', {
+      interest: preselectedPackage ? preselectedPackage.id : interest,
+      has_appointment_date: Boolean(appointmentDate),
     });
 
     setIsSending(false);
