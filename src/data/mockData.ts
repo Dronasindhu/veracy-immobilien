@@ -268,12 +268,12 @@ export const SELLING_PACKAGES: SellingPackage[] = [
       en: 'Our most popular end-to-end service: Personal Swiss brokerage at a fair transparent flat rate.',
     },
     priceDisplay: {
-      de: "CHF 7'900",
-      en: "CHF 7'900",
+      de: "Nur 0.7% Provision",
+      en: "Only 0.7% Commission",
     },
     priceNote: {
-      de: 'Festpreis nur bei Erfolg (Keine Vorkosten, 0 CHF Risiko)',
-      en: 'Flat fee only on success (Zero upfront costs, zero risk)',
+      de: 'Erfolgshonorar erst bei Notariatsvertrag (Traditionell 2.0% – 3.0%)',
+      en: 'Success fee only upon notarization (Traditional brokers 2.0% – 3.0%)',
     },
     idealFor: {
       de: 'Einfamilienhäuser, gehobene Eigentumswohnungen & Mehrfamilienhäuser',
@@ -365,21 +365,21 @@ export const TESTIMONIALS = [
     author: 'Dr. Beat Meier',
     role: 'Verkäufer Einfamilienhaus in Meilen ZH',
     quote:
-      'Statt der üblichen 3% Provision (rund CHF 75’000) zahlten wir bei Veracy den fairen Festpreis. Unser Haus war nach nur 24 Tagen zum Spitzenpreis verkauft. Schnelle Reaktionszeiten, absolute Verlässlichkeit.',
+      'Statt der üblichen 3% Provision (rund CHF 75’000) zahlten wir bei Veracy nur 0.7%. Unser Haus war nach nur 24 Tagen zum Spitzenpreis verkauft. Schnelle Reaktionszeiten, absolute Verlässlichkeit.',
     rating: 5,
   },
   {
-    author: 'Familie von Allmen',
-    role: 'Käufer Attikawohnung in Luzern',
+    author: 'Marc & Elena S.',
+    role: 'Vermieter 4.5-Zimmer-Wohnung in Küsnacht ZH',
     quote:
-      'Vom ersten Kontakt bis zum Notariat in Luzern fühlten wir uns exzellent betreut. Fragen wurden ausnahmslos innert weniger Stunden präzise beantwortet. Höchste Schweizer Professionalität.',
+      'Veracy hat unsere Eigentumswohnung an solvente, sympathische Mieter vermittelt. Die Provision von nur 15 Tagen Mietzins ist im Schweizer Markt konkurrenzlos fair. Perfekte Abwicklung von den Fotos bis zum Mietvertrag.',
     rating: 5,
   },
   {
     author: 'Laurent & Sophie C.',
     role: 'Eigentümer Mehrfamilienhaus in Baden AG',
     quote:
-      'Transparenz statt versteckter Spesen. Veracy hat die Marktwertermittlung wissenschaftlich fundiert durchgeführt und die Käufer bonitätsgeprüft. Wir haben über CHF 42’000 Maklerkosten im Aargau gespart.',
+      'Transparenz statt versteckter Spesen. Veracy hat die Marktwertermittlung fundiert durchgeführt und die Käufer bonitätsgeprüft. Wir haben über CHF 42’000 Maklerkosten im Aargau gespart.',
     rating: 5,
   },
 ];

@@ -7,11 +7,10 @@ import React, { useState, useEffect } from 'react';
 import { MainCategory, Language, SellingPackage } from './types';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
-import { CategoryOverview } from './components/CategoryOverview';
 import { QualityValueModel } from './components/QualityValueModel';
 import { TrustSection } from './components/TrustSection';
 import { SellPage } from './components/SellPage';
-import { BuyRentPage } from './components/BuyRentPage';
+import { RentOutPage } from './components/RentOutPage';
 import { ValuationPage } from './components/ValuationPage';
 import { SeoCopySection } from './components/SeoCopySection';
 import { ContactModal } from './components/ContactModal';
@@ -33,7 +32,7 @@ export default function App() {
     const pageTitles: Record<MainCategory, string> = {
       home: 'Veracy Immobilien – Startseite',
       sell: 'Veracy Immobilien – Immobilie verkaufen',
-      'buy-rent': 'Veracy Immobilien – Kaufen & Mieten Suchauftrag',
+      'rent-out': 'Veracy Immobilien – Immobilie vermieten',
       valuation: 'Veracy Immobilien – Hedonische Schätzung',
     };
     trackPageView(`/${currentCategory === 'home' ? '' : currentCategory}`, pageTitles[currentCategory]);
@@ -109,13 +108,7 @@ export default function App() {
                 }}
               />
 
-              {/* 2. Overview of the 3 Main Categories */}
-              <CategoryOverview
-                language={language}
-                onNavigate={handleNavigate}
-              />
-
-              {/* 3. "Quality at Low Price" Service & Savings Model */}
+              {/* 2. Interactive Savings & Fee Comparison (Selling 0.7% & Renting 15 Days) */}
               <QualityValueModel
                 language={language}
                 onOpenConsultation={() => {
@@ -123,6 +116,30 @@ export default function App() {
                   setIsConsultationOpen(true);
                 }}
               />
+
+              {/* 3. Sleek Valuation Callout - Uncluttered */}
+              <div className="bg-[#FAF6EE] py-8 border-b border-[#EBDCB7]">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+                  <div>
+                    <div className="text-[11px] uppercase tracking-wider text-[#8C6D1F] font-semibold">
+                      {language === 'de' ? '100% Kostenlos & Diskret' : '100% Free & Confidential'}
+                    </div>
+                    <div className="text-base font-semibold text-neutral-900 font-display">
+                      {language === 'de' ? 'Möchten Sie vorab den Marktwert Ihrer Liegenschaft erfahren?' : 'Want to know the current market value of your property?'}
+                    </div>
+                    <div className="text-xs text-neutral-600 font-light">
+                      {language === 'de' ? 'Fundierte hedonische Marktwertanalyse durch Experten innert 24 Stunden.' : 'In-depth hedonic market valuation by local experts within 24 hours.'}
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => handleNavigate('valuation')}
+                    className="px-5 py-2.5 rounded-lg bg-neutral-950 text-white hover:bg-neutral-800 text-xs font-semibold uppercase tracking-wider flex items-center gap-2 cursor-pointer transition-all shadow-sm shrink-0"
+                  >
+                    <span>{language === 'de' ? 'Kostenlose Schätzung' : 'Start Valuation'}</span>
+                    <ChevronUp className="w-3.5 h-3.5 rotate-90 text-[#DFB76C]" />
+                  </button>
+                </div>
+              </div>
 
               {/* 4. Swiss Precision & Trust Section (Testimonials) */}
               <TrustSection language={language} />
@@ -151,24 +168,19 @@ export default function App() {
             </motion.div>
           )}
 
-          {currentCategory === 'buy-rent' && (
+          {currentCategory === 'rent-out' && (
             <motion.div
-              key="buy-rent"
+              key="rent-out"
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -14 }}
               transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             >
-              <BuyRentPage
+              <RentOutPage
                 language={language}
                 onOpenConsultation={() => {
                   setSelectedPackage(null);
                   setPropertyContext(null);
-                  setIsConsultationOpen(true);
-                }}
-                onOpenPropertyInquiry={(ctx) => {
-                  setSelectedPackage(null);
-                  setPropertyContext(ctx);
                   setIsConsultationOpen(true);
                 }}
               />

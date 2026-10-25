@@ -1,7 +1,7 @@
 import React from 'react';
 import { Language } from '../types';
 import { TESTIMONIALS } from '../data/mockData';
-import { ShieldCheck, Clock, Award, Star, CheckCircle } from 'lucide-react';
+import { ShieldCheck, Clock, Award, Star } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface TrustSectionProps {
@@ -9,141 +9,79 @@ interface TrustSectionProps {
 }
 
 export const TrustSection: React.FC<TrustSectionProps> = ({ language }) => {
-  const pillars = [
-    {
-      icon: Clock,
-      title: language === 'de' ? 'Reaktionsgarantie < 24 Stunden' : 'Guaranteed Response < 24 Hours',
-      desc:
-        language === 'de'
-          ? 'Kein langes Warten auf Rückrufe oder Exposés. Sie und Ihre Kaufinteressenten erhalten an Werktagen innert maximal 24 Stunden eine fundierte Rückmeldung.'
-          : 'Zero waiting days for callbacks or dossiers. Both you and potential buyers receive comprehensive responses within 24 hours on business days.',
-      tag: language === 'de' ? 'Geprüfte Service-Garantie' : 'Verified Service Pledge',
-    },
-    {
-      icon: ShieldCheck,
-      title: language === 'de' ? '100% Diskretion & Vertrauen' : '100% Discretion & Trust',
-      desc:
-        language === 'de'
-          ? 'Von der diskreten Off-Market Vermittlung bis zur sensiblen Erbengemeinschaft: Ihre persönlichen Vermögensdaten und Liegenschaftsunterlagen werden nach strengsten Schweizer Datenschutzrichtlinien verwaltet.'
-          : 'From confidential off-market mandates to sensitive inheritance estates: your private financial assets and property documentation are handled under strict Swiss data security laws.',
-      tag: language === 'de' ? 'Diskrete Off-Market Optionen' : 'Discreet Off-Market Option',
-    },
-    {
-      icon: Award,
-      title: language === 'de' ? 'Geprüfte Maklerkompetenz (ZH & AG)' : 'Certified Broker Competence (ZH & AG)',
-      desc:
-        language === 'de'
-          ? 'Unsere Partner und Makler sind SVIT-/USVT-geschult und verfügen über tiefgreifende Marktkenntnisse im kantonalen Steuer-, Notariats- und Sachenrecht von Zürich und Aargau.'
-          : 'Our brokers adhere to SVIT/USVT professional standards, bringing in-depth knowledge of Swiss property tax, land registry, and cantonal capital gains regulations in Zurich and Aargau.',
-      tag: language === 'de' ? 'Notariats- & Steuerbegleitung' : 'Legal & Tax Support',
-    },
-  ];
-
   return (
-    <section className="py-20 sm:py-28 bg-neutral-50 border-b border-neutral-200 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-50px' }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-3xl mx-auto mb-16"
-        >
-          <div className="text-xs uppercase tracking-[0.2em] text-neutral-500 font-semibold mb-2">
-            {language === 'de' ? 'Schweizer Vertrauensstandards' : 'Swiss Trust Standards'}
+    <section className="py-16 sm:py-24 bg-white border-b border-neutral-200 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Clean Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="text-xs uppercase tracking-[0.2em] text-[#8C6D1F] font-semibold mb-2">
+            {language === 'de' ? 'Erfahrungsberichte' : 'Verified Reviews'}
           </div>
           <h2 className="text-3xl sm:text-4xl font-normal font-display text-neutral-950 tracking-tight">
             {language === 'de'
-              ? 'Präzision, Diskretion und garantierte Schnelligkeit.'
-              : 'Precision, Discretion, and Verified Speed.'}
+              ? 'Was Eigentümer über Veracy sagen'
+              : 'What Property Owners Say About Us'}
           </h2>
-          <p className="mt-3 text-base text-neutral-600 font-light leading-relaxed">
+          <p className="mt-3 text-sm text-neutral-600 font-light leading-relaxed">
             {language === 'de'
-              ? 'In den Regionen Zürich und Aargau ist Vertrauen das höchste Gut. Wir schützen Ihre Privatsphäre, verhandeln mit geschultem Verhandlungsgeschick und garantieren maximale Erreichbarkeit.'
-              : 'In the Zurich and Aargau regions, trust is paramount. We protect your confidentiality, negotiate with seasoned skill, and guarantee prompt responsiveness.'}
+              ? 'Erfolgreich vermittelt in den Kantonen Zürich und Aargau: Höchste Kundenzufriedenheit und messbare Einsparungen.'
+              : 'Successfully brokered across Zurich and Aargau: High client satisfaction and substantial fee savings.'}
           </p>
-        </motion.div>
-
-        {/* 3 Trust Pillars */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {pillars.map((pillar, idx) => {
-            const Icon = pillar.icon;
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -6, transition: { duration: 0.25 } }}
-                className="group bg-white p-8 rounded-lg border border-neutral-200 shadow-sm hover:shadow-xl hover:border-neutral-300 transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-12 h-12 bg-neutral-900 rounded-md flex items-center justify-center text-[#DFB76C] mb-6 group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors duration-300 shadow-sm">
-                    <Icon className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-neutral-900 mb-2 group-hover:text-[#8C6D1F] transition-colors">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-sm text-neutral-600 font-light leading-relaxed">
-                    {pillar.desc}
-                  </p>
-                </div>
-                <div className="mt-6 pt-4 border-t border-neutral-100 flex items-center gap-2 text-xs text-neutral-500 font-medium">
-                  <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
-                  <span>{pillar.tag}</span>
-                </div>
-              </motion.div>
-            );
-          })}
         </div>
 
-        {/* Client Testimonials */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-10"
-          >
-            <h3 className="text-2xl font-semibold text-neutral-900">
-              {language === 'de' ? 'Was Eigentümer in Zürich und Aargau sagen' : 'What Property Owners in Zurich & Aargau Say'}
-            </h3>
-          </motion.div>
+        {/* 3 Client Testimonials */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {TESTIMONIALS.map((t, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="bg-neutral-50 p-6 sm:p-7 rounded-xl border border-neutral-200/90 shadow-xs hover:border-[#C5A059] transition-all flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center gap-1 text-[#C5A059] mb-4">
+                  {[...Array(t.rating)].map((_, i) => (
+                    <Star key={i} className="w-3.5 h-3.5 fill-[#C5A059] text-[#C5A059]" />
+                  ))}
+                </div>
+                <blockquote className="text-xs sm:text-sm text-neutral-700 italic font-light leading-relaxed mb-6">
+                  "{t.quote}"
+                </blockquote>
+              </div>
+              <div className="pt-4 border-t border-neutral-200/80">
+                <div className="text-xs font-semibold text-neutral-900">{t.author}</div>
+                <div className="text-[11px] text-neutral-500 mt-0.5">{t.role}</div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className="bg-white p-6 rounded-lg border border-neutral-200/90 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center gap-1 text-[#C5A059] mb-4">
-                    {[...Array(t.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-[#C5A059] text-[#C5A059]" />
-                    ))}
-                  </div>
-                  <blockquote className="text-sm text-neutral-700 italic font-light leading-relaxed mb-6">
-                    "{t.quote}"
-                  </blockquote>
-                </div>
-                <div className="pt-4 border-t border-neutral-100">
-                  <div className="text-sm font-semibold text-neutral-900">{t.author}</div>
-                  <div className="text-xs text-neutral-500">{t.role}</div>
-                </div>
-              </motion.div>
-            ))}
+        {/* Slim Trust Bar */}
+        <div className="p-4 sm:p-5 rounded-xl bg-neutral-50 border border-neutral-200 flex flex-wrap items-center justify-around gap-4 text-xs text-neutral-700">
+          <div className="flex items-center gap-2">
+            <Clock className="w-4 h-4 text-[#8C6D1F] shrink-0" />
+            <span className="font-medium">
+              {language === 'de' ? 'Reaktionsgarantie < 24 Stunden' : 'Guaranteed Response < 24 Hours'}
+            </span>
+          </div>
+          <div className="hidden sm:block text-neutral-300">·</div>
+          <div className="flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-[#8C6D1F] shrink-0" />
+            <span className="font-medium">
+              {language === 'de' ? '100% Diskretion & Schweizer Datenschutz' : '100% Discretion & Swiss Privacy'}
+            </span>
+          </div>
+          <div className="hidden sm:block text-neutral-300">·</div>
+          <div className="flex items-center gap-2">
+            <Award className="w-4 h-4 text-[#8C6D1F] shrink-0" />
+            <span className="font-medium">
+              {language === 'de' ? 'SVIT / USVT Maklerstandard (ZH & AG)' : 'SVIT / USVT Standards (ZH & AG)'}
+            </span>
           </div>
         </div>
       </div>
     </section>
   );
 };
-

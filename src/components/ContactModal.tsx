@@ -214,12 +214,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       onChange={(e) => setInterest(e.target.value)}
                       className="w-full text-xs rounded border border-neutral-300 p-2.5 bg-white text-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
                     >
-                      <option value="sell">{language === 'de' ? 'Immobilie verkaufen (Kostenlose Erstberatung & Fototermin)' : 'Selling Property (Free Consultation & Photos)'}</option>
-                      <option value="rent-out">{language === 'de' ? 'Immobilie vermieten (Erst- & Wiedervermietung)' : 'Renting out Property (Tenant Placement)'}</option>
-                      <option value="buy">{language === 'de' ? 'Immobilie kaufen oder mieten' : 'Buying or Renting Property'}</option>
-                      <option value="valuation">{language === 'de' ? 'Marktwertschätzung anfordern' : 'Requesting Valuation Dossier'}</option>
+                      <option value="sell">{language === 'de' ? 'Immobilie verkaufen (Nur 0.7% Provision)' : 'Sell Property (Only 0.7% Commission)'}</option>
+                      <option value="rent-out">{language === 'de' ? 'Immobilie vermieten (Nur 15 Tage Miete Provision)' : 'Rent Out Property (Only 15 Days Rent Commission)'}</option>
+                      <option value="valuation">{language === 'de' ? 'Kostenlose Marktwertschätzung anfordern' : 'Request Complimentary Valuation'}</option>
+                      <option value="package-standard-full">{language === 'de' ? 'Paket: Standard Makler (0.7% Provision)' : 'Package: Standard Broker (0.7% Commission)'}</option>
                       <option value="package-digital-direct">Paket: Starter / Digital Direkt (CHF 3'900)</option>
-                      <option value="package-standard-full">Paket: Standard Full Service (CHF 7'900)</option>
                       <option value="package-exclusive-mandate">Paket: Exklusiv Mandat (1.0%)</option>
                     </select>
                   </div>

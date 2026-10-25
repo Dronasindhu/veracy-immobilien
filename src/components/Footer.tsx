@@ -57,16 +57,16 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onNavigate('sell')}
                   className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group"
                 >
-                  <span>{language === 'de' ? '01. Immobilie verkaufen' : '01. Sell Property'}</span>
+                  <span>{language === 'de' ? '01. Immobilie verkaufen (0.7%)' : '01. Sell Property (0.7%)'}</span>
                   <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => onNavigate('buy-rent')}
+                  onClick={() => onNavigate('rent-out')}
                   className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group"
                 >
-                  <span>{language === 'de' ? '02. Kaufen & Mieten' : '02. Buy & Rent'}</span>
+                  <span>{language === 'de' ? '02. Immobilie vermieten (15 Tage Miete)' : '02. Rent Out Property (15 Days Rent)'}</span>
                   <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
                 </button>
               </li>

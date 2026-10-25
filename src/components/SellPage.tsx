@@ -18,8 +18,8 @@ export const SellPage: React.FC<SellPageProps> = ({
   const [salesPrice, setSalesPrice] = useState<number>(1250000);
 
   const traditionalCommission = Math.round(salesPrice * 0.025);
-  const veracyStandardFee = 7900;
-  const netSavings = Math.max(0, traditionalCommission - veracyStandardFee);
+  const veracyCommission = Math.round(salesPrice * 0.007);
+  const netSavings = Math.max(0, traditionalCommission - veracyCommission);
 
   const formatChf = (val: number) => `CHF ${val.toLocaleString('de-CH')}`;
 
@@ -235,8 +235,8 @@ export const SellPage: React.FC<SellPageProps> = ({
               </h2>
               <p className="text-sm text-neutral-300 mt-2 font-light">
                 {language === 'de'
-                  ? 'Vergleichen Sie unseren beliebten Standard Full Service Festpreis (CHF 7’900) mit der üblichen Maklerprovision von 2.5% in der Schweiz.'
-                  : 'Compare our popular Standard Full Service flat rate (CHF 7,900) with typical 2.5% Swiss broker commissions.'}
+                  ? 'Vergleichen Sie unsere Schweizer Rekord-Provision von nur 0.7% mit der marktüblichen Maklerprovision von 2.5% in der Schweiz.'
+                  : 'Compare our Switzerland-lowest 0.7% broker commission with typical 2.5% Swiss broker commissions.'}
               </p>
             </div>
 
@@ -278,10 +278,10 @@ export const SellPage: React.FC<SellPageProps> = ({
 
                 <div className="bg-neutral-800/80 p-4 rounded-lg">
                   <div className="text-xs text-[#E6CA85] mb-1 font-medium">
-                    {language === 'de' ? 'Veracy Full Service' : 'Veracy Full Service'}
+                    {language === 'de' ? 'Veracy Makler (Nur 0.7%)' : 'Veracy Broker (Only 0.7%)'}
                   </div>
                   <div className="text-xl font-bold text-white font-mono tabular-nums">
-                    {formatChf(veracyStandardFee)}
+                    {formatChf(veracyCommission)}
                   </div>
                 </div>
 

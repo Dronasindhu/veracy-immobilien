@@ -1,6 +1,6 @@
 export type Language = 'de' | 'en';
 
-export type MainCategory = 'home' | 'sell' | 'buy-rent' | 'valuation';
+export type MainCategory = 'home' | 'sell' | 'rent-out' | 'valuation';
 
 export interface Property {
   id: string;
@@ -84,9 +84,28 @@ export interface ConsultationFormData {
   name: string;
   email: string;
   phone: string;
-  interest: 'sell' | 'buy' | 'valuation' | 'general';
+  interest: 'sell' | 'rent-out' | 'valuation' | 'general';
   message: string;
   preferredContact: 'phone' | 'email';
+}
+
+export interface RentOutFormData {
+  propertyType: string;
+  address: string;
+  zipCity: string;
+  canton: string;
+  rooms: number;
+  livingArea: number;
+  expectedRent: number;
+  availableDate: string;
+  rentalServiceType: 'first_letting' | 're_letting' | 'all_inclusive';
+  tenantPreferences: string;
+  appointmentDate?: string;
+  appointmentTime?: string;
+  name: string;
+  email: string;
+  phone: string;
+  message?: string;
 }
 
 export interface SearchProfileData {

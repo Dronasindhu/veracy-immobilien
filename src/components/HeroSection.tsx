@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Language, MainCategory } from '../types';
 import { HERO_IMAGE } from '../data/mockData';
-import { ArrowRight, ShieldCheck, Clock, Award, CheckCircle2, KeyRound, Calendar } from 'lucide-react';
+import { ArrowRight, Tag, KeyRound, Calendar, ShieldCheck, Clock, CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface HeroSectionProps {
@@ -16,324 +16,218 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
   onOpenConsultation,
 }) => {
   return (
-    <section className="relative overflow-hidden bg-neutral-900 text-white">
-      {/* Background Image with Measured Contrast Scrim */}
+    <section className="relative overflow-hidden bg-neutral-950 text-white">
+      {/* Background Image with Calibrated Luxury Dark Gradient Scrim */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.img
-          initial={{ scale: 1.08, opacity: 0.8 }}
-          animate={{ scale: 1.02, opacity: 1 }}
-          transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ scale: 1.05, opacity: 0.7 }}
+          animate={{ scale: 1, opacity: 0.85 }}
+          transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
           src={HERO_IMAGE}
           alt="Veracy Immobilien – Schweizer Luxusimmobilien"
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover object-center"
         />
-        {/* Measured dark luxury scrim for 4.5:1+ text contrast */}
-        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/92 via-neutral-950/80 to-neutral-950/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-neutral-950/95 via-neutral-950/85 to-neutral-950" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24 md:pt-28 md:pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* Main Headline & Value Proposition */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 md:pt-24 md:pb-28 text-center">
+        {/* Trust Kicker */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#E6CA85] font-medium mb-4"
+        >
+          <span>Schweizer Maklerstandard</span>
+          <span aria-hidden="true" className="text-neutral-500">·</span>
+          <span>Zürich & Aargau</span>
+          <span aria-hidden="true" className="text-neutral-500">·</span>
+          <span>100% Erfolgsbasiert</span>
+        </motion.div>
+
+        {/* Main Clean Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight font-display text-white leading-[1.12] max-w-4xl mx-auto"
+        >
+          {language === 'de' ? (
+            <>
+              Ihre Immobilie verkaufen oder vermieten.{' '}
+              <span className="italic text-[#E6CA85] font-light block sm:inline">
+                Zu Schweizer Top-Konditionen.
+              </span>
+            </>
+          ) : (
+            <>
+              Sell or Rent Your Swiss Property.{' '}
+              <span className="italic text-[#E6CA85] font-light block sm:inline">
+                With Switzerland’s Lowest Commission.
+              </span>
+            </>
+          )}
+        </motion.h1>
+
+        {/* Clear, Crisp Value Proposition */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="mt-4 text-base sm:text-lg text-neutral-300 max-w-2xl mx-auto font-light leading-relaxed"
+        >
+          {language === 'de'
+            ? 'Veracy steht für erstklassigen Schweizer Maklerservice für Eigentümer in Zürich & Aargau: Nur 0.7% Verkaufsprovision und nur 15 Tage Miete bei erfolgreicher Vermietung. Keine Vorabkosten, kein Risiko.'
+            : 'Veracy provides elite Swiss brokerage for property owners across Zurich & Aargau: Only 0.7% sales commission and only 15 days of rent upon successful tenancy placement. Zero upfront fees, zero risk.'}
+        </motion.p>
+
+        {/* Standalone Primary Action: Free Consultation & Valuation (Top Positioned) */}
+        {onOpenConsultation && (
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-7 space-y-6"
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="mt-8 max-w-lg mx-auto"
           >
-            {/* Trust Kicker - Clean unboxed text (anti-pill) */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#E6CA85] font-medium"
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={onOpenConsultation}
+              className="w-full py-4 px-6 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 rounded-xl font-semibold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-between gap-4 transition-all cursor-pointer shadow-xl shadow-[#C5A059]/20 border border-[#C5A059]/50 group"
             >
-              <span>Schweizer Maklerstandard</span>
-              <span aria-hidden="true" className="text-neutral-500">·</span>
-              <span>Zürich & Aargau</span>
-              <span aria-hidden="true" className="text-neutral-500">·</span>
-              <span>Reaktion &lt; 24h</span>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight font-display text-white leading-[1.12] text-balance"
-            >
-              {language === 'de' ? (
-                <>
-                  Immobilien mit Vertrauen verkaufen. <br />
-                  <span className="italic text-neutral-300 font-light">
-                    Schweizer Qualität zum fairen Festpreis.
-                  </span>
-                </>
-              ) : (
-                <>
-                  Sell Swiss Property with Trust. <br />
-                  <span className="italic text-neutral-300 font-light">
-                    Premium Quality at Transparent Flat Rates.
-                  </span>
-                </>
-              )}
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-base sm:text-lg text-neutral-300 max-w-2xl font-light leading-relaxed"
-            >
-              {language === 'de'
-                ? 'Veracy Immobilien verbindet kompromisslose Schweizer Maklerexpertise mit transparenter Festpreisführung. Sparen Sie bis zu 70% der üblichen Maklerprovision bei garantierter Reaktionsschnelligkeit innert 24 Stunden.'
-                : 'Veracy Immobilien pairs uncompromising Swiss brokerage excellence with transparent flat-rate pricing. Save up to 70% in conventional broker commissions with a verified response time under 24 hours.'}
-            </motion.p>
-
-            {/* Quick Proof Metrics adjacent to claim */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="pt-2 grid grid-cols-3 gap-6 border-t border-neutral-800/80 max-w-xl"
-            >
-              <div className="group">
-                <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-white tabular-nums group-hover:text-[#E6CA85] transition-colors">
-                  &lt; 24h
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="w-9 h-9 rounded-lg bg-neutral-950/10 flex items-center justify-center shrink-0 text-neutral-950">
+                  <Calendar className="w-5 h-5" />
                 </div>
-                <div className="text-xs text-neutral-400 mt-1">
-                  {language === 'de' ? 'Antwortgarantie' : 'Response Guarantee'}
-                </div>
-              </div>
-              <div className="group">
-                <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-white tabular-nums group-hover:text-[#E6CA85] transition-colors">
-                  0 CHF
-                </div>
-                <div className="text-xs text-neutral-400 mt-1">
-                  {language === 'de' ? 'Vorab-Kostenrisiko' : 'Upfront Financial Risk'}
-                </div>
-              </div>
-              <div className="group">
-                <div className="text-2xl sm:text-3xl font-semibold tracking-tight text-[#E6CA85] tabular-nums group-hover:text-[#F0D59E] transition-colors">
-                  ~ 70%
-                </div>
-                <div className="text-xs text-neutral-400 mt-1">
-                  {language === 'de' ? 'Kostenersparnis' : 'Commission Savings'}
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Primary Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.45, duration: 0.5 }}
-              className="pt-4 flex flex-wrap items-center gap-3 sm:gap-4"
-            >
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => onNavigate('sell')}
-                className="px-6 py-3.5 text-xs font-semibold tracking-wide uppercase text-neutral-950 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] rounded shadow-lg shadow-[#C5A059]/20 flex items-center gap-2 cursor-pointer transition-all border border-[#C5A059]/40"
-              >
-                <span>{language === 'de' ? 'Immobilie verkaufen' : 'Sell Property'}</span>
-                <ArrowRight className="w-4 h-4" />
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => onNavigate('buy-rent')}
-                className="px-6 py-3.5 text-xs font-medium tracking-wide uppercase text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded border border-white/20 flex items-center gap-2 cursor-pointer transition-all"
-              >
-                <span>{language === 'de' ? 'Suchprofil anlegen' : 'Create Search Profile'}</span>
-                <ArrowRight className="w-4 h-4 text-[#DFB76C]" />
-              </motion.button>
-            </motion.div>
-
-            {/* Secondary Trust Row */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="pt-2 flex flex-wrap items-center gap-4 text-xs text-neutral-300"
-            >
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#DFB76C]" />
-                {language === 'de' ? 'SVIT / USVT Ausbildungsstandard' : 'Swiss Real Estate Standard'}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#DFB76C]" />
-                {language === 'de' ? 'Diskrete Off-Market Optionen' : 'Discreet Off-Market Network'}
-              </span>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Column: Veracy Core Services Hub (Sell, Rent Out & Buy/Rent) */}
-          <motion.div
-            initial={{ opacity: 0, y: 30, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="lg:col-span-5"
-          >
-            <div className="bg-white text-neutral-900 rounded-xl p-5 sm:p-7 shadow-2xl border border-neutral-100 relative hover:shadow-[#C5A059]/10 transition-shadow space-y-4">
-              <div>
-                <div className="text-[11px] uppercase tracking-wider text-[#8C6D1F] font-semibold mb-1">
-                  {language === 'de' ? 'Schweizer Maklerkompetenz' : 'Swiss Brokerage Excellence'}
-                </div>
-                <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-neutral-950 font-display">
-                  {language === 'de'
-                    ? 'Ihr Partner für Verkauf, Vermietung & Kauf'
-                    : 'Your Partner for Selling, Renting & Buying'}
-                </h2>
-                <p className="text-xs text-neutral-500 mt-1 leading-relaxed">
-                  {language === 'de'
-                    ? 'Professionelle Schweizer Maklerdienstleistung in den Kantonen Zürich und Aargau mit transparenter Kostenstruktur.'
-                    : 'Professional Swiss brokerage service across Zurich and Aargau with transparent pricing.'}
-                </p>
-              </div>
-
-              {/* Standalone Primary Action: Free Consultation & Valuation Appointment */}
-              {onOpenConsultation && (
-                <div className="pt-1 pb-0.5">
-                  <motion.button
-                    whileHover={{ scale: 1.015, y: -1 }}
-                    whileTap={{ scale: 0.985 }}
-                    onClick={onOpenConsultation}
-                    className="w-full py-3.5 px-4 bg-neutral-950 hover:bg-neutral-900 text-white rounded-lg text-xs font-semibold uppercase tracking-wider flex items-center justify-between gap-3 transition-all cursor-pointer shadow-md hover:shadow-xl hover:shadow-neutral-950/20 border border-neutral-900 group"
-                  >
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-8 h-8 rounded bg-[#FAF6EE] border border-[#EBDCB7] flex items-center justify-center shrink-0 text-[#8C6D1F]">
-                        <Calendar className="w-4 h-4" />
-                      </div>
-                      <div className="text-left min-w-0">
-                        <div className="font-bold tracking-wider text-white group-hover:text-[#E6CA85] transition-colors truncate">
-                          {language === 'de' ? 'Kostenlose Erstberatung vereinbaren' : 'Request Free Consultation'}
-                        </div>
-                        <div className="text-[10px] text-neutral-400 font-normal normal-case truncate">
-                          {language === 'de' ? 'Inkl. Vor-Ort-Besichtigung & Fototermin' : 'Incl. on-site viewing & photography'}
-                        </div>
-                      </div>
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-[#DFB76C] shrink-0 transition-transform group-hover:translate-x-1" />
-                  </motion.button>
-
-                  <div className="flex items-center justify-between text-[11px] text-neutral-500 mt-2 px-1">
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
-                      {language === 'de' ? 'Antwort innert 24h' : 'Response within 24h'}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
-                      {language === 'de' ? '100% Unverbindlich' : '100% No obligation'}
-                    </span>
+                <div className="text-left min-w-0">
+                  <div className="font-bold tracking-wide truncate">
+                    {language === 'de' ? 'Kostenlose Eigentümer-Beratung & Vor-Ort-Termin' : 'Free Owner Consultation & On-Site Visit'}
+                  </div>
+                  <div className="text-[11px] text-neutral-900/80 font-normal normal-case truncate">
+                    {language === 'de' ? 'Inkl. Vor-Ort-Besichtigung & Fototermin · Antwort < 24h' : 'Incl. on-site viewing & photography · Response < 24h'}
                   </div>
                 </div>
-              )}
+              </div>
+              <ArrowRight className="w-4 h-4 text-neutral-950 shrink-0 transition-transform group-hover:translate-x-1" />
+            </motion.button>
+          </motion.div>
+        )}
 
-              {/* Sub-services divider */}
-              <div className="relative flex items-center justify-center pt-1 pb-1">
-                <div className="border-t border-neutral-200 w-full" />
-                <span className="bg-white px-3 text-[10px] uppercase tracking-widest text-neutral-400 shrink-0 font-medium">
-                  {language === 'de' ? 'Oder Bereich wählen' : 'Or select a service'}
+        {/* The 2 Core Options: Sell & Rent Out (Clean 2-Column Grid) */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto text-left"
+        >
+          {/* Card 1: Sell Property - 0.7% Commission */}
+          <div
+            onClick={() => onNavigate('sell')}
+            className="group p-6 rounded-xl border border-neutral-800 bg-neutral-900/80 hover:bg-neutral-900 hover:border-[#C5A059] transition-all cursor-pointer flex flex-col justify-between shadow-lg relative"
+          >
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors">
+                    <Tag className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                    {language === 'de' ? 'Option 01' : 'Option 01'}
+                  </span>
+                </div>
+                <span className="text-[11px] font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-2.5 py-0.5 rounded shadow-xs">
+                  {language === 'de' ? 'Nur 0.7% Provision' : 'Only 0.7% Commission'}
                 </span>
-                <div className="border-t border-neutral-200 w-full" />
               </div>
 
-              {/* Service Card 1: Sell Property */}
-              <div
-                onClick={() => onNavigate('sell')}
-                className="group p-3.5 sm:p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-3.5"
-              >
-                <div className="p-2.5 rounded bg-white shadow-sm border border-neutral-200 group-hover:border-[#C5A059] shrink-0 text-[#8C6D1F]">
-                  <Award className="w-5 h-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-semibold text-neutral-900 group-hover:text-[#8C6D1F] transition-colors">
-                      {language === 'de' ? '01. Immobilie verkaufen' : '01. Sell Property'}
-                    </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] px-2 py-0.5 rounded shrink-0">
-                      {language === 'de' ? 'ab CHF 3’900' : 'from CHF 3,900'}
-                    </span>
-                  </div>
-                  <p className="text-xs text-neutral-600 mt-1 font-light leading-relaxed">
-                    {language === 'de'
-                      ? 'Festpreise statt überrissene 2–3% Provision. Bis zu CHF 35’000 sparen bei vollem Makler-Einsatz.'
-                      : 'Flat fees instead of 2–3% broker fees. Save up to CHF 35,000 with full brokerage service.'}
-                  </p>
-                  <div className="mt-2 text-xs font-medium text-[#8C6D1F] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                    <span>{language === 'de' ? 'Verkaufspakete ansehen' : 'View Selling Packages'}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </div>
+              <h2 className="text-xl font-semibold text-white group-hover:text-[#DFB76C] transition-colors font-display">
+                {language === 'de' ? 'Immobilie verkaufen' : 'Sell Property'}
+              </h2>
 
-              {/* Service Card 2: Rent Out Property (Vermieten) */}
-              <div
-                onClick={() => {
-                  if (onOpenConsultation) {
-                    onOpenConsultation();
-                  } else {
-                    onNavigate('sell');
-                  }
-                }}
-                className="group p-3.5 sm:p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-3.5"
-              >
-                <div className="p-2.5 rounded bg-white shadow-sm border border-neutral-200 group-hover:border-[#C5A059] shrink-0 text-[#8C6D1F]">
-                  <KeyRound className="w-5 h-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-semibold text-neutral-900 group-hover:text-[#8C6D1F] transition-colors">
-                      {language === 'de' ? '02. Immobilie vermieten' : '02. Rent out Property'}
-                    </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] px-2 py-0.5 rounded shrink-0">
-                      {language === 'de' ? 'Erst- & Wiedervermietung' : 'Tenant Placement'}
-                    </span>
-                  </div>
-                  <p className="text-xs text-neutral-600 mt-1 font-light leading-relaxed">
-                    {language === 'de'
-                      ? 'Professionelle Mietersuche, umfassende Bonitätsprüfung, rechtssichere Mietverträge & lückenlose Übergabe.'
-                      : 'Professional tenant search, credit checks, Swiss lease contracts & seamless handover protocols.'}
-                  </p>
-                  <div className="mt-2 text-xs font-medium text-[#8C6D1F] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                    <span>{language === 'de' ? 'Vermietung anfragen' : 'Request Rental Service'}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </div>
-
-              {/* Service Card 3: Buy & Rent */}
-              <div
-                onClick={() => onNavigate('buy-rent')}
-                className="group p-3.5 sm:p-4 rounded-lg border border-neutral-200 hover:border-[#C5A059] bg-neutral-50 hover:bg-[#FAF6EE] transition-all cursor-pointer flex items-start gap-3.5"
-              >
-                <div className="p-2.5 rounded bg-white shadow-sm border border-neutral-200 group-hover:border-[#C5A059] shrink-0 text-[#8C6D1F]">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-semibold text-neutral-900 group-hover:text-[#8C6D1F] transition-colors">
-                      {language === 'de' ? '03. Kaufen & Mieten' : '03. Buy & Rent'}
-                    </span>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] px-2 py-0.5 rounded shrink-0">
-                      {language === 'de' ? 'Suchauftrag' : 'Search Profile'}
-                    </span>
-                  </div>
-                  <p className="text-xs text-neutral-600 mt-1 font-light leading-relaxed">
-                    {language === 'de'
-                      ? 'Definieren Sie Ihr massgeschneidertes Suchprofil. Wir finden Ihr Wunschobjekt in Zürich & Aargau inkl. diskreter Off-Market Liegenschaften.'
-                      : 'Define your tailored search criteria. We find your dream residence across Zurich & Aargau including discreet off-market opportunities.'}
-                  </p>
-                  <div className="mt-2 text-xs font-medium text-[#8C6D1F] flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
-                    <span>{language === 'de' ? 'Suchprofil anlegen' : 'Create Search Profile'}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </div>
+              <p className="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
+                {language === 'de'
+                  ? 'Schweizer Makler-Vollservice vor Ort: HDR-Fototermin, Grundrisse, Top-Listing auf Homegate & ImmoScout24, Bonitätsprüfung & Notariatskoordination. Erfolgshonorar erst bei Beurkundung.'
+                  : 'Full Swiss on-site brokerage: HDR photography, floor plans, priority listing on Homegate/ImmoScout, vetting & notary filing. Success fee only upon notarization.'}
+              </p>
             </div>
-          </motion.div>
-        </div>
+
+            <div className="mt-5 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
+              <span>{language === 'de' ? 'Verkauf anfragen (0.7%)' : 'Inquire Sale (0.7%)'}</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </div>
+          </div>
+
+          {/* Card 2: Rent Out Property - 15 Days of Rent Commission */}
+          <div
+            onClick={() => onNavigate('rent-out')}
+            className="group p-6 rounded-xl border border-neutral-800 bg-neutral-900/80 hover:bg-neutral-900 hover:border-[#C5A059] transition-all cursor-pointer flex flex-col justify-between shadow-lg relative"
+          >
+            <div>
+              <div className="flex items-center justify-between gap-2 mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors">
+                    <KeyRound className="w-4 h-4" />
+                  </div>
+                  <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                    {language === 'de' ? 'Option 02' : 'Option 02'}
+                  </span>
+                </div>
+                <span className="text-[11px] font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-2.5 py-0.5 rounded shadow-xs">
+                  {language === 'de' ? 'Nur 15 Tage Miete Provision' : 'Only 15 Days Rent Commission'}
+                </span>
+              </div>
+
+              <h2 className="text-xl font-semibold text-white group-hover:text-[#DFB76C] transition-colors font-display">
+                {language === 'de' ? 'Immobilie vermieten' : 'Rent Out Property'}
+              </h2>
+
+              <p className="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
+                {language === 'de'
+                  ? 'Professionelle Mietersuche, strenge Bonitäts- und Referenzprüfung sowie rechtssichere Schweizer Mietverträge nach OR. Unsere Provision beträgt nur 15 Tage des Mietzinses bei erfolgreichem Abschluss.'
+                  : 'Professional tenant search, strict solvency and reference checks, and Swiss lease contracts. Our commission is strictly 15 days of rent upon successful lease signing.'}
+              </p>
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
+              <span>{language === 'de' ? 'Vermietung anfragen (15 Tage Miete)' : 'Inquire Rental Placement (15 Days Rent)'}</span>
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Minimalist Trust & Proof Metrics */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-12 pt-8 border-t border-neutral-800/80 max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-center"
+        >
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-[#E6CA85] tabular-nums font-mono">0.7%</div>
+            <div className="text-[11px] text-neutral-400 mt-0.5 font-medium">
+              {language === 'de' ? 'Verkaufsprovision' : 'Sales Commission'}
+            </div>
+          </div>
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-white tabular-nums font-mono">15 Tage</div>
+            <div className="text-[11px] text-neutral-400 mt-0.5 font-medium">
+              {language === 'de' ? 'Miete bei Vermietung' : 'Rent as Commission'}
+            </div>
+          </div>
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-white tabular-nums font-mono">0 CHF</div>
+            <div className="text-[11px] text-neutral-400 mt-0.5 font-medium">
+              {language === 'de' ? 'Vorabkosten / Risiko' : 'Upfront Fee / Risk'}
+            </div>
+          </div>
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-[#E6CA85] tabular-nums font-mono">&lt; 24h</div>
+            <div className="text-[11px] text-neutral-400 mt-0.5 font-medium">
+              {language === 'de' ? 'Antwortgarantie' : 'Response Guarantee'}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

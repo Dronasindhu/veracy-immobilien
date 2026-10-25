@@ -38,10 +38,10 @@ export const Navbar: React.FC<NavbarProps> = ({
       },
     },
     {
-      id: 'buy-rent',
+      id: 'rent-out',
       label: {
-        de: 'Kaufen & Mieten',
-        en: 'Buy & Rent',
+        de: 'Immobilie vermieten',
+        en: 'Rent Out Property',
       },
     },
     {
