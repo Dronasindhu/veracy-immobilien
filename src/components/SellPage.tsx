@@ -38,12 +38,12 @@ export const SellPage: React.FC<SellPageProps> = ({
     {
       step: '02',
       title: {
-        de: 'High-End Aufbereitung & Multi-Kanal Vermarktung',
-        en: 'High-End Media & Multi-Channel Marketing',
+        de: 'Profi-Fotos, 3D Tour & Video-Walkthrough',
+        en: 'Pro Photos, 3D Tour & Video Walkthrough',
       },
       desc: {
-        de: 'Professionelle HDR-Fotografie, maßgeschneiderte Grundrisse und Premium-Präsenz auf Homegate, ImmoScout24 sowie in unserem diskreten Käufernetzwerk.',
-        en: 'Professional HDR photography, tailored floor plans, and priority positioning on Homegate, ImmoScout24, and our private VIP buyer pool.',
+        de: 'Professionelle HDR-Fotografie vor Ort, interaktive Matterport 3D Tour, cinematischer Video-Walkthrough sowie Top-Listing auf Homegate & ImmoScout24 für maximale Käuferresonanz.',
+        en: 'Professional on-site HDR photography, interactive Matterport 3D tour, cinematic video walkthrough, and priority placement on Homegate & ImmoScout24 for peak buyer interest.',
       },
     },
     {
@@ -84,9 +84,9 @@ export const SellPage: React.FC<SellPageProps> = ({
             <div className="flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#E6CA85] font-medium mb-3">
               <span>{language === 'de' ? 'Immobilie verkaufen' : 'Sell Property'}</span>
               <span aria-hidden="true" className="text-neutral-500">·</span>
-              <span>{language === 'de' ? 'Transparente Festpreise' : 'Transparent Flat Fees'}</span>
+              <span>{language === 'de' ? 'Nur 0.7% Provision' : 'Only 0.7% Commission'}</span>
               <span aria-hidden="true" className="text-neutral-500">·</span>
-              <span>{language === 'de' ? 'Schweizer Qualität' : 'Swiss Excellence'}</span>
+              <span>{language === 'de' ? 'Fotos, 3D Tour & Walkthrough inkl.' : 'Photos, 3D Tour & Walkthrough incl.'}</span>
             </div>
             <h1 className="text-4xl sm:text-5xl font-normal font-display tracking-tight text-white leading-tight">
               {language === 'de'
@@ -95,9 +95,24 @@ export const SellPage: React.FC<SellPageProps> = ({
             </h1>
             <p className="mt-4 text-base sm:text-lg text-neutral-300 font-light leading-relaxed">
               {language === 'de'
-                ? 'Wählen Sie aus drei transparenten Verkaufspaketen. Vom digitalen Einstieg bis zum vollumfänglichen Concierge-Service: Bei Veracy bezahlen Sie nur für echte Leistung bei garantierter Schnelligkeit und Schweizer Diskretion.'
-                : 'Choose from three clear selling packages. From digital-direct marketing to end-to-end concierge representation: with Veracy, you enjoy full Swiss broker quality with guaranteed speed and discretion.'}
+                ? 'Schweizer Makler-Vollservice zu unschlagbaren Konditionen: Bei Veracy ist die komplette multimediale Vermarktung (Profi-Fotos, 3D Matterport Tour, Video-Walkthrough) bereits im Standard-Mandat zu nur 0.7% Erfolgshonorar inbegriffen.'
+                : 'Swiss full-service brokerage at unbeatable terms: Veracy includes comprehensive multimedia marketing (pro HDR photos, 3D Matterport tour, video walkthrough) in our standard 0.7% success-fee mandate.'}
             </p>
+
+            <div className="mt-6 flex flex-wrap gap-2 text-xs text-neutral-300">
+              <span className="px-3 py-1 rounded bg-neutral-800 border border-neutral-700 text-[#E6CA85] font-medium">
+                ✓ {language === 'de' ? 'Profi-Fotos inklusive' : 'Pro photos included'}
+              </span>
+              <span className="px-3 py-1 rounded bg-neutral-800 border border-neutral-700 text-[#E6CA85] font-medium">
+                ✓ {language === 'de' ? 'Interaktive 3D Tour' : 'Interactive 3D tour'}
+              </span>
+              <span className="px-3 py-1 rounded bg-neutral-800 border border-neutral-700 text-[#E6CA85] font-medium">
+                ✓ {language === 'de' ? 'Video-Walkthrough' : 'Video walkthrough'}
+              </span>
+              <span className="px-3 py-1 rounded bg-neutral-800 border border-neutral-700 text-white font-medium">
+                ✓ {language === 'de' ? '0 CHF Vorabkosten' : '0 CHF upfront'}
+              </span>
+            </div>
           </motion.div>
         </div>
       </div>

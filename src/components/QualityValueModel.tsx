@@ -116,6 +116,10 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
                     <span>{language === 'de' ? 'Veracy: Nur 0.7% Erfolgshonorar bei Beurkundung' : 'Veracy: Only 0.7% success fee upon notarization'}</span>
                   </div>
+                  <div className="flex items-center gap-2 text-[#E6CA85]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
+                    <span>{language === 'de' ? 'Inklusive Profi-Fotos, interaktive 3D Tour & Video-Walkthrough' : 'Includes pro photos, interactive 3D tour & video walkthrough'}</span>
+                  </div>
                 </div>
               </div>
 
@@ -191,6 +195,10 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
                   <div className="flex items-center gap-2 text-neutral-300">
                     <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
                     <span>{language === 'de' ? 'Veracy: Nur 15 Tage Miete (halbe Monatsmiete)' : 'Veracy: Only 15 days rent (0.5 month)'}</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-[#E6CA85]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
+                    <span>{language === 'de' ? 'Inklusive Profi-Fotos, interaktive 3D Tour & Video-Walkthrough' : 'Includes pro photos, interactive 3D tour & video walkthrough'}</span>
                   </div>
                 </div>
               </div>

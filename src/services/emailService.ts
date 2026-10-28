@@ -34,8 +34,8 @@ export async function sendEmailInquiry(data: EmailSubmissionData): Promise<{ suc
       'Telefon': data.phone || 'Nicht angegeben',
       'Liegenschaft / Ort': data.location || 'Nicht angegeben',
       'Anliegen': data.interest || 'Allgemeine Anfrage',
-      'Wunschtermin für Vor-Ort-Fototermin': data.appointmentDate
-        ? `${data.appointmentDate} (${data.appointmentTime || 'Flexibel'}) - Veracy Vor-Ort-Besuch bei Verkaufsliegenschaft`
+      'Wunschtermin': data.appointmentDate
+        ? `${data.appointmentDate} (${data.appointmentTime || 'Flexibel'})`
         : 'Nicht spezifiziert',
       'Terminbestätigung per E-Mail': 'Bestätigung an Kunde versandt',
       'Nachricht': data.message || 'Keine zusätzliche Nachricht',

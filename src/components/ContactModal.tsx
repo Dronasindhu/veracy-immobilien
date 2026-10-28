@@ -52,7 +52,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
     await sendEmailInquiry({
       formType: 'Kostenlose Beratung / Verkaufspaket',
-      subject: `Termin- & Fotobesuch: ${name} (${interest})${appointmentDate ? ` – ${appointmentDate}` : ''}`,
+      subject: `Beratungsanfrage: ${name} (${interest})${appointmentDate ? ` – ${appointmentDate}` : ''}`,
       name,
       email,
       phone,
@@ -125,19 +125,19 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
                 <h3 className="text-2xl font-display font-medium text-neutral-950">
-                  {language === 'de' ? 'Terminanfrage erfolgreich erhalten!' : 'Appointment Request Confirmed!'}
+                  {language === 'de' ? 'Beratungsanfrage erfolgreich erhalten!' : 'Consultation Request Confirmed!'}
                 </h3>
                 <p className="text-xs text-neutral-600 font-light leading-relaxed max-w-sm mx-auto">
                   {language === 'de'
-                    ? `Vielen Dank, ${name || 'Eigentümer/in'}. Wir haben Ihren Wunschtermin für den Vor-Ort-Besuch bei Ihrer Liegenschaft reserviert.`
-                    : `Thank you, ${name || 'property owner'}. We have reserved your requested appointment for our team to visit your property.`}
+                    ? `Vielen Dank, ${name || 'Eigentümer/in'}. Wir haben Ihren Wunschtermin für das unverbindliche Beratungsgespräch vorgemerkt.`
+                    : `Thank you, ${name || 'property owner'}. We have noted your requested appointment for your confidential consultation.`}
                 </p>
 
                 {/* Appointment & Email Confirmation Card */}
                 <div className="bg-[#FAF6EE] border border-[#EBDCB7] rounded-xl p-4 text-left space-y-2.5 text-xs">
                   <div className="flex items-center gap-1.5 font-semibold text-[#8C6D1F]">
                     <Calendar className="w-4 h-4 text-[#C5A059]" />
-                    <span>{language === 'de' ? 'Vorgemerkter Vor-Ort-Termin:' : 'Reserved On-Site Visit:'}</span>
+                    <span>{language === 'de' ? 'Vorgemerkter Beratungstermin:' : 'Reserved Consultation Date:'}</span>
                   </div>
                   <div className="font-mono text-neutral-900 font-semibold text-sm pl-5">
                     {appointmentDate
@@ -161,8 +161,8 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                     <Mail className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
                     <span>
                       {language === 'de'
-                        ? `Bestätigungs-E-Mail versendet: Eine schriftliche Terminbestätigung mit allen Angaben und Vorbereitungstipps für die Fotoaufnahmen wurde an ${email} gesendet. Unser Fotografen- und Maklerteam meldet sich zudem telefonisch bei Ihnen.`
-                        : `Confirmation email dispatched: A written confirmation with all visit details and photo preparation guidance has been sent to ${email}. Our team will also contact you by phone.`}
+                        ? `Bestätigungs-E-Mail versendet: Eine schriftliche Terminbestätigung mit allen Angaben für Ihr Beratungsgespräch wurde an ${email} gesendet. Unser Maklerteam meldet sich zudem telefonisch bei Ihnen.`
+                        : `Confirmation email dispatched: A written confirmation with all consultation details has been sent to ${email}. Our brokerage team will also contact you by phone.`}
                     </span>
                   </div>
                 </div>
@@ -182,7 +182,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
               <div>
                 <div className="mb-6">
                   <div className="text-[11px] uppercase tracking-wider text-[#8C6D1F] font-semibold mb-1">
-                    {language === 'de' ? 'Kostenlose Erstberatung & Vor-Ort-Termin' : 'Free Consultation & On-Site Visit'}
+                    {language === 'de' ? 'Kostenlose Eigentümer-Beratung' : 'Free Owner Consultation'}
                   </div>
                   <h3 className="text-2xl font-display font-medium text-neutral-950">
                     {language === 'de'
@@ -279,27 +279,27 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                     />
                   </div>
 
-                  {/* On-Site Visit & Photography Appointment Section */}
+                  {/* Consultation Appointment Section (Purely Advisory / Consultation) */}
                   <div className="bg-[#FAF6EE] border border-[#EBDCB7] rounded-xl p-4 space-y-3">
                     <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8C6D1F]">
-                      <Camera className="w-4 h-4 text-[#C5A059]" />
+                      <Calendar className="w-4 h-4 text-[#C5A059]" />
                       <span>
                         {language === 'de'
-                          ? 'Wunschtermin: Vor-Ort-Fototermin & Liegenschaftsaufnahme'
-                          : 'On-Site Photography & Assessment Visit'}
+                          ? 'Wunschtermin: Persönliche Eigentümer-Beratung'
+                          : 'Preferred Owner Consultation Date'}
                       </span>
                     </div>
 
                     <div className="bg-white/90 rounded-lg p-2.5 border border-[#EBDCB7]/70 text-xs text-neutral-700 font-light leading-relaxed">
                       <p className="font-semibold text-neutral-900 mb-0.5">
                         {language === 'de'
-                          ? '📌 Vor-Ort-Besuch durch Veracy Immobilien:'
-                          : '📌 On-Site Visit by Veracy Real Estate:'}
+                          ? '📌 Unverbindliche Beratung durch Veracy Immobilien:'
+                          : '📌 Confidential Consultation by Veracy Real Estate:'}
                       </p>
                       <p>
                         {language === 'de'
-                          ? 'Dieser Termin ist dafür bestimmt, dass unser Veracy-Makler- und Fotografenteam persönlich zu Ihrer Liegenschaft kommt, um professionelle Fotoaufnahmen der Verkaufsimmobilie zu erstellen und den genauen Objektzustand vor Ort aufzunehmen.'
-                          : 'This appointment is for our Veracy brokerage and photography team to personally visit the property you are going to sell in order to take professional marketing photographs and record key property metrics on-site.'}
+                          ? 'Dieses Erstgespräch ist dafür bestimmt, Ihre Immobilie, Ihre Vorstellungen und den realistischen Marktpreis oder Mietzins unverbindlich zu analysieren. Unser lizenzierter Makler berät Sie fundiert und diskret – persönlich vor Ort, per Video oder telefonisch.'
+                          : 'This initial consultation is intended to review your property, your objectives, and realistic market valuations or rent levels. Our certified broker provides thorough, confidential advice — in person on-site, via video, or by phone.'}
                       </p>
                     </div>
 
@@ -307,7 +307,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       <div>
                         <label className="block text-[11px] font-semibold text-neutral-800 mb-1 flex items-center gap-1">
                           <Calendar className="w-3.5 h-3.5 text-[#C5A059]" />
-                          <span>{language === 'de' ? 'Wunschdatum (Vor-Ort-Besuch)' : 'Preferred Date (On-site Visit)'}</span>
+                          <span>{language === 'de' ? 'Wunschdatum (Beratungsgespräch)' : 'Preferred Date (Consultation)'}</span>
                         </label>
                         <input
                           type="date"
@@ -344,8 +344,8 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                           {language === 'de' ? 'Schriftliche Bestätigung per E-Mail: ' : 'Written Confirmation via Email: '}
                         </strong>
                         {language === 'de'
-                          ? 'Sie erhalten unmittelbar nach dem Absenden eine schriftliche Terminbestätigung per E-Mail mit allen Angaben sowie praktischen Vorbereitungshinweisen für die Fotoaufnahmen Ihrer Liegenschaft.'
-                          : 'Immediately after submitting, you will receive a written confirmation email with all appointment details and helpful preparation advice for the property photo session.'}
+                          ? 'Sie erhalten unmittelbar nach dem Absenden eine schriftliche Terminbestätigung per E-Mail für Ihr persönliches Beratungsgespräch. Unser Maklerteam meldet sich zur Vorbereitung bei Ihnen.'
+                          : 'Immediately after submitting, you will receive a written confirmation email for your personal consultation. Our brokerage team will contact you in advance.'}
                       </span>
                     </div>
                   </div>

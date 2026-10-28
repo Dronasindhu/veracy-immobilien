@@ -82,7 +82,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             : 'Veracy provides elite Swiss brokerage for property owners across Zurich & Aargau: Only 0.7% sales commission and only 15 days of rent upon successful tenancy placement. Zero upfront fees, zero risk.'}
         </motion.p>
 
-        {/* Standalone Primary Action: Free Consultation & Valuation (Top Positioned) */}
+        {/* Standalone Primary Action: Free Consultation (Purely Advisory / Consultation) */}
         {onOpenConsultation && (
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -102,10 +102,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 </div>
                 <div className="text-left min-w-0">
                   <div className="font-bold tracking-wide truncate">
-                    {language === 'de' ? 'Kostenlose Eigentümer-Beratung & Vor-Ort-Termin' : 'Free Owner Consultation & On-Site Visit'}
+                    {language === 'de' ? 'Kostenlose Eigentümer-Beratung vereinbaren' : 'Request Free Owner Consultation'}
                   </div>
                   <div className="text-[11px] text-neutral-900/80 font-normal normal-case truncate">
-                    {language === 'de' ? 'Inkl. Vor-Ort-Besichtigung & Fototermin · Antwort < 24h' : 'Incl. on-site viewing & photography · Response < 24h'}
+                    {language === 'de' ? 'Unverbindliche Erstberatung & Markteinschätzung · Antwort < 24h' : 'No-obligation consultation & market valuation · Response < 24h'}
                   </div>
                 </div>
               </div>
@@ -114,7 +114,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           </motion.div>
         )}
 
-        {/* The 2 Core Options: Sell & Rent Out (Clean 2-Column Grid) */}
+        {/* The 2 Core Options: Sell & Rent Out (Both Include Photos, 3D Tour & Walkthrough) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -147,9 +147,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               <p className="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
                 {language === 'de'
-                  ? 'Schweizer Makler-Vollservice vor Ort: HDR-Fototermin, Grundrisse, Top-Listing auf Homegate & ImmoScout24, Bonitätsprüfung & Notariatskoordination. Erfolgshonorar erst bei Beurkundung.'
-                  : 'Full Swiss on-site brokerage: HDR photography, floor plans, priority listing on Homegate/ImmoScout, vetting & notary filing. Success fee only upon notarization.'}
+                  ? 'Schweizer Makler-Vollservice: Inklusive professioneller HDR-Fotos, interaktiver 3D Tour & Video-Walkthrough für maximale Käuferreichweite, Grundrisse, Top-Listing & Notariatsbegleitung. Erfolgshonorar erst bei Beurkundung.'
+                  : 'Full Swiss on-site brokerage: Includes professional HDR photography, interactive 3D tour & video walkthrough for peak buyer engagement, floor plans, priority listing & notary filing. Success fee only upon notarization.'}
               </p>
+
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
+                  {language === 'de' ? 'Profi-Fotos inklusive' : 'Pro photos included'}
+                </span>
+                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
+                  {language === 'de' ? 'Interaktive 3D Tour' : 'Interactive 3D tour'}
+                </span>
+                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
+                  {language === 'de' ? 'Video-Walkthrough' : 'Video walkthrough'}
+                </span>
+              </div>
             </div>
 
             <div className="mt-5 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
@@ -184,9 +196,21 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               <p className="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
                 {language === 'de'
-                  ? 'Professionelle Mietersuche, strenge Bonitäts- und Referenzprüfung sowie rechtssichere Schweizer Mietverträge nach OR. Unsere Provision beträgt nur 15 Tage des Mietzinses bei erfolgreichem Abschluss.'
-                  : 'Professional tenant search, strict solvency and reference checks, and Swiss lease contracts. Our commission is strictly 15 days of rent upon successful lease signing.'}
+                  ? 'Kompletter Vermieterservice: Inklusive professioneller HDR-Fotos, interaktiver 3D Tour & Video-Walkthrough, strenger Bonitäts- & Referenzprüfung sowie Mietvertrag nach OR. Provision: Nur 15 Tage Miete bei Vertragsabschluss.'
+                  : 'Complete landlord service: Includes professional HDR photography, interactive 3D tour & video walkthrough, rigorous solvency & reference checks, and Swiss lease contracts. Commission: Strictly 15 days of rent upon signing.'}
               </p>
+
+              <div className="mt-3 flex flex-wrap gap-1.5">
+                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
+                  {language === 'de' ? 'Profi-Fotos inklusive' : 'Pro photos included'}
+                </span>
+                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
+                  {language === 'de' ? 'Interaktive 3D Tour' : 'Interactive 3D tour'}
+                </span>
+                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
+                  {language === 'de' ? 'Video-Walkthrough' : 'Video walkthrough'}
+                </span>
+              </div>
             </div>
 
             <div className="mt-5 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-semibold text-[#DFB76C] group-hover:text-white transition-colors">

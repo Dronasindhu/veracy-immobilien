@@ -282,6 +282,9 @@ export const SELLING_PACKAGES: SellingPackage[] = [
     features: {
       de: [
         'Alles aus dem Starter-Paket inklusive',
+        'Professionelle HDR-Fotografie vor Ort inklusive',
+        'Interaktive 3D Tour (Matterport Virtueller Rundgang)',
+        'Cinematischer Video-Walkthrough für Portale & Social Media',
         'Persönlicher SVIT-zertifizierter Makler als Festansprechpartner',
         'Durchführung ALLER Besichtigungen vor Ort durch Veracy',
         'Professionelle Preisverhandlung & strukturiertes Bieterverfahren',
@@ -292,6 +295,9 @@ export const SELLING_PACKAGES: SellingPackage[] = [
       ],
       en: [
         'Includes everything in the Starter package',
+        'Professional on-site HDR photography included',
+        'Interactive 3D tour (Matterport virtual walkthrough)',
+        'Cinematic video walkthrough for portals & social media',
         'Dedicated SVIT-certified broker as your personal advisor',
         'Veracy conducts ALL in-person viewings on-site',
         'Expert price negotiations & structured bidding process',

@@ -154,10 +154,10 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
     },
     {
       step: '02',
-      title: { de: 'High-End Inserat & Fotos', en: 'High-End Photos & Listings' },
+      title: { de: 'Profi-Fotos, 3D Tour & Walkthrough', en: 'Pro Photos, 3D Tour & Walkthrough' },
       desc: {
-        de: 'Professionelle Fotografie vor Ort, ansprechende Grundrisse und prominente Schaltung auf Homegate, ImmoScout24 & Flatfox.',
-        en: 'Professional on-site HDR photography, custom floor plans, and prominent placement on all major Swiss portals.',
+        de: 'Professionelle HDR-Fotografie vor Ort, interaktive 3D Tour und Video-Walkthrough für maximale Aufmerksamkeit auf Homegate, ImmoScout24 & Flatfox.',
+        en: 'Professional on-site HDR photography, interactive 3D tour, and video walkthrough for peak visibility across Swiss property portals.',
       },
     },
     {
@@ -215,12 +215,12 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                 <span>{language === 'de' ? 'Nur 15 Tage Miete Provision' : 'Only 15 Days Rent Fee'}</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-neutral-300">
-                <ShieldCheck className="w-4 h-4 text-[#DFB76C] shrink-0" />
-                <span>{language === 'de' ? '100% Bonitätsgeprüft' : '100% Solvency Checked'}</span>
+                <Camera className="w-4 h-4 text-[#DFB76C] shrink-0" />
+                <span>{language === 'de' ? 'Fotos, 3D Tour & Walkthrough' : 'Photos, 3D Tour & Walkthrough'}</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-neutral-300">
-                <FileText className="w-4 h-4 text-[#DFB76C]" />
-                <span>{language === 'de' ? 'OR-Rechtskonform' : 'Legally Compliant'}</span>
+                <ShieldCheck className="w-4 h-4 text-[#DFB76C] shrink-0" />
+                <span>{language === 'de' ? '100% Bonitätsgeprüft' : '100% Solvency Checked'}</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-neutral-300">
                 <Award className="w-4 h-4 text-[#DFB76C] shrink-0" />
@@ -368,8 +368,8 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                       id: 'all_inclusive' as const,
                       title: { de: 'Rundum-Sorglos-Paket', en: 'All-Inclusive Placement' },
                       desc: {
-                        de: 'Provision: Nur 15 Tage Miete bei Vertragsabschluss. Inkl. Profi-Fotos, Bonitätsprüfung & Mietvertrag.',
-                        en: 'Commission: Only 15 days rent upon contract signing. Incl. photos, solvency checks & lease contract.',
+                        de: 'Provision: Nur 15 Tage Miete bei Vertragsabschluss. Inkl. Profi-Fotos, interaktiver 3D Tour, Video-Walkthrough, Bonitätsprüfung & Mietvertrag.',
+                        en: 'Commission: Only 15 days rent upon contract signing. Incl. pro photos, interactive 3D tour, video walkthrough, solvency checks & lease contract.',
                       },
                       tag: { de: 'Meistgewählt', en: 'Most Popular' },
                     },
@@ -458,8 +458,8 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                 </h2>
                 <p className="text-xs text-neutral-500 mt-1">
                   {language === 'de'
-                    ? 'Unser Team kommt zu Ihrer Liegenschaft für eine präzise Mietzinsanalyse und professionelle Vermarktungsfotos.'
-                    : 'Our team visits your property for exact rent valuation and professional marketing photography.'}
+                    ? 'Unser Team kommt zu Ihrer Liegenschaft für eine fundierte Mietzinsanalyse sowie professionelle Fotoaufnahmen, 3D Tour & Video-Walkthrough.'
+                    : 'Our team visits your property for exact rent valuation as well as professional photography, 3D tour & video walkthrough.'}
                 </p>
 
                 {/* Owner Contacts */}
