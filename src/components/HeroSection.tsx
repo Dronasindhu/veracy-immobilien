@@ -145,23 +145,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {language === 'de' ? 'Immobilie verkaufen' : 'Sell Property'}
               </h2>
 
-              <p className="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
-                {language === 'de'
-                  ? 'Schweizer Makler-Vollservice: Inklusive professioneller HDR-Fotos, interaktiver 3D Tour & Video-Walkthrough für maximale Käuferreichweite, Grundrisse, Top-Listing & Notariatsbegleitung. Erfolgshonorar erst bei Beurkundung.'
-                  : 'Full Swiss on-site brokerage: Includes professional HDR photography, interactive 3D tour & video walkthrough for peak buyer engagement, floor plans, priority listing & notary filing. Success fee only upon notarization.'}
-              </p>
-
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
-                  {language === 'de' ? 'Profi-Fotos inklusive' : 'Pro photos included'}
-                </span>
-                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
-                  {language === 'de' ? 'Interaktive 3D Tour' : 'Interactive 3D tour'}
-                </span>
-                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
-                  {language === 'de' ? 'Video-Walkthrough' : 'Video walkthrough'}
-                </span>
-              </div>
+              {/* Bullet Points */}
+              <ul className="mt-3.5 space-y-2 text-xs text-neutral-300 font-light">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span>{language === 'de' ? 'Schweizer Makler-Vollservice vor Ort' : 'Full Swiss on-site brokerage'}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span>{language === 'de' ? 'Profi-Fotos, 3D Tour & Video-Walkthrough' : 'Pro photos, 3D tour & video walkthrough'}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span>{language === 'de' ? 'Top-Listing auf Homegate & ImmoScout24' : 'Top listing on Homegate & ImmoScout24'}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span>{language === 'de' ? 'Bonitätsprüfung & Notariatskoordination' : 'Solvency vetting & notary coordination'}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span className="text-[#E6CA85] font-medium">{language === 'de' ? 'Erfolgshonorar (0.7%) erst bei Beurkundung' : 'Success fee (0.7%) only upon notarization'}</span>
+                </li>
+              </ul>
             </div>
 
             <div className="mt-5 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
@@ -194,23 +200,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 {language === 'de' ? 'Immobilie vermieten' : 'Rent Out Property'}
               </h2>
 
-              <p className="text-xs text-neutral-300 mt-2 font-light leading-relaxed">
-                {language === 'de'
-                  ? 'Kompletter Vermieterservice: Inklusive professioneller HDR-Fotos, interaktiver 3D Tour & Video-Walkthrough, strenger Bonitäts- & Referenzprüfung sowie Mietvertrag nach OR. Provision: Nur 15 Tage Miete bei Vertragsabschluss.'
-                  : 'Complete landlord service: Includes professional HDR photography, interactive 3D tour & video walkthrough, rigorous solvency & reference checks, and Swiss lease contracts. Commission: Strictly 15 days of rent upon signing.'}
-              </p>
-
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
-                  {language === 'de' ? 'Profi-Fotos inklusive' : 'Pro photos included'}
-                </span>
-                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
-                  {language === 'de' ? 'Interaktive 3D Tour' : 'Interactive 3D tour'}
-                </span>
-                <span className="text-[10px] font-medium bg-neutral-800 text-[#DFB76C] px-2 py-0.5 rounded border border-neutral-700">
-                  {language === 'de' ? 'Video-Walkthrough' : 'Video walkthrough'}
-                </span>
-              </div>
+              {/* Bullet Points */}
+              <ul className="mt-3.5 space-y-2 text-xs text-neutral-300 font-light">
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span>{language === 'de' ? 'Kompletter Vermieter-Rundumservice vor Ort' : 'Full turnkey landlord service on-site'}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span>{language === 'de' ? 'Profi-Fotos, 3D Tour & Video-Walkthrough' : 'Pro photos, 3D tour & video walkthrough'}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span>{language === 'de' ? 'Strenge Bonitätsprüfung & Mieterselektion' : 'Strict solvency screening & tenant vetting'}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span>{language === 'de' ? 'Rechtssicherer Schweizer Mietvertrag nach OR' : 'Legally compliant Swiss lease contract (OR)'}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span className="text-[#E6CA85] font-medium">{language === 'de' ? 'Provision nur 15 Tage Miete bei Abschluss' : 'Fee strictly 15 days rent upon signing'}</span>
+                </li>
+              </ul>
             </div>
 
             <div className="mt-5 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
