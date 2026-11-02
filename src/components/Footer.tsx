@@ -28,8 +28,8 @@ export const Footer: React.FC<FooterProps> = ({
           <div className="lg:col-span-4 space-y-4">
             <img
               src="/veracy-logo-light.png"
-              alt="Veracy Immobilien"
-              width={1467}
+              alt="Veracy"
+              width={815}
               height={377}
               className="h-10 sm:h-12 w-auto object-contain"
             />

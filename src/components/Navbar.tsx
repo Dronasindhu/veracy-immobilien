@@ -109,8 +109,8 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           <img
             src="/veracy-logo-main.png"
-            alt="Veracy Immobilien"
-            width={1467}
+            alt="Veracy"
+            width={815}
             height={377}
             className="h-10 sm:h-11 md:h-12 w-auto object-contain transition-opacity group-hover:opacity-85"
           />
@@ -182,8 +182,8 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div className="pb-2 border-b border-neutral-100 flex items-center">
                 <img
                   src="/veracy-logo-main.png"
-                  alt="Veracy Immobilien"
-                  width={1467}
+                  alt="Veracy"
+                  width={815}
                   height={377}
                   className="h-8 w-auto object-contain"
                 />

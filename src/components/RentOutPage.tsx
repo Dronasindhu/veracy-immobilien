@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Language, RentOutFormData } from '../types';
+import { Language } from '../types';
 import { sendEmailInquiry } from '../services/emailService';
 import { trackEvent } from '../services/analytics';
 import {
@@ -16,7 +16,6 @@ import {
   Phone,
   Building,
   Home,
-  Check,
   RotateCcw
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
@@ -36,9 +35,6 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
   const [rooms, setRooms] = useState<number>(3.5);
   const [livingArea, setLivingArea] = useState<number>(85);
   const [expectedRent, setExpectedRent] = useState<number>(2450);
-  const [availableDate, setAvailableDate] = useState<string>('ab sofort');
-  const [rentalServiceType, setRentalServiceType] = useState<'first_letting' | 're_letting' | 'all_inclusive'>('all_inclusive');
-  const [tenantPreferences, setTenantPreferences] = useState<string>('Solvente Einzelperson, Paar oder Familie; Nichtraucher');
   const [appointmentDate, setAppointmentDate] = useState<string>('');
   const [appointmentTime, setAppointmentTime] = useState<string>('morning');
   const [specialNotes, setSpecialNotes] = useState<string>('');
@@ -98,7 +94,7 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
       email,
       phone,
       location,
-      interest: `Immobilie vermieten (${rentalServiceType === 'first_letting' ? 'Erstvermietung' : 'Wiedervermietung'})`,
+      interest: 'Immobilie vermieten (Provision: Nur 15 Tage Miete)',
       appointmentDate,
       appointmentTime: timeLabel,
       message: specialNotes || 'Keine zusätzlichen Anmerkungen angegeben.',
@@ -109,14 +105,7 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
         'Zimmeranzahl': `${rooms} Zimmer`,
         'Wohnfläche': `${livingArea} m²`,
         'Gewünschter Mietzins': `CHF ${expectedRent.toLocaleString('de-CH')} / Mt.`,
-        'Bezugsbereit': availableDate,
-        'Vermietungspaket':
-          rentalServiceType === 'all_inclusive'
-            ? 'Rundum-Sorglos-Paket (Provision: Nur 15 Tage Miete bei Vertragsabschluss)'
-            : rentalServiceType === 'first_letting'
-            ? 'Erstvermietung (Provision: Nur 15 Tage Miete)'
-            : 'Klassische Wiedervermietung (Provision: Nur 15 Tage Miete)',
-        'Gewünschte Mieterkriterien': tenantPreferences,
+        'Konditionen / Provision': 'Nur 15 Tage Miete bei erfolgreichem Mietvertragsabschluss',
         'Vor-Ort-Fototermin': appointmentDate ? `${appointmentDate} (${timeLabel})` : 'Nach telefonischer Absprache',
       },
     });
@@ -230,6 +219,52 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
           </motion.div>
         </div>
       </div>
+
+      {/* 4 Steps Journey for Landlords (Moved to top) */}
+      <section className="bg-white border-b border-neutral-200 py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs uppercase tracking-[0.2em] text-[#8C6D1F] font-semibold">
+              {language === 'de' ? 'Der Veracy Vermieterprozess' : 'The Landlord Journey'}
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-normal font-display text-neutral-950 mt-2">
+              {language === 'de'
+                ? 'In vier Schritten zum solventen Wunschmieter'
+                : 'Four Clear Steps to Qualified Tenants'}
+            </h2>
+            <p className="mt-2 text-sm text-neutral-600 font-light">
+              {language === 'de'
+                ? 'Strukturiert, transparent und fair: Provision nur 15 Tage Miete bei erfolgreichem Abschluss.'
+                : 'Structured, transparent, and fair: Commission only 15 days of rent upon success.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {rentalSteps.map((step) => (
+              <div
+                key={step.step}
+                className="p-6 rounded-lg bg-neutral-50 border border-neutral-200 shadow-sm flex flex-col justify-between"
+              >
+                <div>
+                  <div className="text-2xl font-mono font-bold text-[#C5A059] mb-3">
+                    {step.step}
+                  </div>
+                  <h3 className="text-sm font-bold text-neutral-900 mb-2">
+                    {step.title[language]}
+                  </h3>
+                  <p className="text-xs text-neutral-600 font-light leading-relaxed">
+                    {step.desc[language]}
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-neutral-200/80 text-[11px] text-neutral-500 flex items-center gap-1">
+                  <Clock className="w-3 h-3 text-[#C5A059]" />
+                  <span>{language === 'de' ? 'Provision: Nur 15 Tage Miete' : 'Fee: Only 15 days rent'}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Main Content Area */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
@@ -351,106 +386,10 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                 </div>
               </div>
 
-              {/* Section 2: Service Model & Move-In Date */}
+              {/* Section 2: Owner Details & On-site Photography Appointment */}
               <div className="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-neutral-200">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8C6D1F] mb-1">
                   <span className="w-5 h-5 rounded-full bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] flex items-center justify-center text-[10px] font-bold">2</span>
-                  <span>{language === 'de' ? 'Vermietungspaket & Zeitplan' : 'Placement Model & Timeline'}</span>
-                </div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-950 font-display">
-                  {language === 'de' ? 'Gewünschter Serviceumfang' : 'Requested Service Scope'}
-                </h2>
-
-                {/* Service Types */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
-                  {[
-                    {
-                      id: 'all_inclusive' as const,
-                      title: { de: 'Rundum-Sorglos-Paket', en: 'All-Inclusive Placement' },
-                      desc: {
-                        de: 'Provision: Nur 15 Tage Miete bei Vertragsabschluss. Inkl. Profi-Fotos, interaktiver 3D Tour, Video-Walkthrough, Bonitätsprüfung & Mietvertrag.',
-                        en: 'Commission: Only 15 days rent upon contract signing. Incl. pro photos, interactive 3D tour, video walkthrough, solvency checks & lease contract.',
-                      },
-                      tag: { de: 'Meistgewählt', en: 'Most Popular' },
-                    },
-                    {
-                      id: 'first_letting' as const,
-                      title: { de: 'Erstvermietung (Neubau)', en: 'First-Time Letting' },
-                      desc: {
-                        de: 'Für Neubauprojekte oder Totalsanierungen mit gestaffelter Mieterakquise.',
-                        en: 'For new developments and major renovations with phased placement.',
-                      },
-                      tag: { de: 'Neubau', en: 'New Build' },
-                    },
-                    {
-                      id: 're_letting' as const,
-                      title: { de: 'Klassischer Mieterwechsel', en: 'Standard Re-Letting' },
-                      desc: {
-                        de: 'Schnelle Nachmietersuche bei Kündigung zur Vermeidung von Doppelbelastung.',
-                        en: 'Fast replacement tenant search to ensure seamless transition.',
-                      },
-                      tag: { de: 'Schnellservice', en: 'Fast Track' },
-                    },
-                  ].map((pkg) => (
-                    <div
-                      key={pkg.id}
-                      onClick={() => setRentalServiceType(pkg.id)}
-                      className={`p-4 rounded-lg border-2 cursor-pointer transition-all flex flex-col justify-between ${
-                        rentalServiceType === pkg.id
-                          ? 'border-[#C5A059] bg-[#FAF6EE] shadow-sm'
-                          : 'border-neutral-200 bg-white hover:border-neutral-300'
-                      }`}
-                    >
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-[10px] font-bold uppercase tracking-wider bg-white text-[#8C6D1F] border border-[#EBDCB7] px-2 py-0.5 rounded">
-                            {pkg.tag[language]}
-                          </span>
-                          {rentalServiceType === pkg.id && (
-                            <Check className="w-4 h-4 text-[#C5A059]" />
-                          )}
-                        </div>
-                        <h3 className="text-sm font-bold text-neutral-900">{pkg.title[language]}</h3>
-                        <p className="text-xs text-neutral-600 mt-1 leading-relaxed">{pkg.desc[language]}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Move-in Date & Preferences */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-6 pt-5 border-t border-neutral-100">
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-1.5">
-                      {language === 'de' ? 'Bezugsbereit ab:' : 'Available for Occupancy from:'}
-                    </label>
-                    <input
-                      type="text"
-                      value={availableDate}
-                      onChange={(e) => setAvailableDate(e.target.value)}
-                      placeholder={language === 'de' ? 'z.B. Ab sofort oder per 1. Mai 2026' : 'e.g. Immediately or from May 1st'}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-1.5">
-                      {language === 'de' ? 'Kriterien an die zukünftigen Mieter:' : 'Tenant Preferences:'}
-                    </label>
-                    <input
-                      type="text"
-                      value={tenantPreferences}
-                      onChange={(e) => setTenantPreferences(e.target.value)}
-                      placeholder={language === 'de' ? 'z.B. Solvente Einzelperson/Paar, keine Haustiere' : 'e.g. Solvent single/couple, no pets'}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Section 3: Owner Details & On-site Photography Appointment */}
-              <div className="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-neutral-200">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8C6D1F] mb-1">
-                  <span className="w-5 h-5 rounded-full bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] flex items-center justify-center text-[10px] font-bold">3</span>
                   <span>{language === 'de' ? 'Eigentümer-Kontaktdaten & Vor-Ort-Termin' : 'Owner Contact & On-Site Visit'}</span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-semibold text-neutral-950 font-display">
@@ -700,50 +639,6 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* 4 Steps Journey for Landlords */}
-        <section className="mt-20 pt-16 border-t border-neutral-200">
-          <div className="text-center max-w-2xl mx-auto mb-12">
-            <span className="text-xs uppercase tracking-[0.2em] text-[#8C6D1F] font-semibold">
-              {language === 'de' ? 'Der Veracy Vermieterprozess' : 'The Landlord Journey'}
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-normal font-display text-neutral-950 mt-2">
-              {language === 'de'
-                ? 'In vier Schritten zum solventen Wunschmieter'
-                : 'Four Clear Steps to Qualified Tenants'}
-            </h2>
-            <p className="mt-2 text-sm text-neutral-600 font-light">
-              {language === 'de'
-                ? 'Strukturiert, transparent und fair: Provision nur 15 Tage Miete bei erfolgreichem Abschluss.'
-                : 'Structured, transparent, and fair: Commission only 15 days of rent upon success.'}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {rentalSteps.map((step, idx) => (
-              <div
-                key={step.step}
-                className="p-6 rounded-lg bg-white border border-neutral-200 shadow-sm flex flex-col justify-between"
-              >
-                <div>
-                  <div className="text-2xl font-mono font-bold text-[#C5A059] mb-3">
-                    {step.step}
-                  </div>
-                  <h3 className="text-sm font-bold text-neutral-900 mb-2">
-                    {step.title[language]}
-                  </h3>
-                  <p className="text-xs text-neutral-600 font-light leading-relaxed">
-                    {step.desc[language]}
-                  </p>
-                </div>
-                <div className="mt-4 pt-3 border-t border-neutral-100 text-[11px] text-neutral-500 flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-[#C5A059]" />
-                  <span>{language === 'de' ? 'Provision: Nur 15 Tage Miete' : 'Fee: Only 15 days rent'}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
       </div>
     </div>
   );
