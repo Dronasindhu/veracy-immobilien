@@ -24,8 +24,8 @@ export const Footer: React.FC<FooterProps> = ({
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20"
       >
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
-          {/* Brand info (Col 1-4) */}
-          <div className="lg:col-span-4 space-y-4">
+          {/* Brand info (Col 1-5) */}
+          <div className="lg:col-span-5 space-y-4">
             <img
               src="/veracy-logo-light.png"
               alt="Veracy"
@@ -46,7 +46,7 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
           </div>
 
-          {/* Navigation Categories (Col 5-7) */}
+          {/* Navigation Categories (Col 6-8) */}
           <div className="lg:col-span-3 space-y-3">
             <div className="text-xs uppercase tracking-wider text-neutral-200 font-semibold mb-2">
               {language === 'de' ? 'Hauptkategorien' : 'Main Categories'}
@@ -90,41 +90,26 @@ export const Footer: React.FC<FooterProps> = ({
             </ul>
           </div>
 
-          {/* Key Swiss Cantons (Col 8-9) */}
-          <div className="lg:col-span-2 space-y-3">
-            <div className="text-xs uppercase tracking-wider text-neutral-200 font-semibold mb-2">
-              {language === 'de' ? 'Standorte' : 'Locations'}
-            </div>
-            <ul className="space-y-1.5 text-neutral-400">
-              <li>Zürich Stadt & See (ZH)</li>
-              <li>Winterthur & Unterland (ZH)</li>
-              <li>Baden & Wettingen (AG)</li>
-              <li>Aarau & Lenzburg (AG)</li>
-              <li>Limmattal (ZH / AG)</li>
-              <li>Freiamt & Bremgarten (AG)</li>
-            </ul>
-          </div>
-
-          {/* Contact (Col 10-12) */}
-          <div className="lg:col-span-3 space-y-3">
+          {/* Contact (Col 9-12) */}
+          <div className="lg:col-span-4 space-y-3">
             <div className="text-xs uppercase tracking-wider text-neutral-200 font-semibold mb-2">
               {language === 'de' ? 'Direktkontakt' : 'Direct Contact'}
             </div>
             <div className="space-y-2 text-neutral-300">
               <div className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
-                <span>Bahnhofstrasse 45, 8001 Zürich</span>
+                <span>Rainstrasse 35, 5415 Nussbaumen</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                <a href="tel:+41442108800" className="hover:text-white font-mono">
-                  +41 44 210 88 00
+                <a href="tel:+41765886989" className="hover:text-white font-mono">
+                  +41 76 588 69 89
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                <a href="mailto:kontakt@veracy-immobilien.ch" className="hover:text-white">
-                  kontakt@veracy-immobilien.ch
+                <a href="mailto:veracy.immobilien@gmail.com" className="hover:text-white">
+                  veracy.immobilien@gmail.com
                 </a>
               </div>
             </div>

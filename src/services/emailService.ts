@@ -1,10 +1,10 @@
 /**
  * Service to handle form submissions and forward inquiries directly
- * to writetoanju@gmail.com.
+ * to veracy.immobilien@gmail.com.
  * Works seamlessly from client-side static hosting (such as GitHub Pages).
  */
 
-export const RECIPIENT_EMAIL = 'writetoanju@gmail.com';
+export const RECIPIENT_EMAIL = 'veracy.immobilien@gmail.com';
 
 export interface EmailSubmissionData {
   formType: 'Kostenlose Beratung / Verkaufspaket' | 'Immobilienschätzung' | 'Besichtigungsanfrage' | 'Exposé Anforderung' | 'Suchauftrag Kaufen / Mieten' | 'Immobilie vermieten / Vermieterservice';

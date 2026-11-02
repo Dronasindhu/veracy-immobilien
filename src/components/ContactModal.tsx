@@ -258,7 +258,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       <input
                         type="tel"
                         required
-                        placeholder="+41 79 000 00 00"
+                        placeholder="+41 76 588 69 89"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         className="w-full text-xs rounded border border-neutral-300 p-2.5 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"

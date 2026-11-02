@@ -679,7 +679,7 @@ export const ValuationPage: React.FC<ValuationPageProps> = ({
                       <input
                         type="tel"
                         required
-                        placeholder="+41 79 123 45 67"
+                        placeholder="+41 76 588 69 89"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         className="w-full text-sm rounded border border-neutral-300 p-2.5 focus:ring-1 focus:ring-neutral-900 focus:outline-none"

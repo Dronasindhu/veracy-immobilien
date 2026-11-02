@@ -81,11 +81,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
           <div className="flex items-center gap-4">
             <a
-              href="tel:+41442108800"
+              href="tel:+41765886989"
               className="text-neutral-700 hover:text-neutral-950 transition-colors flex items-center gap-1 font-mono tracking-tight font-medium"
             >
               <PhoneCall className="w-3 h-3 text-[#C5A059]" />
-              <span>+41 44 210 88 00</span>
+              <span>+41 76 588 69 89</span>
             </a>
             <span className="text-neutral-300">|</span>
             <button

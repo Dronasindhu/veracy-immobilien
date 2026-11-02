@@ -437,7 +437,7 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      placeholder="+41 79 345 67 89"
+                      placeholder="+41 76 588 69 89"
                       className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
                     />
                   </div>
