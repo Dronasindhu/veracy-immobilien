@@ -243,23 +243,17 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
             {rentalSteps.map((step) => (
               <div
                 key={step.step}
-                className="p-6 rounded-lg bg-neutral-50 border border-neutral-200 shadow-sm flex flex-col justify-between"
+                className="p-6 rounded-lg bg-neutral-50 border border-neutral-200 shadow-sm"
               >
-                <div>
-                  <div className="text-2xl font-mono font-bold text-[#C5A059] mb-3">
-                    {step.step}
-                  </div>
-                  <h3 className="text-sm font-bold text-neutral-900 mb-2">
-                    {step.title[language]}
-                  </h3>
-                  <p className="text-xs text-neutral-600 font-light leading-relaxed">
-                    {step.desc[language]}
-                  </p>
+                <div className="text-2xl font-mono font-bold text-[#C5A059] mb-3">
+                  {step.step}
                 </div>
-                <div className="mt-4 pt-3 border-t border-neutral-200/80 text-[11px] text-neutral-500 flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-[#C5A059]" />
-                  <span>{language === 'de' ? 'Provision: Nur 15 Tage Miete' : 'Fee: Only 15 days rent'}</span>
-                </div>
+                <h3 className="text-sm font-bold text-neutral-900 mb-2">
+                  {step.title[language]}
+                </h3>
+                <p className="text-xs text-neutral-600 font-light leading-relaxed">
+                  {step.desc[language]}
+                </p>
               </div>
             ))}
           </div>
