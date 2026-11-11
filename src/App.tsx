@@ -12,6 +12,7 @@ import { TrustSection } from './components/TrustSection';
 import { SellPage } from './components/SellPage';
 import { RentOutPage } from './components/RentOutPage';
 import { ValuationPage } from './components/ValuationPage';
+import { ObjektauflagePage } from './components/ObjektauflagePage';
 import { SeoCopySection } from './components/SeoCopySection';
 import { ContactModal } from './components/ContactModal';
 import { Footer } from './components/Footer';
@@ -28,12 +29,41 @@ export default function App() {
   const [valuationInitialQuery, setValuationInitialQuery] = useState<string>('');
   const [showScrollTop, setShowScrollTop] = useState(false);
 
+  // Direct link parsing (?page=objektauflage, #objektauflage, /objektauflage)
+  useEffect(() => {
+    const parseUrlRoute = () => {
+      const params = new URLSearchParams(window.location.search);
+      const page = params.get('page') || params.get('p') || params.get('form');
+      const hash = window.location.hash.replace('#', '').toLowerCase();
+      const path = window.location.pathname.replace(/^\//, '').toLowerCase();
+
+      if (page === 'objektauflage' || hash === 'objektauflage' || path === 'objektauflage') {
+        setCurrentCategory('objektauflage');
+      } else if (page === 'sell' || hash === 'sell' || path === 'sell') {
+        setCurrentCategory('sell');
+      } else if (page === 'rent-out' || hash === 'rent-out' || path === 'rent-out') {
+        setCurrentCategory('rent-out');
+      } else if (page === 'valuation' || hash === 'valuation' || path === 'valuation') {
+        setCurrentCategory('valuation');
+      }
+    };
+
+    parseUrlRoute();
+    window.addEventListener('popstate', parseUrlRoute);
+    window.addEventListener('hashchange', parseUrlRoute);
+    return () => {
+      window.removeEventListener('popstate', parseUrlRoute);
+      window.removeEventListener('hashchange', parseUrlRoute);
+    };
+  }, []);
+
   useEffect(() => {
     const pageTitles: Record<MainCategory, string> = {
       home: 'Veracy Immobilien – Startseite',
       sell: 'Veracy Immobilien – Immobilie verkaufen',
       'rent-out': 'Veracy Immobilien – Immobilie vermieten',
       valuation: 'Veracy Immobilien – Hedonische Schätzung',
+      objektauflage: 'Veracy Immobilien – Objektauflage (Vermietungsmandat)',
     };
     trackPageView(`/${currentCategory === 'home' ? '' : currentCategory}`, pageTitles[currentCategory]);
   }, [currentCategory]);
@@ -64,6 +94,20 @@ export default function App() {
 
   const handleNavigate = (category: MainCategory) => {
     setCurrentCategory(category);
+    try {
+      const url = new URL(window.location.href);
+      if (category === 'home') {
+        url.searchParams.delete('page');
+        url.searchParams.delete('p');
+        url.searchParams.delete('form');
+        window.history.pushState({}, '', url.pathname + (url.search ? url.search : ''));
+      } else {
+        url.searchParams.set('page', category);
+        window.history.pushState({}, '', url.toString());
+      }
+    } catch {
+      // Safe fallback
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -203,6 +247,21 @@ export default function App() {
                   setPropertyContext(null);
                   setIsConsultationOpen(true);
                 }}
+              />
+            </motion.div>
+          )}
+
+          {currentCategory === 'objektauflage' && (
+            <motion.div
+              key="objektauflage"
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -14 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <ObjektauflagePage
+                language={language}
+                onNavigateHome={() => handleNavigate('home')}
               />
             </motion.div>
           )}

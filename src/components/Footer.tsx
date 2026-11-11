@@ -127,11 +127,17 @@ export const Footer: React.FC<FooterProps> = ({
           <div>
             © {new Date().getFullYear()} Veracy Immobilien AG. Alle Rechte vorbehalten.
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center gap-4 sm:gap-6">
             <span>Impressum</span>
             <span>Datenschutz (DSG / DSGVO)</span>
             <span>AGB</span>
             <span>SVIT Partner</span>
+            <button
+              onClick={() => onNavigate('objektauflage')}
+              className="text-neutral-600 hover:text-[#DFB76C] transition-colors cursor-pointer"
+            >
+              Objektauflage
+            </button>
           </div>
         </div>
       </motion.div>

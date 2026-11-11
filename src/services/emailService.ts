@@ -7,7 +7,7 @@
 export const RECIPIENT_EMAIL = 'veracy.immobilien@gmail.com';
 
 export interface EmailSubmissionData {
-  formType: 'Kostenlose Beratung / Verkaufspaket' | 'Immobilienschätzung' | 'Besichtigungsanfrage' | 'Exposé Anforderung' | 'Suchauftrag Kaufen / Mieten' | 'Immobilie vermieten / Vermieterservice';
+  formType: 'Kostenlose Beratung / Verkaufspaket' | 'Immobilienschätzung' | 'Besichtigungsanfrage' | 'Exposé Anforderung' | 'Suchauftrag Kaufen / Mieten' | 'Immobilie vermieten / Vermieterservice' | 'Objektauflage Vermietungsmandat';
   subject: string;
   name: string;
   email: string;
@@ -43,8 +43,9 @@ export async function sendEmailInquiry(data: EmailSubmissionData): Promise<{ suc
 
     if (data.propertyDetails) {
       Object.entries(data.propertyDetails).forEach(([key, val]) => {
-        if (val !== undefined && val !== null) {
-          payload[`Objekt: ${key}`] = String(val);
+        if (val !== undefined && val !== null && String(val).trim() !== '') {
+          const formattedKey = key.startsWith('Objekt:') || /^[0-9]\./.test(key) ? key : `Objekt: ${key}`;
+          payload[formattedKey] = String(val);
         }
       });
     }

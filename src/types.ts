@@ -1,6 +1,6 @@
 export type Language = 'de' | 'en';
 
-export type MainCategory = 'home' | 'sell' | 'rent-out' | 'valuation';
+export type MainCategory = 'home' | 'sell' | 'rent-out' | 'valuation' | 'objektauflage';
 
 export interface Property {
   id: string;

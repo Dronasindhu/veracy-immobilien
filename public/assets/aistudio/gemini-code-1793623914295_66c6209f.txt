@@ -1,0 +1,80 @@
+================================================================================
+                    VERACY IMMOBILIEN GMBH - OBJEKTAUFLAGE
+                         (Vermietung / Rental Mandate)
+================================================================================
+
+--------------------------------------------------------------------------------
+1. STAMMDATEN EIGENTÜMER (OWNER DETAILS)
+--------------------------------------------------------------------------------
+Name / Vorname:      ___________________________________________________________
+Adresse:             ___________________________________________________________
+Telefon / Mobil:     ___________________________________________________________
+E-Mail:              ___________________________________________________________
+Bankverbindung (IBAN):__________________________________________________________
+Auskerkunftsperson:  [ ] Eigentümer direkt   [ ] Vertretung: __________________
+
+--------------------------------------------------------------------------------
+2. OBJEKTADRESSE & LAGE (PROPERTY LOCATION)
+--------------------------------------------------------------------------------
+Strasse, Hausnummer: ___________________________________________________________
+PLZ, Ort:            ___________________________________________________________
+Stockwerk / Lage:    [ ] EG  [ ] ___ OG  [ ] Attika  [ ] Links  [ ] Rechts
+Baujahr / Renovation:Baujahr: ______  Letzte Sanierung: ______ (Was: ___________)
+
+--------------------------------------------------------------------------------
+3. ECKDATEN ZUR WOHNUNG (APARTMENT SPECIFICATIONS)
+--------------------------------------------------------------------------------
+Wohnfläche (Nettowohnfläche m²): ____________ m²
+Anzahl Zimmer:                   ____________ Zimmer
+Nasszellen (Bäder/WC):           [ ] Bad/WC   [ ] Dusche/WC   [ ] Sep. WC
+Balkon / Terrasse / Garten:      [ ] Balkon (___ m²)  [ ] Terrasse  [ ] Gartenanteil
+Keller / Estrich:                [ ] Keller-Nr. ___  [ ] Estrich-Nr. ___
+Waschmöglichkeiten:              [ ] Eigene Waschmaschine/Trockner in Wohnung
+                                 [ ] Gem. Waschküche mit Dienstplan / Secomat
+
+--------------------------------------------------------------------------------
+4. AUSSTATTUNG & ZUSTAND (FIXTURES & CONDITION)
+--------------------------------------------------------------------------------
+Küche:               [ ] Glaskeramik  [ ] Induktion  [ ] Geschirrspüler  
+                     [ ] Backofen  [ ] Steamer
+Bodenbeläge:         [ ] Parkett  [ ] Laminat  [ ] Platten/Fliesen  [ ] Teppich
+Heizsystem:          [ ] Wärmepumpe  [ ] Gas  [ ] Öl  [ ] Fernwärme
+Bodenheizung / Radiatoren:[ ] Fussbodenheizung  [ ] Radiatoren
+Lift vorhanden:      [ ] Ja   [ ] Nein
+Behindertengerecht / Rollstuhlgängig: [ ] Ja  [ ] Nein
+
+--------------------------------------------------------------------------------
+5. PARKMÖGLICHKEITEN (PARKING)
+--------------------------------------------------------------------------------
+Einstellhallenplatz / Tiefgarage:[ ] Anzahl: ___  Platz-Nr: ___  Preis: CHF _____
+Aussenabstellplatz:              [ ] Anzahl: ___  Platz-Nr: ___  Preis: CHF _____
+Garage (Einzelgarage):           [ ] Anzahl: ___  Platz-Nr: ___  Preis: CHF _____
+
+--------------------------------------------------------------------------------
+6. FINANZIELLES & CONDICIONES (FINANCIAL PARAMETERS)
+--------------------------------------------------------------------------------
+Nettomietzins / Monat:            CHF ___________________
+Heiz- und Nebenkosten (Akconto):  CHF ___________________
+Parkplatzmiete / Monat:           CHF ___________________
+---------------------------------------------------------
+BRUTTOMIETZINS GESAMT / Monat:    CHF ___________________
+
+Mietkaution (Security Deposit):   [ ] 2 Monatsmieten  [ ] 3 Monatsmieten
+Kautionsform:                     [ ] Sparkonto  [ ] Kautionsversicherung (Swisscaution etc.)
+
+--------------------------------------------------------------------------------
+7. VERFÜGBARKEIT & MIETERPROFIL (AVAILABILITY & TENANT PROFILE)
+--------------------------------------------------------------------------------
+Bezugsbereit ab (Verfügbarkeit):  _______________________
+Mindestmietdauer:                [ ] 1 Jahr  [ ] 2 Jahre  [ ] Unbefristet
+Haustiere erlaubt:               [ ] Ja  [ ] Nein  [ ] Nach Absprache (Hunde/Katzen)
+Rauchen in der Wohnung:          [ ] Nichtraucher bevorzugt  [ ] Egal
+Zielgruppe / Mieterprofil:       [ ] Einzelperson  [ ] Paar  [ ] Familie  [ ] WG erlaubt
+
+--------------------------------------------------------------------------------
+8. BESICHTIGUNG & SCHLÜSSEL (VIEWING & ACCESS)
+--------------------------------------------------------------------------------
+Objekt aktuell bewohnt:          [ ] Ja (durch: _________)  [ ] Nein (Leerstehend)
+Schlüsselübergabe für Makler:    [ ] Anwesend bei Besichtigung  [ ] Schlüssel erhalten (___ Stk.)
+
+================================================================================
