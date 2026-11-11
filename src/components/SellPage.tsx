@@ -191,14 +191,14 @@ export const SellPage: React.FC<SellPageProps> = ({
                     </div>
 
                     {/* Features list */}
-                    <div className="space-y-3">
-                      <div className="text-xs font-semibold uppercase tracking-wider text-neutral-800">
+                    <div className="space-y-3.5">
+                      <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-900">
                         {language === 'de' ? 'Leistungsumfang:' : 'Included Services:'}
                       </div>
-                      <ul className="space-y-2.5">
+                      <ul className="space-y-3">
                         {pkg.features[language].map((feat, idx2) => (
-                          <li key={idx2} className="flex items-start gap-2.5 text-xs text-neutral-600 leading-snug">
-                            <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <li key={idx2} className="flex items-start gap-2.5 text-sm text-neutral-700 leading-normal">
+                            <Check className="w-4.5 h-4.5 text-emerald-600 shrink-0 mt-0.5" />
                             <span>{feat}</span>
                           </li>
                         ))}
@@ -212,14 +212,14 @@ export const SellPage: React.FC<SellPageProps> = ({
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={() => onSelectPackage(pkg)}
-                      className={`w-full py-3 px-4 rounded text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer ${
+                      className={`w-full py-3.5 px-4 rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm ${
                         isPopular
-                          ? 'bg-neutral-900 hover:bg-neutral-800 text-white shadow'
+                          ? 'bg-neutral-900 hover:bg-neutral-800 text-white shadow-md'
                           : 'bg-neutral-100 hover:bg-neutral-900 hover:text-white text-neutral-900'
                       }`}
                     >
                       <span>{language === 'de' ? 'Paket unverbindlich anfragen' : 'Request Package Consultation'}</span>
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </motion.button>
                   </div>
                 </motion.div>
@@ -373,21 +373,21 @@ export const SellPage: React.FC<SellPageProps> = ({
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="group p-6 rounded-lg bg-neutral-50 border border-neutral-200/80 hover:border-neutral-300 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                className="group p-6 sm:p-7 rounded-xl bg-neutral-50 border border-neutral-200 hover:border-neutral-300 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="text-3xl font-mono font-bold text-neutral-300 group-hover:text-[#C5A059] transition-colors mb-4">
+                  <div className="text-3xl font-mono font-bold text-[#C5A059] mb-3">
                     {step.step}
                   </div>
-                  <h3 className="text-base font-semibold text-neutral-900 mb-2 group-hover:text-[#8C6D1F] transition-colors">
+                  <h3 className="text-base sm:text-lg font-bold text-neutral-900 mb-2 group-hover:text-[#8C6D1F] transition-colors leading-snug">
                     {step.title[language]}
                   </h3>
-                  <p className="text-xs text-neutral-600 font-light leading-relaxed">
+                  <p className="text-sm text-neutral-700 font-normal leading-relaxed">
                     {step.desc[language]}
                   </p>
                 </div>
-                <div className="mt-4 pt-3 border-t border-neutral-200/60 text-[11px] text-neutral-500 flex items-center gap-1">
-                  <Clock className="w-3 h-3 text-neutral-400" />
+                <div className="mt-5 pt-3.5 border-t border-neutral-200 text-xs text-neutral-600 flex items-center gap-1.5 font-medium">
+                  <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
                   <span>{language === 'de' ? 'Reaktion innert 24h' : 'Response in 24h'}</span>
                 </div>
               </motion.div>

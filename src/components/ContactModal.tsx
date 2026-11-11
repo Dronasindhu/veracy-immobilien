@@ -181,15 +181,15 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             ) : (
               <div>
                 <div className="mb-6">
-                  <div className="text-[11px] uppercase tracking-wider text-[#8C6D1F] font-semibold mb-1">
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#8C6D1F] mb-1.5">
                     {language === 'de' ? 'Kostenlose Eigentümer-Beratung' : 'Free Owner Consultation'}
                   </div>
-                  <h3 className="text-2xl font-display font-medium text-neutral-950">
+                  <h3 className="text-2xl sm:text-3xl font-display font-medium text-neutral-950">
                     {language === 'de'
                       ? 'Sprechen Sie mit unseren Schweizer Maklern'
                       : 'Connect with a Swiss Real Estate Expert'}
                   </h3>
-                  <p className="text-xs text-neutral-500 mt-1 leading-relaxed">
+                  <p className="text-sm text-neutral-600 mt-1.5 leading-relaxed font-normal">
                     {propertyContext
                       ? language === 'de'
                         ? `Anfrage zu: ${propertyContext.title}`
@@ -204,15 +204,15 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
                   <div>
-                    <label className="block text-xs font-medium text-neutral-700 mb-1">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-1.5">
                       {language === 'de' ? 'Anliegen' : 'Primary Interest'}
                     </label>
                     <select
                       value={interest}
                       onChange={(e) => setInterest(e.target.value)}
-                      className="w-full text-xs rounded border border-neutral-300 p-2.5 bg-white text-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
+                      className="w-full text-base rounded-xl border border-neutral-300 p-3 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C5A059] transition-colors"
                     >
                       <option value="sell">{language === 'de' ? 'Immobilie verkaufen (Nur 0.7% Provision)' : 'Sell Property (Only 0.7% Commission)'}</option>
                       <option value="rent-out">{language === 'de' ? 'Immobilie vermieten (Nur 15 Tage Miete Provision)' : 'Rent Out Property (Only 15 Days Rent Commission)'}</option>
@@ -224,7 +224,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-neutral-700 mb-1">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-1.5">
                       {language === 'de' ? 'Name und Vorname' : 'Full Name'}
                     </label>
                     <input
@@ -233,13 +233,13 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       placeholder="z.B. Sandra Vollenweider"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full text-xs rounded border border-neutral-300 p-2.5 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
+                      className="w-full text-base rounded-xl border border-neutral-300 p-3 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C5A059] transition-colors placeholder:text-neutral-400"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                      <label className="block text-xs font-medium text-neutral-700 mb-1">
+                      <label className="block text-sm font-semibold text-neutral-900 mb-1.5">
                         {language === 'de' ? 'E-Mail' : 'Email'}
                       </label>
                       <input
@@ -248,11 +248,11 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                         placeholder="name@domain.ch"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full text-xs rounded border border-neutral-300 p-2.5 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
+                        className="w-full text-base rounded-xl border border-neutral-300 p-3 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C5A059] transition-colors placeholder:text-neutral-400"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium text-neutral-700 mb-1">
+                      <label className="block text-sm font-semibold text-neutral-900 mb-1.5">
                         {language === 'de' ? 'Telefonnummer' : 'Phone'}
                       </label>
                       <input
@@ -261,13 +261,13 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                         placeholder="+41 76 588 69 89"
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
-                        className="w-full text-xs rounded border border-neutral-300 p-2.5 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
+                        className="w-full text-base rounded-xl border border-neutral-300 p-3 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C5A059] transition-colors placeholder:text-neutral-400"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-neutral-700 mb-1">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-1.5">
                       {language === 'de' ? 'Liegenschaft / PLZ (Adresse der Verkaufsimmobilie)' : 'Property Address / Location (Property to be Sold)'}
                     </label>
                     <input
@@ -275,14 +275,14 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       placeholder="z.B. Seestrasse 42, 8700 Küsnacht oder 5400 Baden"
                       value={location}
                       onChange={(e) => setLocation(e.target.value)}
-                      className="w-full text-xs rounded border border-neutral-300 p-2.5 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
+                      className="w-full text-base rounded-xl border border-neutral-300 p-3 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C5A059] transition-colors placeholder:text-neutral-400"
                     />
                   </div>
 
                   {/* Consultation Appointment Section (Purely Advisory / Consultation) */}
-                  <div className="bg-[#FAF6EE] border border-[#EBDCB7] rounded-xl p-4 space-y-3">
-                    <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8C6D1F]">
-                      <Calendar className="w-4 h-4 text-[#C5A059]" />
+                  <div className="bg-[#FAF6EE] border border-[#EBDCB7] rounded-xl p-4 sm:p-5 space-y-3.5">
+                    <div className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-[#8C6D1F]">
+                      <Calendar className="w-4.5 h-4.5 text-[#C5A059]" />
                       <span>
                         {language === 'de'
                           ? 'Wunschtermin: Persönliche Eigentümer-Beratung'
@@ -290,8 +290,8 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       </span>
                     </div>
 
-                    <div className="bg-white/90 rounded-lg p-2.5 border border-[#EBDCB7]/70 text-xs text-neutral-700 font-light leading-relaxed">
-                      <p className="font-semibold text-neutral-900 mb-0.5">
+                    <div className="bg-white/90 rounded-lg p-3 border border-[#EBDCB7]/70 text-sm text-neutral-700 font-normal leading-relaxed">
+                      <p className="font-bold text-neutral-900 mb-1">
                         {language === 'de'
                           ? '📌 Unverbindliche Beratung durch Veracy Immobilien:'
                           : '📌 Confidential Consultation by Veracy Real Estate:'}
@@ -303,10 +303,10 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       </p>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       <div>
-                        <label className="block text-[11px] font-semibold text-neutral-800 mb-1 flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5 text-[#C5A059]" />
+                        <label className="block text-xs sm:text-sm font-bold text-neutral-800 mb-1.5 flex items-center gap-1.5">
+                          <Calendar className="w-4 h-4 text-[#C5A059]" />
                           <span>{language === 'de' ? 'Wunschdatum (Beratungsgespräch)' : 'Preferred Date (Consultation)'}</span>
                         </label>
                         <input
@@ -314,19 +314,19 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                           min={new Date().toISOString().split('T')[0]}
                           value={appointmentDate}
                           onChange={(e) => setAppointmentDate(e.target.value)}
-                          className="w-full text-xs rounded border border-neutral-300 bg-white p-2.5 text-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
+                          className="w-full text-base rounded-xl border border-neutral-300 bg-white p-3 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C5A059] transition-colors"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-[11px] font-semibold text-neutral-800 mb-1 flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
+                        <label className="block text-xs sm:text-sm font-bold text-neutral-800 mb-1.5 flex items-center gap-1.5">
+                          <Clock className="w-4 h-4 text-[#C5A059]" />
                           <span>{language === 'de' ? 'Bevorzugtes Zeitfenster' : 'Preferred Time Window'}</span>
                         </label>
                         <select
                           value={appointmentTime}
                           onChange={(e) => setAppointmentTime(e.target.value)}
-                          className="w-full text-xs rounded border border-neutral-300 bg-white p-2.5 text-neutral-900 focus:outline-none focus:ring-1 focus:ring-neutral-900 transition-colors"
+                          className="w-full text-base rounded-xl border border-neutral-300 bg-white p-3 text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C5A059] transition-colors"
                         >
                           <option value="morning">{language === 'de' ? 'Vormittag (09:00 – 12:00 Uhr)' : 'Morning (09:00 – 12:00)'}</option>
                           <option value="afternoon">{language === 'de' ? 'Nachmittag (13:00 – 16:00 Uhr)' : 'Afternoon (13:00 – 16:00)'}</option>
@@ -337,10 +337,10 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                     </div>
 
                     {/* Email confirmation notice */}
-                    <div className="flex items-start gap-2 pt-2 border-t border-[#EBDCB7]/80 text-[11px] text-[#6E5516] leading-relaxed">
-                      <Mail className="w-4 h-4 text-[#C5A059] shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-2.5 pt-2.5 border-t border-[#EBDCB7]/80 text-xs sm:text-sm text-[#6E5516] leading-relaxed">
+                      <Mail className="w-4.5 h-4.5 text-[#C5A059] shrink-0 mt-0.5" />
                       <span>
-                        <strong className="font-semibold text-neutral-900">
+                        <strong className="font-bold text-neutral-900">
                           {language === 'de' ? 'Schriftliche Bestätigung per E-Mail: ' : 'Written Confirmation via Email: '}
                         </strong>
                         {language === 'de'
@@ -351,7 +351,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium text-neutral-700 mb-1">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-1.5">
                       {language === 'de' ? 'Ihre Nachricht oder ergänzende Details' : 'Your Message or Additional Notes'}
                     </label>
                     <textarea
@@ -359,7 +359,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       placeholder={language === 'de' ? 'Besonderheiten der Liegenschaft, Zugang oder Fragen...' : 'Property highlights, access details or questions...'}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
-                      className="w-full text-xs rounded border border-neutral-300 p-2.5 focus:outline-none focus:ring-1 focus:ring-neutral-900 resize-none transition-colors"
+                      className="w-full text-base rounded-xl border border-neutral-300 p-3 bg-white text-neutral-900 focus:outline-none focus:ring-2 focus:ring-[#C5A059] resize-none transition-colors placeholder:text-neutral-400"
                     />
                   </div>
 
@@ -369,33 +369,33 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       whileTap={{ scale: 0.985 }}
                       type="submit"
                       disabled={isSending}
-                      className="w-full py-3 bg-neutral-900 hover:bg-neutral-800 disabled:opacity-60 text-white rounded text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer transition-all shadow"
+                      className="w-full py-4 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 font-bold rounded-xl text-sm sm:text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer transition-all shadow-md border border-[#C5A059]/40 disabled:opacity-60"
                     >
                       {isSending ? (
                         <>
-                          <Loader2 className="w-4 h-4 animate-spin text-[#C5A059]" />
+                          <Loader2 className="w-5 h-5 animate-spin text-neutral-950" />
                           <span>{language === 'de' ? 'Wird übermittelt...' : 'Sending request...'}</span>
                         </>
                       ) : (
                         <>
                           <span>{language === 'de' ? 'Termin & Beratung kostenlos anfragen' : 'Request Appointment & Free Consultation'}</span>
-                          <ArrowRight className="w-3.5 h-3.5 text-[#DFB76C]" />
+                          <ArrowRight className="w-5 h-5 text-neutral-950" />
                         </>
                       )}
                     </motion.button>
                   </div>
 
-                  <div className="flex items-center justify-between text-[11px] text-neutral-500 pt-2 border-t border-neutral-100">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3 text-[#C5A059]" />
-                      {language === 'de' ? 'Antwort garantiert < 24h' : 'Response < 24h'}
+                  <div className="flex items-center justify-between text-xs text-neutral-600 pt-3 border-t border-neutral-100">
+                    <span className="flex items-center gap-1 font-medium">
+                      <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
+                      {language === 'de' ? 'Antwort < 24h' : 'Response < 24h'}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Mail className="w-3 h-3 text-[#C5A059]" />
-                      {language === 'de' ? 'Schriftliche E-Mail-Bestätigung' : 'Written Email Confirmation'}
+                    <span className="flex items-center gap-1 font-medium">
+                      <Mail className="w-3.5 h-3.5 text-[#C5A059]" />
+                      {language === 'de' ? 'E-Mail-Bestätigung' : 'Email Confirmation'}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <ShieldCheck className="w-3 h-3 text-[#C5A059]" />
+                    <span className="flex items-center gap-1 font-medium">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
                       {language === 'de' ? '100% Unverbindlich' : '100% Confidential'}
                     </span>
                   </div>

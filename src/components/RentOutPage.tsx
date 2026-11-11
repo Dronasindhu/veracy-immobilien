@@ -224,15 +224,15 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
       <section className="bg-white border-b border-neutral-200 py-12 sm:py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="text-xs uppercase tracking-[0.2em] text-[#8C6D1F] font-semibold">
+            <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-[#8C6D1F] font-bold">
               {language === 'de' ? 'Der Veracy Vermieterprozess' : 'The Landlord Journey'}
             </span>
-            <h2 className="text-2xl sm:text-3xl font-normal font-display text-neutral-950 mt-2">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-normal font-display text-neutral-950 mt-2">
               {language === 'de'
                 ? 'In vier Schritten zum solventen Wunschmieter'
                 : 'Four Clear Steps to Qualified Tenants'}
             </h2>
-            <p className="mt-2 text-sm text-neutral-600 font-light">
+            <p className="mt-2 text-sm sm:text-base text-neutral-600 font-normal">
               {language === 'de'
                 ? 'Strukturiert, transparent und fair: Provision nur 15 Tage Miete bei erfolgreichem Abschluss.'
                 : 'Structured, transparent, and fair: Commission only 15 days of rent upon success.'}
@@ -243,17 +243,19 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
             {rentalSteps.map((step) => (
               <div
                 key={step.step}
-                className="p-6 rounded-lg bg-neutral-50 border border-neutral-200 shadow-sm"
+                className="p-6 sm:p-7 rounded-xl bg-neutral-50 border border-neutral-200 shadow-sm flex flex-col justify-between"
               >
-                <div className="text-2xl font-mono font-bold text-[#C5A059] mb-3">
-                  {step.step}
+                <div>
+                  <div className="text-3xl font-mono font-bold text-[#C5A059] mb-3">
+                    {step.step}
+                  </div>
+                  <h3 className="text-base sm:text-lg font-bold text-neutral-900 mb-2 leading-snug">
+                    {step.title[language]}
+                  </h3>
+                  <p className="text-sm text-neutral-700 font-normal leading-relaxed">
+                    {step.desc[language]}
+                  </p>
                 </div>
-                <h3 className="text-sm font-bold text-neutral-900 mb-2">
-                  {step.title[language]}
-                </h3>
-                <p className="text-xs text-neutral-600 font-light leading-relaxed">
-                  {step.desc[language]}
-                </p>
               </div>
             ))}
           </div>
@@ -274,26 +276,26 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
               className="space-y-8"
             >
               {/* Section 1: Property Details */}
-              <div className="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-neutral-200">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8C6D1F] mb-1">
-                  <span className="w-5 h-5 rounded-full bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] flex items-center justify-center text-[10px] font-bold">1</span>
+              <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-neutral-200">
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#8C6D1F] mb-2">
+                  <span className="w-7 h-7 rounded-full bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] flex items-center justify-center text-xs font-bold shadow-xs">1</span>
                   <span>{language === 'de' ? 'Angaben zur Mietliegenschaft' : 'Rental Property Details'}</span>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-950 font-display">
+                <h2 className="text-2xl sm:text-3xl font-normal text-neutral-950 font-display">
                   {language === 'de' ? 'Welche Liegenschaft möchten Sie vermieten?' : 'Which property are you looking to rent out?'}
                 </h2>
-                <p className="text-xs text-neutral-500 mt-1">
+                <p className="text-sm sm:text-base text-neutral-600 mt-1.5 font-normal">
                   {language === 'de'
                     ? 'Geben Sie Eckdaten zu Ihrer Liegenschaft ein, damit wir den optimalen Marktmietzins ermitteln können.'
                     : 'Provide property details so we can calculate the optimal market rent benchmark.'}
                 </p>
 
                 {/* Property Type Grid */}
-                <div className="mt-6">
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-2">
+                <div className="mt-7">
+                  <label className="block text-sm font-semibold text-neutral-900 mb-2.5">
                     {language === 'de' ? 'Objektart:' : 'Property Type:'}
                   </label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {[
                       { id: 'Wohnung', de: 'Wohnung / Etage', en: 'Apartment' },
                       { id: 'Attikawohnung', de: 'Attika / Penthouse', en: 'Penthouse' },
@@ -304,10 +306,10 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                         key={pt.id}
                         type="button"
                         onClick={() => setPropertyType(pt.id)}
-                        className={`py-3 px-3 rounded-lg border text-xs font-semibold cursor-pointer transition-all ${
+                        className={`py-3.5 px-4 rounded-xl border text-sm sm:text-base font-semibold cursor-pointer transition-all ${
                           propertyType === pt.id
-                            ? 'bg-neutral-950 text-white border-neutral-950 shadow-sm'
-                            : 'bg-white text-neutral-700 border-neutral-200 hover:border-neutral-300'
+                            ? 'bg-neutral-950 text-white border-neutral-950 shadow-md ring-2 ring-neutral-950/20'
+                            : 'bg-white text-neutral-700 border-neutral-300 hover:border-neutral-400'
                         }`}
                       >
                         {language === 'de' ? pt.de : pt.en}
@@ -317,8 +319,8 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                 </div>
 
                 {/* Location / Address */}
-                <div className="mt-5">
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-1.5">
+                <div className="mt-6">
+                  <label className="block text-sm font-semibold text-neutral-900 mb-2">
                     {language === 'de' ? 'Adresse oder PLZ & Ort der Liegenschaft *' : 'Property Address or Zip & City *'}
                   </label>
                   <input
@@ -327,20 +329,20 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     placeholder={language === 'de' ? 'z.B. Seestrasse 14, 8700 Küsnacht oder 5400 Baden' : 'e.g. Seestrasse 14, 8700 Kuesnacht or 5400 Baden'}
-                    className="w-full px-4 py-3 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
+                    className="w-full px-4 py-3.5 rounded-xl border border-neutral-300 text-base focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900 placeholder:text-neutral-400"
                   />
                 </div>
 
                 {/* Rooms, Area, Rent */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5 pt-4 border-t border-neutral-100">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-6 pt-5 border-t border-neutral-100">
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-1.5">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-2">
                       {language === 'de' ? 'Anzahl Zimmer:' : 'Number of Rooms:'}
                     </label>
                     <select
                       value={rooms}
                       onChange={(e) => setRooms(Number(e.target.value))}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
+                      className="w-full px-4 py-3.5 rounded-xl border border-neutral-300 text-base focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
                     >
                       <option value={1.5}>1.5 Zimmer</option>
                       <option value={2.5}>2.5 Zimmer</option>
@@ -352,7 +354,7 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-1.5">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-2">
                       {language === 'de' ? 'Wohnfläche (ca. m²):' : 'Living Area (approx. m²):'}
                     </label>
                     <input
@@ -361,12 +363,12 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                       max={1000}
                       value={livingArea}
                       onChange={(e) => setLivingArea(Number(e.target.value))}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
+                      className="w-full px-4 py-3.5 rounded-xl border border-neutral-300 text-base focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900 font-mono"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-700 mb-1.5">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-2">
                       {language === 'de' ? 'Wunsch-Mietzins (CHF / Mt.):' : 'Target Rent (CHF / mo.):'}
                     </label>
                     <input
@@ -374,31 +376,31 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                       step={50}
                       value={expectedRent}
                       onChange={(e) => setExpectedRent(Number(e.target.value))}
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900 font-mono"
+                      className="w-full px-4 py-3.5 rounded-xl border border-neutral-300 text-base focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900 font-mono"
                     />
                   </div>
                 </div>
               </div>
 
               {/* Section 2: Owner Details & On-site Photography Appointment */}
-              <div className="bg-white rounded-xl p-6 sm:p-8 shadow-sm border border-neutral-200">
-                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#8C6D1F] mb-1">
-                  <span className="w-5 h-5 rounded-full bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] flex items-center justify-center text-[10px] font-bold">2</span>
+              <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-neutral-200">
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold uppercase tracking-wider text-[#8C6D1F] mb-2">
+                  <span className="w-7 h-7 rounded-full bg-[#FAF6EE] text-[#8C6D1F] border border-[#EBDCB7] flex items-center justify-center text-xs font-bold shadow-xs">2</span>
                   <span>{language === 'de' ? 'Eigentümer-Kontaktdaten & Vor-Ort-Termin' : 'Owner Contact & On-Site Visit'}</span>
                 </div>
-                <h2 className="text-xl sm:text-2xl font-semibold text-neutral-950 font-display">
+                <h2 className="text-2xl sm:text-3xl font-normal text-neutral-950 font-display">
                   {language === 'de' ? 'Wann dürfen wir Ihre Liegenschaft besichtigen?' : 'When can we visit your property?'}
                 </h2>
-                <p className="text-xs text-neutral-500 mt-1">
+                <p className="text-sm sm:text-base text-neutral-600 mt-1.5 font-normal">
                   {language === 'de'
                     ? 'Unser Team kommt zu Ihrer Liegenschaft für eine fundierte Mietzinsanalyse sowie professionelle Fotoaufnahmen, 3D Tour & Video-Walkthrough.'
                     : 'Our team visits your property for exact rent valuation as well as professional photography, 3D tour & video walkthrough.'}
                 </p>
 
                 {/* Owner Contacts */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-7">
                   <div>
-                    <label className="block text-xs font-medium text-neutral-700 mb-1">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-2">
                       {language === 'de' ? 'Vor- & Nachname *' : 'Full Name *'}
                     </label>
                     <input
@@ -407,11 +409,11 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="z.B. Beat Meier"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
+                      className="w-full px-4 py-3.5 rounded-xl border border-neutral-300 text-base focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900 placeholder:text-neutral-400"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-neutral-700 mb-1">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-2">
                       {language === 'de' ? 'E-Mail-Adresse *' : 'Email Address *'}
                     </label>
                     <input
@@ -420,11 +422,11 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="b.meier@beispiel.ch"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
+                      className="w-full px-4 py-3.5 rounded-xl border border-neutral-300 text-base focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900 placeholder:text-neutral-400"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-neutral-700 mb-1">
+                    <label className="block text-sm font-semibold text-neutral-900 mb-2">
                       {language === 'de' ? 'Telefonnummer' : 'Phone Number'}
                     </label>
                     <input
@@ -432,16 +434,16 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder="+41 76 588 69 89"
-                      className="w-full px-3.5 py-2.5 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
+                      className="w-full px-4 py-3.5 rounded-xl border border-neutral-300 text-base focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900 placeholder:text-neutral-400"
                     />
                   </div>
                 </div>
 
                 {/* Appointment Date & Window */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5 p-4 rounded-lg bg-[#FAF6EE] border border-[#EBDCB7]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-6 p-5 rounded-xl bg-[#FAF6EE] border border-[#EBDCB7]">
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#8C6D1F] mb-1.5 flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-[#C5A059]" />
+                    <label className="block text-sm font-bold text-[#8C6D1F] mb-2 flex items-center gap-2">
+                      <Calendar className="w-4 h-4 text-[#C5A059]" />
                       <span>{language === 'de' ? 'Wunschtermin für Vor-Ort-Besuch:' : 'Preferred Date for On-Site Visit:'}</span>
                     </label>
                     <input
@@ -449,19 +451,19 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                       min={today}
                       value={appointmentDate}
                       onChange={(e) => setAppointmentDate(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
+                      className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-base focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-[#8C6D1F] mb-1.5 flex items-center gap-1.5">
-                      <Camera className="w-3.5 h-3.5 text-[#C5A059]" />
+                    <label className="block text-sm font-bold text-[#8C6D1F] mb-2 flex items-center gap-2">
+                      <Camera className="w-4 h-4 text-[#C5A059]" />
                       <span>{language === 'de' ? 'Bevorzugtes Zeitfenster:' : 'Preferred Time Window:'}</span>
                     </label>
                     <select
                       value={appointmentTime}
                       onChange={(e) => setAppointmentTime(e.target.value)}
-                      className="w-full px-3.5 py-2 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
+                      className="w-full px-4 py-3 rounded-xl border border-neutral-300 text-base focus:outline-none focus:ring-2 focus:ring-[#C5A059] bg-white text-neutral-900"
                     >
                       <option value="morning">{language === 'de' ? 'Vormittag (09:00 – 12:00)' : 'Morning (09:00 – 12:00)'}</option>
                       <option value="afternoon">{language === 'de' ? 'Nachmittag (13:00 – 16:00)' : 'Afternoon (13:00 – 16:00)'}</option>
@@ -472,16 +474,16 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                 </div>
 
                 {/* Consent */}
-                <div className="mt-5 space-y-2.5 pt-4 border-t border-neutral-100 text-xs text-neutral-600">
-                  <label className="flex items-start gap-2.5 cursor-pointer">
+                <div className="mt-6 pt-5 border-t border-neutral-100">
+                  <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
                       required
                       checked={acceptTerms}
                       onChange={(e) => setAcceptTerms(e.target.checked)}
-                      className="mt-0.5 accent-[#C5A059]"
+                      className="w-5 h-5 mt-0.5 accent-[#C5A059] shrink-0"
                     />
-                    <span>
+                    <span className="text-sm text-neutral-700 leading-normal">
                       {language === 'de'
                         ? 'Ich stimme der Kontaktaufnahme und vertraulichen Behandlung meiner Liegenschaftsdaten gemäss Schweizer Datenschutzgesetz zu.'
                         : 'I agree to contact and confidential handling of my property data under Swiss data privacy law.'}
@@ -490,15 +492,15 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                 </div>
 
                 {errorMessage && (
-                  <div className="mt-4 p-3 bg-red-50 text-red-700 border border-red-200 rounded text-xs">
+                  <div className="mt-5 p-4 bg-red-50 text-red-700 border border-red-200 rounded-xl text-sm font-medium">
                     {errorMessage}
                   </div>
                 )}
 
                 {/* Submit Action */}
-                <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                  <div className="flex items-center gap-2 text-xs text-neutral-500">
-                    <Clock className="w-4 h-4 text-[#C5A059]" />
+                <div className="mt-8 pt-4 border-t border-neutral-100 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+                  <div className="flex items-center gap-2 text-sm text-neutral-600">
+                    <Clock className="w-4.5 h-4.5 text-[#C5A059] shrink-0" />
                     <span>{language === 'de' ? 'Schriftliche Bestätigung per E-Mail innert 24h' : 'Written confirmation by email within 24h'}</span>
                   </div>
 
@@ -507,7 +509,7 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                     whileTap={{ scale: 0.985 }}
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-8 py-3.5 rounded-lg text-xs font-semibold uppercase tracking-wider text-neutral-950 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2 border border-[#C5A059]/40 disabled:opacity-50"
+                    className="px-8 py-4 rounded-xl text-sm sm:text-base font-bold tracking-wide text-neutral-950 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] shadow-md hover:shadow-lg transition-all cursor-pointer flex items-center justify-center gap-2 border border-[#C5A059]/40 disabled:opacity-50"
                   >
                     <span>
                       {isSubmitting
@@ -518,7 +520,7 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                         ? 'Vermietung anfragen & Mieter finden'
                         : 'Request Rental Placement & Find Tenants'}
                     </span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-5 h-5" />
                   </motion.button>
                 </div>
               </div>
@@ -536,76 +538,76 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                 <CheckCircle2 className="w-8 h-8" />
               </div>
 
-              <span className="text-xs font-semibold uppercase tracking-widest text-[#8C6D1F] bg-[#FAF6EE] border border-[#EBDCB7] px-3 py-1 rounded-full">
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-[#8C6D1F] bg-[#FAF6EE] border border-[#EBDCB7] px-4 py-1.5 rounded-full">
                 {language === 'de' ? 'Vermieter-Anfrage erfolgreich erfasst' : 'Landlord Inquiry Successfully Received'}
               </span>
 
-              <h2 className="text-2xl sm:text-3xl font-display font-normal text-neutral-950 mt-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-display font-normal text-neutral-950 mt-4">
                 {language === 'de'
                   ? `Vielen Dank, ${name}!`
                   : `Thank You, ${name}!`}
               </h2>
-              <p className="text-sm text-neutral-600 mt-2 max-w-xl mx-auto font-light leading-relaxed">
+              <p className="text-base text-neutral-600 mt-2 max-w-xl mx-auto font-normal leading-relaxed">
                 {language === 'de'
                   ? `Ihr Vermietungsauftrag wurde unter der Referenznummer ${referenceId} registriert. Eine schriftliche Bestätigung wurde an ${email} versandt.`
                   : `Your rental placement inquiry has been registered under reference ${referenceId}. A confirmation email has been dispatched to ${email}.`}
               </p>
 
               {/* Summary */}
-              <div className="mt-8 text-left bg-neutral-50 rounded-xl p-6 border border-neutral-200/80 space-y-3 text-xs">
-                <div className="text-[11px] uppercase tracking-wider font-bold text-neutral-800 border-b border-neutral-200 pb-2">
+              <div className="mt-8 text-left bg-neutral-50 rounded-xl p-6 border border-neutral-200 space-y-3.5 text-sm sm:text-base">
+                <div className="text-xs sm:text-sm uppercase tracking-wider font-bold text-neutral-900 border-b border-neutral-200 pb-2.5">
                   {language === 'de' ? 'Zusammenfassung Ihrer Liegenschaft:' : 'Summary of Your Property:'}
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
                   <div>
                     <span className="text-neutral-500">{language === 'de' ? 'Objektart:' : 'Property Type:'}</span>{' '}
-                    <span className="font-semibold text-neutral-900">{propertyType} ({rooms} Zi., {livingArea} m²)</span>
+                    <span className="font-bold text-neutral-900">{propertyType} ({rooms} Zi., {livingArea} m²)</span>
                   </div>
                   <div>
                     <span className="text-neutral-500">{language === 'de' ? 'Liegenschaft:' : 'Location:'}</span>{' '}
-                    <span className="font-semibold text-neutral-900">{location}</span>
+                    <span className="font-bold text-neutral-900">{location}</span>
                   </div>
                   <div>
                     <span className="text-neutral-500">{language === 'de' ? 'Mietzinsziel:' : 'Target Rent:'}</span>{' '}
-                    <span className="font-semibold text-neutral-900 font-mono">CHF {expectedRent.toLocaleString('de-CH')} / Mt.</span>
+                    <span className="font-bold text-neutral-900 font-mono">CHF {expectedRent.toLocaleString('de-CH')} / Mt.</span>
                   </div>
                   <div>
                     <span className="text-neutral-500">{language === 'de' ? 'Vor-Ort-Besuch:' : 'On-Site Visit:'}</span>{' '}
-                    <span className="font-semibold text-neutral-900">{appointmentDate ? `${appointmentDate} (${appointmentTime})` : 'Wird telefonisch abgestimmt'}</span>
+                    <span className="font-bold text-neutral-900">{appointmentDate ? `${appointmentDate} (${appointmentTime})` : 'Wird telefonisch abgestimmt'}</span>
                   </div>
                 </div>
               </div>
 
               {/* What happens now */}
-              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 text-left text-xs">
-                <div className="p-4 rounded-lg bg-white border border-neutral-200">
-                  <div className="font-semibold text-neutral-900 flex items-center gap-1.5 mb-1 text-sm">
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-5 text-left text-sm">
+                <div className="p-5 rounded-xl bg-white border border-neutral-200 shadow-xs">
+                  <div className="font-bold text-neutral-900 flex items-center gap-1.5 mb-2 text-base">
                     <span className="text-[#8C6D1F]">01.</span>
                     <span>{language === 'de' ? 'Kontaktaufnahme < 24h' : 'Contact < 24h'}</span>
                   </div>
-                  <p className="text-neutral-600 leading-relaxed">
+                  <p className="text-neutral-600 leading-relaxed font-normal">
                     {language === 'de'
                       ? 'Ein lizenzierter Veracy Vermietungsmakler meldet sich zur Vorbereitung des Fototermins.'
                       : 'A licensed Veracy broker contacts you to prepare the on-site photo appointment.'}
                   </p>
                 </div>
-                <div className="p-4 rounded-lg bg-white border border-neutral-200">
-                  <div className="font-semibold text-neutral-900 flex items-center gap-1.5 mb-1 text-sm">
+                <div className="p-5 rounded-xl bg-white border border-neutral-200 shadow-xs">
+                  <div className="font-bold text-neutral-900 flex items-center gap-1.5 mb-2 text-base">
                     <span className="text-[#8C6D1F]">02.</span>
                     <span>{language === 'de' ? 'Multichannel-Reichweite' : 'Multichannel Reach'}</span>
                   </div>
-                  <p className="text-neutral-600 leading-relaxed">
+                  <p className="text-neutral-600 leading-relaxed font-normal">
                     {language === 'de'
                       ? 'Sofortige Ausschreibung auf Homegate, ImmoScout24 & in unserer solventen Mieterkartei.'
                       : 'Immediate advertising across Homegate, ImmoScout24, and our pre-screened tenant network.'}
                   </p>
                 </div>
-                <div className="p-4 rounded-lg bg-white border border-neutral-200">
-                  <div className="font-semibold text-neutral-900 flex items-center gap-1.5 mb-1 text-sm">
+                <div className="p-5 rounded-xl bg-white border border-neutral-200 shadow-xs">
+                  <div className="font-bold text-neutral-900 flex items-center gap-1.5 mb-2 text-base">
                     <span className="text-[#8C6D1F]">03.</span>
                     <span>{language === 'de' ? 'Geprüfter Mietvertrag' : 'Vetted Lease'}</span>
                   </div>
-                  <p className="text-neutral-600 leading-relaxed">
+                  <p className="text-neutral-600 leading-relaxed font-normal">
                     {language === 'de'
                       ? 'Vollständige Bonitätsprüfung und Schweizer Mietvertrag nach OR für maximale Sicherheit.'
                       : 'Full credit checks and legally verified Swiss lease contracts for complete security.'}
@@ -614,19 +616,19 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
               </div>
 
               {/* Buttons */}
-              <div className="mt-8 pt-6 border-t border-neutral-200 flex flex-wrap items-center justify-center gap-4">
+              <div className="mt-10 pt-6 border-t border-neutral-200 flex flex-wrap items-center justify-center gap-4">
                 <button
                   onClick={handleReset}
-                  className="px-5 py-2.5 rounded-lg border border-neutral-300 text-xs font-semibold text-neutral-700 hover:bg-neutral-100 transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-6 py-3 rounded-xl border border-neutral-300 text-sm font-semibold text-neutral-700 hover:bg-neutral-100 transition-all flex items-center gap-2 cursor-pointer"
                 >
-                  <RotateCcw className="w-3.5 h-3.5" />
+                  <RotateCcw className="w-4 h-4" />
                   <span>{language === 'de' ? 'Weitere Liegenschaft erfassen' : 'Add Another Property'}</span>
                 </button>
                 <button
                   onClick={onOpenConsultation}
-                  className="px-6 py-2.5 rounded-lg bg-neutral-950 text-white text-xs font-semibold uppercase tracking-wider hover:bg-neutral-800 transition-all flex items-center gap-2 cursor-pointer shadow-sm"
+                  className="px-7 py-3 rounded-xl bg-neutral-950 text-white text-sm font-bold uppercase tracking-wider hover:bg-neutral-800 transition-all flex items-center gap-2 cursor-pointer shadow-md"
                 >
-                  <Phone className="w-3.5 h-3.5 text-[#DFB76C]" />
+                  <Phone className="w-4 h-4 text-[#DFB76C]" />
                   <span>{language === 'de' ? 'Direktberatung anfragen' : 'Direct Call'}</span>
                 </button>
               </div>

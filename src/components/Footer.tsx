@@ -15,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({
   onOpenConsultation,
 }) => {
   return (
-    <footer className="bg-neutral-950 text-neutral-400 text-xs border-t border-neutral-800 overflow-hidden">
+    <footer className="bg-neutral-950 text-neutral-300 text-sm border-t border-neutral-800 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -33,56 +33,56 @@ export const Footer: React.FC<FooterProps> = ({
               height={377}
               className="h-10 sm:h-12 w-auto object-contain"
             />
-            <p className="text-neutral-400 font-light leading-relaxed max-w-sm">
+            <p className="text-neutral-300 font-normal leading-relaxed max-w-sm text-sm">
               {language === 'de'
                 ? 'Schweizer Immobilienmakler für transparente Festpreise, verlässliche Marktwertschätzungen und persönliche Betreuung vor Ort in den Kantonen Zürich und Aargau.'
                 : 'Swiss real estate brokerage providing transparent flat fees, accurate valuations, and dedicated on-site representation across the cantons of Zurich and Aargau.'}
             </p>
             <div className="pt-2 flex items-center gap-2 text-neutral-300">
               <ShieldCheck className="w-4 h-4 text-[#DFB76C]" />
-              <span className="text-[11px] font-medium">
+              <span className="text-xs font-medium">
                 {language === 'de' ? 'SVIT / USVT Standard-Konform' : 'Swiss SVIT / USVT Standards'}
               </span>
             </div>
           </div>
 
           {/* Navigation Categories (Col 6-8) */}
-          <div className="lg:col-span-3 space-y-3">
-            <div className="text-xs uppercase tracking-wider text-neutral-200 font-semibold mb-2">
+          <div className="lg:col-span-3 space-y-3.5">
+            <div className="text-xs sm:text-sm uppercase tracking-wider text-neutral-100 font-bold mb-2">
               {language === 'de' ? 'Hauptkategorien' : 'Main Categories'}
             </div>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               <li>
                 <button
                   onClick={() => onNavigate('sell')}
-                  className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group"
+                  className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group text-sm text-neutral-300"
                 >
                   <span>{language === 'de' ? '01. Immobilie verkaufen (0.7%)' : '01. Sell Property (0.7%)'}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('rent-out')}
-                  className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group"
+                  className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group text-sm text-neutral-300"
                 >
                   <span>{language === 'de' ? '02. Immobilie vermieten (15 Tage Miete)' : '02. Rent Out Property (15 Days Rent)'}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => onNavigate('valuation')}
-                  className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group"
+                  className="hover:text-white transition-colors cursor-pointer text-left flex items-center gap-1 group text-sm text-neutral-300"
                 >
                   <span>{language === 'de' ? '03. Professionelle Schätzung' : '03. Valuation'}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
+                  <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity text-[#DFB76C]" />
                 </button>
               </li>
               <li>
                 <button
                   onClick={onOpenConsultation}
-                  className="hover:text-[#E6CA85] transition-colors cursor-pointer text-left font-medium"
+                  className="hover:text-[#E6CA85] transition-colors cursor-pointer text-left font-semibold text-sm text-[#DFB76C]"
                 >
                   {language === 'de' ? 'Kostenlose Erstberatung' : 'Free Consultation'}
                 </button>
@@ -91,31 +91,31 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
 
           {/* Contact (Col 9-12) */}
-          <div className="lg:col-span-4 space-y-3">
-            <div className="text-xs uppercase tracking-wider text-neutral-200 font-semibold mb-2">
+          <div className="lg:col-span-4 space-y-3.5">
+            <div className="text-xs sm:text-sm uppercase tracking-wider text-neutral-100 font-bold mb-2">
               {language === 'de' ? 'Direktkontakt' : 'Direct Contact'}
             </div>
-            <div className="space-y-2 text-neutral-300">
-              <div className="flex items-start gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+            <div className="space-y-2.5 text-neutral-200 text-sm">
+              <div className="flex items-start gap-2.5">
+                <MapPin className="w-4 h-4 text-[#DFB76C] shrink-0 mt-0.5" />
                 <span>Rainstrasse 35, 5415 Nussbaumen</span>
               </div>
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                <a href="tel:+41765886989" className="hover:text-white font-mono">
+              <div className="flex items-center gap-2.5">
+                <Phone className="w-4 h-4 text-[#DFB76C] shrink-0" />
+                <a href="tel:+41765886989" className="hover:text-white font-mono font-medium">
                   +41 76 588 69 89
                 </a>
               </div>
-              <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                <a href="mailto:veracy.immobilien@gmail.com" className="hover:text-white">
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4 text-[#DFB76C] shrink-0" />
+                <a href="mailto:veracy.immobilien@gmail.com" className="hover:text-white font-medium">
                   veracy.immobilien@gmail.com
                 </a>
               </div>
             </div>
 
             <div className="pt-2">
-              <div className="text-[11px] text-[#E6CA85] font-medium">
+              <div className="text-xs text-[#E6CA85] font-semibold">
                 {language === 'de' ? 'Reaktionszeit < 24h an Werktagen' : 'Response time < 24h on business days'}
               </div>
             </div>
@@ -123,7 +123,7 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+        <div className="mt-16 pt-8 border-t border-neutral-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
           <div>
             © {new Date().getFullYear()} Veracy Immobilien AG. Alle Rechte vorbehalten.
           </div>
@@ -134,7 +134,7 @@ export const Footer: React.FC<FooterProps> = ({
             <span>SVIT Partner</span>
             <button
               onClick={() => onNavigate('objektauflage')}
-              className="text-neutral-600 hover:text-[#DFB76C] transition-colors cursor-pointer"
+              className="text-neutral-500 hover:text-[#DFB76C] transition-colors cursor-pointer"
             >
               Objektauflage
             </button>

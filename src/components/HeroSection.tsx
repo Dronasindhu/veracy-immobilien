@@ -37,7 +37,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-[#E6CA85] font-medium mb-4"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-[#E6CA85] font-semibold mb-4"
         >
           <span>Schweizer Maklerstandard</span>
           <span aria-hidden="true" className="text-neutral-500">·</span>
@@ -75,7 +75,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
-          className="mt-4 text-base sm:text-lg text-neutral-300 max-w-2xl mx-auto font-light leading-relaxed"
+          className="mt-4 text-base sm:text-lg lg:text-xl text-neutral-200 max-w-2xl mx-auto font-normal leading-relaxed"
         >
           {language === 'de'
             ? 'Veracy steht für erstklassigen Schweizer Maklerservice für Eigentümer in Zürich & Aargau: Nur 0.7% Verkaufsprovision und nur 15 Tage Miete bei erfolgreicher Vermietung. Keine Vorabkosten, kein Risiko.'
@@ -94,22 +94,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={onOpenConsultation}
-              className="w-full py-4 px-6 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 rounded-xl font-semibold text-xs sm:text-sm uppercase tracking-wider flex items-center justify-between gap-4 transition-all cursor-pointer shadow-xl shadow-[#C5A059]/20 border border-[#C5A059]/50 group"
+              className="w-full py-4 px-6 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 rounded-xl font-bold text-sm sm:text-base tracking-wide flex items-center justify-between gap-4 transition-all cursor-pointer shadow-xl shadow-[#C5A059]/20 border border-[#C5A059]/50 group"
             >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="w-9 h-9 rounded-lg bg-neutral-950/10 flex items-center justify-center shrink-0 text-neutral-950">
+              <div className="flex items-center gap-3.5 min-w-0">
+                <div className="w-10 h-10 rounded-lg bg-neutral-950/10 flex items-center justify-center shrink-0 text-neutral-950">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div className="text-left min-w-0">
                   <div className="font-bold tracking-wide truncate">
                     {language === 'de' ? 'Kostenlose Eigentümer-Beratung vereinbaren' : 'Request Free Owner Consultation'}
                   </div>
-                  <div className="text-[11px] text-neutral-900/80 font-normal normal-case truncate">
+                  <div className="text-xs text-neutral-900/90 font-medium normal-case truncate">
                     {language === 'de' ? 'Unverbindliche Erstberatung & Markteinschätzung · Antwort < 24h' : 'No-obligation consultation & market valuation · Response < 24h'}
                   </div>
                 </div>
               </div>
-              <ArrowRight className="w-4 h-4 text-neutral-950 shrink-0 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-5 h-5 text-neutral-950 shrink-0 transition-transform group-hover:translate-x-1" />
             </motion.button>
           </motion.div>
         )}
@@ -119,115 +119,115 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 max-w-4xl mx-auto text-left"
+          className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left"
         >
           {/* Card 1: Sell Property - 0.7% Commission */}
           <div
             onClick={() => onNavigate('sell')}
-            className="group p-6 rounded-xl border border-neutral-800 bg-neutral-900/80 hover:bg-neutral-900 hover:border-[#C5A059] transition-all cursor-pointer flex flex-col justify-between shadow-lg relative"
+            className="group p-7 rounded-2xl border border-neutral-800 bg-neutral-900/90 hover:bg-neutral-900 hover:border-[#C5A059] transition-all cursor-pointer flex flex-col justify-between shadow-xl relative"
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <div className="flex items-center gap-2">
-                  <div className="p-2 rounded bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors">
-                    <Tag className="w-4 h-4" />
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2.5 rounded-lg bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors">
+                    <Tag className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-300">
                     {language === 'de' ? 'Option 01' : 'Option 01'}
                   </span>
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-2.5 py-0.5 rounded shadow-xs">
+                <span className="text-xs font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-3 py-1 rounded shadow-xs">
                   {language === 'de' ? 'Nur 0.7% Provision' : 'Only 0.7% Commission'}
                 </span>
               </div>
 
-              <h2 className="text-xl font-semibold text-white group-hover:text-[#DFB76C] transition-colors font-display">
+              <h2 className="text-2xl font-semibold text-white group-hover:text-[#DFB76C] transition-colors font-display">
                 {language === 'de' ? 'Immobilie verkaufen' : 'Sell Property'}
               </h2>
 
               {/* Bullet Points */}
-              <ul className="mt-3.5 space-y-2 text-xs text-neutral-300 font-light">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+              <ul className="mt-4 space-y-3 text-sm sm:text-[15px] text-neutral-200 font-normal leading-snug">
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Schweizer Makler-Vollservice vor Ort' : 'Full Swiss on-site brokerage'}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Profi-Fotos, 3D Tour & Video-Walkthrough' : 'Pro photos, 3D tour & video walkthrough'}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Top-Listing auf Homegate & ImmoScout24' : 'Top listing on Homegate & ImmoScout24'}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Bonitätsprüfung & Notariatskoordination' : 'Solvency vetting & notary coordination'}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
-                  <span className="text-[#E6CA85] font-medium">{language === 'de' ? 'Erfolgshonorar (0.7%) erst bei Beurkundung' : 'Success fee (0.7%) only upon notarization'}</span>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span className="text-[#E6CA85] font-semibold">{language === 'de' ? 'Erfolgshonorar (0.7%) erst bei Beurkundung' : 'Success fee (0.7%) only upon notarization'}</span>
                 </li>
               </ul>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
+            <div className="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-sm sm:text-base font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
               <span>{language === 'de' ? 'Verkauf anfragen (0.7%)' : 'Inquire Sale (0.7%)'}</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-4.5 h-4.5 transition-transform group-hover:translate-x-1" />
             </div>
           </div>
 
           {/* Card 2: Rent Out Property - 15 Days of Rent Commission */}
           <div
             onClick={() => onNavigate('rent-out')}
-            className="group p-6 rounded-xl border border-neutral-800 bg-neutral-900/80 hover:bg-neutral-900 hover:border-[#C5A059] transition-all cursor-pointer flex flex-col justify-between shadow-lg relative"
+            className="group p-7 rounded-2xl border border-neutral-800 bg-neutral-900/90 hover:bg-neutral-900 hover:border-[#C5A059] transition-all cursor-pointer flex flex-col justify-between shadow-xl relative"
           >
             <div>
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <div className="flex items-center gap-2">
-                  <div className="p-2 rounded bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors">
-                    <KeyRound className="w-4 h-4" />
+              <div className="flex items-center justify-between gap-2 mb-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="p-2.5 rounded-lg bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors">
+                    <KeyRound className="w-5 h-5" />
                   </div>
-                  <span className="text-xs font-semibold uppercase tracking-wider text-neutral-400">
+                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-300">
                     {language === 'de' ? 'Option 02' : 'Option 02'}
                   </span>
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-2.5 py-0.5 rounded shadow-xs">
+                <span className="text-xs font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-3 py-1 rounded shadow-xs">
                   {language === 'de' ? 'Nur 15 Tage Miete Provision' : 'Only 15 Days Rent Commission'}
                 </span>
               </div>
 
-              <h2 className="text-xl font-semibold text-white group-hover:text-[#DFB76C] transition-colors font-display">
+              <h2 className="text-2xl font-semibold text-white group-hover:text-[#DFB76C] transition-colors font-display">
                 {language === 'de' ? 'Immobilie vermieten' : 'Rent Out Property'}
               </h2>
 
               {/* Bullet Points */}
-              <ul className="mt-3.5 space-y-2 text-xs text-neutral-300 font-light">
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+              <ul className="mt-4 space-y-3 text-sm sm:text-[15px] text-neutral-200 font-normal leading-snug">
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Kompletter Vermieter-Rundumservice vor Ort' : 'Full turnkey landlord service on-site'}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Profi-Fotos, 3D Tour & Video-Walkthrough' : 'Pro photos, 3D tour & video walkthrough'}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Strenge Bonitätsprüfung & Mieterselektion' : 'Strict solvency screening & tenant vetting'}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Rechtssicherer Schweizer Mietvertrag nach OR' : 'Legally compliant Swiss lease contract (OR)'}</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0 mt-0.5" />
-                  <span className="text-[#E6CA85] font-medium">{language === 'de' ? 'Provision nur 15 Tage Miete bei Abschluss' : 'Fee strictly 15 days rent upon signing'}</span>
+                <li className="flex items-start gap-2.5">
+                  <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
+                  <span className="text-[#E6CA85] font-semibold">{language === 'de' ? 'Provision nur 15 Tage Miete bei Abschluss' : 'Fee strictly 15 days rent upon signing'}</span>
                 </li>
               </ul>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-neutral-800 flex items-center justify-between text-xs font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
+            <div className="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-sm sm:text-base font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
               <span>{language === 'de' ? 'Vermietung anfragen (15 Tage Miete)' : 'Inquire Rental Placement (15 Days Rent)'}</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-4.5 h-4.5 transition-transform group-hover:translate-x-1" />
             </div>
           </div>
         </motion.div>
@@ -237,29 +237,29 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-12 pt-8 border-t border-neutral-800/80 max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-center"
+          className="mt-14 pt-8 border-t border-neutral-800/80 max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-5 text-center"
         >
           <div>
-            <div className="text-xl sm:text-2xl font-bold text-[#E6CA85] tabular-nums font-mono">0.7%</div>
-            <div className="text-[11px] text-neutral-400 mt-0.5 font-medium">
+            <div className="text-2xl sm:text-3xl font-bold text-[#E6CA85] tabular-nums font-mono">0.7%</div>
+            <div className="text-xs sm:text-sm text-neutral-300 mt-1 font-medium">
               {language === 'de' ? 'Verkaufsprovision' : 'Sales Commission'}
             </div>
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-bold text-white tabular-nums font-mono">15 Tage</div>
-            <div className="text-[11px] text-neutral-400 mt-0.5 font-medium">
+            <div className="text-2xl sm:text-3xl font-bold text-white tabular-nums font-mono">15 Tage</div>
+            <div className="text-xs sm:text-sm text-neutral-300 mt-1 font-medium">
               {language === 'de' ? 'Miete bei Vermietung' : 'Rent as Commission'}
             </div>
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-bold text-white tabular-nums font-mono">0 CHF</div>
-            <div className="text-[11px] text-neutral-400 mt-0.5 font-medium">
+            <div className="text-2xl sm:text-3xl font-bold text-white tabular-nums font-mono">0 CHF</div>
+            <div className="text-xs sm:text-sm text-neutral-300 mt-1 font-medium">
               {language === 'de' ? 'Vorabkosten / Risiko' : 'Upfront Fee / Risk'}
             </div>
           </div>
           <div>
-            <div className="text-xl sm:text-2xl font-bold text-[#E6CA85] tabular-nums font-mono">&lt; 24h</div>
-            <div className="text-[11px] text-neutral-400 mt-0.5 font-medium">
+            <div className="text-2xl sm:text-3xl font-bold text-[#E6CA85] tabular-nums font-mono">&lt; 24h</div>
+            <div className="text-xs sm:text-sm text-neutral-300 mt-1 font-medium">
               {language === 'de' ? 'Antwortgarantie' : 'Response Guarantee'}
             </div>
           </div>
