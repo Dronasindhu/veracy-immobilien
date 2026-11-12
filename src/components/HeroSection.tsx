@@ -133,7 +133,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     <Tag className="w-5 h-5" />
                   </div>
                   <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-300">
-                    {language === 'de' ? 'Option 01' : 'Option 01'}
+                    {language === 'de' ? 'Verkaufen' : 'Sell'}
                   </span>
                 </div>
                 <span className="text-xs font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-3 py-1 rounded shadow-xs">
@@ -188,7 +188,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                     <KeyRound className="w-5 h-5" />
                   </div>
                   <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-300">
-                    {language === 'de' ? 'Option 02' : 'Option 02'}
+                    {language === 'de' ? 'Vermieten' : 'Rent Out'}
                   </span>
                 </div>
                 <span className="text-xs font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-3 py-1 rounded shadow-xs">

@@ -217,9 +217,6 @@ export const ContactModal: React.FC<ContactModalProps> = ({
                       <option value="sell">{language === 'de' ? 'Immobilie verkaufen (Nur 0.7% Provision)' : 'Sell Property (Only 0.7% Commission)'}</option>
                       <option value="rent-out">{language === 'de' ? 'Immobilie vermieten (Nur 15 Tage Miete Provision)' : 'Rent Out Property (Only 15 Days Rent Commission)'}</option>
                       <option value="valuation">{language === 'de' ? 'Kostenlose Marktwertschätzung anfordern' : 'Request Complimentary Valuation'}</option>
-                      <option value="package-standard-full">{language === 'de' ? 'Paket: Standard Makler (0.7% Provision)' : 'Package: Standard Broker (0.7% Commission)'}</option>
-                      <option value="package-digital-direct">Paket: Starter / Digital Direkt (CHF 3'900)</option>
-                      <option value="package-exclusive-mandate">Paket: Exklusiv Mandat (1.0%)</option>
                     </select>
                   </div>
 

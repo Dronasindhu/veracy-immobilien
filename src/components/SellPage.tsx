@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Language, SellingPackage } from '../types';
-import { SELLING_PACKAGES } from '../data/mockData';
-import { Check, ArrowRight, ShieldCheck, Clock, HelpCircle, FileText, Sparkles, Calendar } from 'lucide-react';
+import { Check, ArrowRight, ShieldCheck, Clock, HelpCircle, FileText, Sparkles, Calendar, Tag } from 'lucide-react';
 import { motion } from 'motion/react';
 
 interface SellPageProps {
   language: Language;
-  onSelectPackage: (pkg: SellingPackage) => void;
+  onSelectPackage?: (pkg: SellingPackage) => void;
   onOpenConsultation: () => void;
 }
 
@@ -89,9 +88,21 @@ export const SellPage: React.FC<SellPageProps> = ({
               <span>{language === 'de' ? 'Fotos, 3D Tour & Walkthrough inkl.' : 'Photos, 3D Tour & Walkthrough incl.'}</span>
             </div>
             <h1 className="text-4xl sm:text-5xl font-normal font-display tracking-tight text-white leading-tight">
-              {language === 'de'
-                ? 'Ihre Immobilie erfolgreich verkaufen. Ohne überhöhte Maklerprovision.'
-                : 'Sell Your Property Successfully. Without Inflated Broker Fees.'}
+              {language === 'de' ? (
+                <>
+                  Ihre Immobilie erfolgreich verkaufen.{' '}
+                  <span className="text-[#E6CA85] italic font-light block sm:inline">
+                    Zu nur 0.7% Provision.
+                  </span>
+                </>
+              ) : (
+                <>
+                  Sell Your Property Successfully.{' '}
+                  <span className="text-[#E6CA85] italic font-light block sm:inline">
+                    At Only 0.7% Commission.
+                  </span>
+                </>
+              )}
             </h1>
             <p className="mt-4 text-base sm:text-lg text-neutral-300 font-light leading-relaxed">
               {language === 'de'
@@ -117,115 +128,112 @@ export const SellPage: React.FC<SellPageProps> = ({
         </div>
       </div>
 
-      {/* The 3 Selling Packages */}
-      <section className="py-20 sm:py-28 bg-neutral-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Schweizer Makler-Vollservice – Nur 0.7% Provision */}
+      <section className="py-16 sm:py-24 bg-neutral-50 border-b border-neutral-200 overflow-hidden">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-2xl mx-auto mb-16"
+            className="text-center max-w-2xl mx-auto mb-12"
           >
-            <div className="text-xs uppercase tracking-[0.2em] text-neutral-500 font-semibold mb-2">
-              {language === 'de' ? 'Transparente Preismodelle' : 'Transparent Packages'}
+            <div className="text-xs sm:text-sm uppercase tracking-[0.2em] text-[#8C6D1F] font-bold mb-2">
+              {language === 'de' ? 'Unser klares Schweizer Modell' : 'Our Transparent Swiss Model'}
             </div>
-            <h2 className="text-3xl font-normal font-display text-neutral-950 tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-normal font-display text-neutral-950 tracking-tight">
               {language === 'de'
-                ? 'Drei klare Pakete für Ihren Immobilienverkauf'
-                : 'Three Tailored Packages for Selling Your Property'}
+                ? 'Schweizer Makler-Vollservice: Nur 0.7% Provision'
+                : 'Full Swiss Brokerage: Only 0.7% Commission'}
             </h2>
-            <p className="mt-2 text-sm text-neutral-600 font-light">
+            <p className="mt-3 text-base sm:text-lg text-neutral-600 font-normal">
               {language === 'de'
-                ? 'Keine versteckten Gebühren. Erfolgshonorar wird erst nach erfolgreicher notarieller Beurkundung fällig.'
-                : 'No hidden fees. Invoiced only upon successful notarization and transfer of ownership.'}
+                ? 'Keine Pakete, keine versteckten Kosten und 0 CHF Vorabkosten: Bei Veracy zahlen Sie ausschliesslich 0.7% Erfolgshonorar bei erfolgreicher Beurkundung.'
+                : 'No packages, no hidden fees, and 0 CHF upfront: With Veracy, you strictly pay 0.7% success fee upon notarization.'}
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-            {SELLING_PACKAGES.map((pkg, idx) => {
-              const isPopular = pkg.popular;
-              return (
-                <motion.div
-                  key={pkg.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.6, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                  whileHover={{ y: -8, transition: { duration: 0.25 } }}
-                  className={`relative flex flex-col justify-between rounded-xl bg-white transition-shadow duration-300 ${
-                    isPopular
-                      ? 'border-2 border-neutral-900 shadow-xl hover:shadow-2xl'
-                      : 'border border-neutral-200/90 shadow-sm hover:shadow-xl hover:border-neutral-300'
-                  }`}
-                >
-                  {isPopular && (
-                    <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-neutral-900 text-[#E6CA85] text-[11px] font-semibold uppercase tracking-wider px-3 py-1 rounded shadow-sm border border-[#C5A059]/40">
-                      {language === 'de' ? 'Meistgewähltes Paket' : 'Most Popular Choice'}
-                    </div>
-                  )}
+          {/* Unified 0.7% Full Service Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6 }}
+            className="bg-white rounded-2xl border-2 border-neutral-900 p-8 sm:p-12 shadow-xl relative"
+          >
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 pb-8 border-b border-neutral-200">
+              <div>
+                <span className="text-xs sm:text-sm font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-3.5 py-1 rounded-full shadow-xs">
+                  {language === 'de' ? '100% Makler-Vollservice vor Ort' : '100% Full On-Site Brokerage'}
+                </span>
+                <h3 className="text-2xl sm:text-3xl font-display font-semibold text-neutral-950 mt-3">
+                  {language === 'de' ? 'Rundum-Sorglos-Verkaufsmandat' : 'Turnkey Sales Mandate'}
+                </h3>
+                <p className="text-neutral-600 text-sm sm:text-base mt-1.5 font-normal">
+                  {language === 'de'
+                    ? 'Persönliche Betreuung von A bis Z für Einfamilienhäuser, Eigentumswohnungen und Mehrfamilienhäuser in Zürich & Aargau.'
+                    : 'Personal guidance from start to finish for houses, apartments, and residential buildings in Zurich & Aargau.'}
+                </p>
+              </div>
 
-                  <div className="p-7 sm:p-8">
-                    {/* Header */}
-                    <div className="mb-6">
-                      <h3 className="text-xl font-semibold tracking-tight text-neutral-900">
-                        {pkg.name[language]}
-                      </h3>
-                      <p className="text-xs text-neutral-500 mt-1 min-h-[32px] font-light leading-relaxed">
-                        {pkg.tagline[language]}
-                      </p>
-                    </div>
+              <div className="text-left lg:text-right shrink-0">
+                <div className="text-4xl sm:text-5xl font-extrabold font-mono text-neutral-950 tracking-tight">
+                  0.7%
+                </div>
+                <div className="text-xs sm:text-sm text-neutral-600 font-medium mt-1">
+                  {language === 'de' ? 'Erfolgshonorar erst bei Notariatsvertrag' : 'Success fee only upon notarization'}
+                </div>
+                <div className="text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded px-2.5 py-1 inline-block mt-2">
+                  {language === 'de' ? '0 CHF Vorabkosten / Kein Risiko' : '0 CHF upfront / Zero risk'}
+                </div>
+              </div>
+            </div>
 
-                    {/* Price Lockup */}
-                    <div className="mb-6 pb-6 border-b border-neutral-100">
-                      <div className="text-3xl sm:text-4xl font-bold font-mono tracking-tight text-neutral-950">
-                        {pkg.priceDisplay[language]}
-                      </div>
-                      <div className="text-xs text-neutral-500 mt-1">
-                        {pkg.priceNote[language]}
-                      </div>
-                      <div className="mt-3 text-[11px] text-[#8C6D1F] bg-[#FAF6EE] border border-[#EBDCB7] rounded px-2.5 py-1 inline-block font-medium">
-                        {language === 'de' ? 'Ideal für: ' : 'Ideal for: '}
-                        {pkg.idealFor[language]}
-                      </div>
-                    </div>
-
-                    {/* Features list */}
-                    <div className="space-y-3.5">
-                      <div className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-900">
-                        {language === 'de' ? 'Leistungsumfang:' : 'Included Services:'}
-                      </div>
-                      <ul className="space-y-3">
-                        {pkg.features[language].map((feat, idx2) => (
-                          <li key={idx2} className="flex items-start gap-2.5 text-sm text-neutral-700 leading-normal">
-                            <Check className="w-4.5 h-4.5 text-emerald-600 shrink-0 mt-0.5" />
-                            <span>{feat}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+            {/* Everything Included 2-column checklist */}
+            <div className="mt-8">
+              <div className="text-sm font-bold uppercase tracking-wider text-neutral-900 mb-4">
+                {language === 'de' ? 'In der 0.7% Provision lückenlos inbegriffen:' : 'Fully included in the 0.7% commission:'}
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {[
+                  { de: 'Schweizer Makler-Vollservice & persönliche Vertretung vor Ort', en: 'Full Swiss on-site brokerage & personal representation' },
+                  { de: 'Professionelle HDR-Fotografie vor Ort & 2D/3D Grundrisse', en: 'Professional HDR photography & 2D/3D floor plans' },
+                  { de: 'Interaktive Matterport 3D Tour (Virtueller Rundgang)', en: 'Interactive Matterport 3D virtual tour' },
+                  { de: 'Cinematischer Video-Walkthrough für Web & Social Media', en: 'Cinematic video walkthrough for portals & social media' },
+                  { de: 'Prioritäts-Listing auf Homegate, ImmoScout24 & Flatfox', en: 'Priority listing on Homegate, ImmoScout24 & Flatfox' },
+                  { de: 'Erstellung eines hochwertigen Verkaufsdossiers', en: 'Creation of a premium sales dossier' },
+                  { de: 'Durchführung sämtlicher Besichtigungen durch Veracy Makler', en: 'Conducting all viewings by licensed Veracy brokers' },
+                  { de: 'Professionelle Preisverhandlung & strukturiertes Bieterverfahren', en: 'Professional price negotiation & structured bidding' },
+                  { de: 'Bank- & Bonitätsprüfung der Käufer vor Reservation', en: 'Bank mortgage & solvency vetting before reservation' },
+                  { de: 'Koordination des Notartermins & Begleitung zum Grundbuchamt', en: 'Coordination of notary & accompaniment to land registry' },
+                  { de: 'Steuerliche Ersteinschätzung der Grundstückgewinnsteuer', en: 'Initial tax calculation for Swiss capital gains tax' },
+                  { de: 'Rechtssichere Kaufvertragsprüfung & protokollierte Übergabe', en: 'Contract legal verification & documented handover' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 text-sm text-neutral-700 font-normal leading-snug">
+                    <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <span>{item[language]}</span>
                   </div>
+                ))}
+              </div>
+            </div>
 
-                  {/* Action button */}
-                  <div className="p-7 sm:p-8 pt-0">
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => onSelectPackage(pkg)}
-                      className={`w-full py-3.5 px-4 rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm ${
-                        isPopular
-                          ? 'bg-neutral-900 hover:bg-neutral-800 text-white shadow-md'
-                          : 'bg-neutral-100 hover:bg-neutral-900 hover:text-white text-neutral-900'
-                      }`}
-                    >
-                      <span>{language === 'de' ? 'Paket unverbindlich anfragen' : 'Request Package Consultation'}</span>
-                      <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </motion.button>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
+            {/* CTA in the 0.7% card */}
+            <div className="mt-10 pt-8 border-t border-neutral-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-neutral-600 font-medium">
+                <Clock className="w-4.5 h-4.5 text-[#C5A059]" />
+                <span>{language === 'de' ? 'Antwort innert 24h garantiert · 100% unverbindlich' : 'Guaranteed response < 24h · 100% non-binding'}</span>
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onOpenConsultation}
+                className="px-8 py-4 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 font-bold rounded-xl text-sm sm:text-base tracking-wide flex items-center justify-center gap-2.5 cursor-pointer shadow-md border border-[#C5A059]/40"
+              >
+                <span>{language === 'de' ? 'Verkauf anfragen (0.7% Provision)' : 'Inquire Sale (0.7% Commission)'}</span>
+                <ArrowRight className="w-5 h-5" />
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
