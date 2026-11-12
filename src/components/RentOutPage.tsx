@@ -199,31 +199,40 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
 
             {/* Value Proposition Badges */}
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 border-t border-neutral-800/80 pt-6">
-              <div className="flex items-center gap-2 text-xs text-neutral-300">
-                <Clock className="w-4 h-4 text-[#DFB76C] shrink-0" />
-                <span>{language === 'de' ? 'Nur 15 Tage Miete Provision' : 'Only 15 Days Rent Fee'}</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-neutral-300">
-                <Camera className="w-4 h-4 text-[#DFB76C] shrink-0" />
-                <span>{language === 'de' ? 'Fotos, 3D Tour & Walkthrough' : 'Photos, 3D Tour & Walkthrough'}</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-neutral-300">
-                <ShieldCheck className="w-4 h-4 text-[#DFB76C] shrink-0" />
-                <span>{language === 'de' ? '100% Bonitätsgeprüft' : '100% Solvency Checked'}</span>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-neutral-300">
-                <Award className="w-4 h-4 text-[#DFB76C] shrink-0" />
-                <span>{language === 'de' ? '0 CHF bei Nichterfolg' : '0 CHF If Not Rented'}</span>
-              </div>
+              {[
+                { icon: Clock, text: language === 'de' ? 'Nur 15 Tage Miete Provision' : 'Only 15 Days Rent Fee' },
+                { icon: Camera, text: language === 'de' ? 'Fotos, 3D Tour & Walkthrough' : 'Photos, 3D Tour & Walkthrough' },
+                { icon: ShieldCheck, text: language === 'de' ? '100% Bonitätsgeprüft' : '100% Solvency Checked' },
+                { icon: Award, text: language === 'de' ? '0 CHF bei Nichterfolg' : '0 CHF If Not Rented' },
+              ].map((badge, idx) => {
+                const IconComp = badge.icon;
+                return (
+                  <motion.div
+                    key={idx}
+                    whileHover={{ scale: 1.03, x: 2 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                    className="flex items-center gap-2 text-xs text-neutral-300 p-1.5 rounded-lg hover:bg-neutral-800/60 transition-colors"
+                  >
+                    <IconComp className="w-4 h-4 text-[#DFB76C] shrink-0" />
+                    <span>{badge.text}</span>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
       </div>
 
       {/* 4 Steps Journey for Landlords (Moved to top) */}
-      <section className="bg-white border-b border-neutral-200 py-12 sm:py-16">
+      <section className="bg-white border-b border-neutral-200 py-12 sm:py-16 overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-2xl mx-auto mb-10"
+          >
             <span className="text-xs sm:text-sm uppercase tracking-[0.2em] text-[#8C6D1F] font-bold">
               {language === 'de' ? 'Der Veracy Vermieterprozess' : 'The Landlord Journey'}
             </span>
@@ -237,26 +246,42 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                 ? 'Strukturiert, transparent und fair: Provision nur 15 Tage Miete bei erfolgreichem Abschluss.'
                 : 'Structured, transparent, and fair: Commission only 15 days of rent upon success.'}
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {rentalSteps.map((step) => (
-              <div
+            {rentalSteps.map((step, idx) => (
+              <motion.div
                 key={step.step}
-                className="p-6 sm:p-7 rounded-xl bg-neutral-50 border border-neutral-200 shadow-sm flex flex-col justify-between"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -8, scale: 1.015, transition: { duration: 0.22, ease: 'easeOut' } }}
+                className="group p-6 sm:p-7 rounded-xl bg-neutral-50 hover:bg-white border border-neutral-200 hover:border-[#C5A059] shadow-sm hover:shadow-[0_16px_36px_rgba(197,160,89,0.12)] transition-all flex flex-col justify-between relative overflow-hidden"
               >
+                {/* Subtle top golden accent bar on card hover */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#DFB76C] to-[#C5A059] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
                 <div>
-                  <div className="text-3xl font-mono font-bold text-[#C5A059] mb-3">
-                    {step.step}
+                  <div className="text-3xl font-mono font-bold text-[#C5A059] group-hover:text-[#8C6D1F] mb-3 transition-colors flex items-center justify-between">
+                    <span>{step.step}</span>
+                    <span className="text-xs uppercase tracking-wider text-neutral-400 group-hover:text-[#8C6D1F] font-sans font-semibold transition-colors">
+                      {language === 'de' ? `Schritt ${idx + 1}` : `Step ${idx + 1}`}
+                    </span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-neutral-900 mb-2 leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-neutral-900 group-hover:text-neutral-950 mb-2 leading-snug transition-colors">
                     {step.title[language]}
                   </h3>
                   <p className="text-sm text-neutral-700 font-normal leading-relaxed">
                     {step.desc[language]}
                   </p>
                 </div>
-              </div>
+
+                <div className="mt-5 pt-3 border-t border-neutral-200/80 text-xs text-neutral-500 flex items-center gap-1.5 font-medium group-hover:text-[#8C6D1F] transition-colors">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#C5A059]" />
+                  <span>{language === 'de' ? 'Schweizer SVIT Standard' : 'Swiss SVIT Standard'}</span>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -302,9 +327,11 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                       { id: 'Einfamilienhaus', de: 'Einfamilienhaus / Villa', en: 'Single-Family House' },
                       { id: 'Mehrfamilienhaus', de: 'Ganzes Mehrfamilienhaus', en: 'Multi-Family House' },
                     ].map((pt) => (
-                      <button
+                      <motion.button
                         key={pt.id}
                         type="button"
+                        whileHover={{ y: -2, scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
                         onClick={() => setPropertyType(pt.id)}
                         className={`py-3.5 px-4 rounded-xl border text-sm sm:text-base font-semibold cursor-pointer transition-all ${
                           propertyType === pt.id
@@ -313,7 +340,7 @@ export const RentOutPage: React.FC<RentOutPageProps> = ({
                         }`}
                       >
                         {language === 'de' ? pt.de : pt.en}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Language } from '../types';
 import { Sparkles, ArrowRight, CheckCircle2, Tag, KeyRound } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 
 interface QualityValueModelProps {
   language: Language;
@@ -49,12 +49,12 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
           </p>
 
           {/* Tab Selector: Sell vs Rent-Out */}
-          <div className="mt-6 inline-flex p-1 rounded-lg bg-neutral-800 border border-neutral-700">
+          <div className="mt-6 inline-flex p-1 rounded-xl bg-neutral-800 border border-neutral-700 relative">
             <button
               onClick={() => setActiveTab('sell')}
-              className={`px-5 py-2 rounded-md text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
+              className={`px-5 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 relative z-10 ${
                 activeTab === 'sell'
-                  ? 'bg-gradient-to-r from-[#DFB76C] to-[#C5A059] text-neutral-950 shadow'
+                  ? 'bg-gradient-to-r from-[#DFB76C] to-[#C5A059] text-neutral-950 shadow-md font-bold'
                   : 'text-neutral-400 hover:text-white'
               }`}
             >
@@ -63,9 +63,9 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('rent')}
-              className={`px-5 py-2 rounded-md text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
+              className={`px-5 py-2.5 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 relative z-10 ${
                 activeTab === 'rent'
-                  ? 'bg-gradient-to-r from-[#DFB76C] to-[#C5A059] text-neutral-950 shadow'
+                  ? 'bg-gradient-to-r from-[#DFB76C] to-[#C5A059] text-neutral-950 shadow-md font-bold'
                   : 'text-neutral-400 hover:text-white'
               }`}
             >
@@ -76,176 +76,228 @@ export const QualityValueModel: React.FC<QualityValueModelProps> = ({
         </div>
 
         {/* Interactive Calculator Box */}
-        <div className="bg-neutral-950/70 border border-neutral-800 rounded-2xl p-6 sm:p-10 shadow-2xl">
-          {activeTab === 'sell' ? (
-            /* Sales Calculator */
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-6 space-y-5">
-                <div>
-                  <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium mb-1">
-                    {language === 'de' ? 'Verkaufswert Liegenschaft' : 'Expected Sale Price'}
-                  </div>
-                  <div className="text-3xl font-semibold text-[#E6CA85] font-mono tabular-nums">
-                    {formatChf(propertyPrice)}
-                  </div>
-                </div>
-
-                <div>
-                  <input
-                    type="range"
-                    min={500000}
-                    max={3500000}
-                    step={50000}
-                    value={propertyPrice}
-                    onChange={(e) => setPropertyPrice(Number(e.target.value))}
-                    className="w-full h-2 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-[#C5A059]"
-                  />
-                  <div className="flex justify-between text-[11px] text-neutral-500 mt-2 font-mono">
-                    <span>CHF 500'000</span>
-                    <span>CHF 1'800'000</span>
-                    <span>CHF 3'500'000</span>
-                  </div>
-                </div>
-
-                <div className="space-y-1.5 text-xs text-neutral-400 pt-2">
-                  <div className="flex items-center gap-2 text-neutral-300">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                    <span>{language === 'de' ? 'Traditionell: 2.5% Provision fällig' : 'Traditional: 2.5% commission'}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-neutral-300">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                    <span>{language === 'de' ? 'Veracy: Nur 0.7% Erfolgshonorar bei Beurkundung' : 'Veracy: Only 0.7% success fee upon notarization'}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[#E6CA85]">
-                    <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                    <span>{language === 'de' ? 'Inklusive Profi-Fotos, interaktive 3D Tour & Video-Walkthrough' : 'Includes pro photos, interactive 3D tour & video walkthrough'}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Calculated Comparison */}
-              <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-neutral-900/90 p-5 rounded-xl border border-neutral-800 flex flex-col justify-between">
+        <div className="bg-neutral-950/70 border border-neutral-800 rounded-2xl p-6 sm:p-10 shadow-2xl relative overflow-hidden">
+          <AnimatePresence mode="wait">
+            {activeTab === 'sell' ? (
+              /* Sales Calculator */
+              <motion.div
+                key="tab-sell"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                <div className="lg:col-span-6 space-y-5">
                   <div>
-                    <div className="text-[11px] text-neutral-400 uppercase tracking-wider mb-1">
-                      {language === 'de' ? 'Marktstandard (2.5%)' : 'Market standard (2.5%)'}
+                    <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium mb-1">
+                      {language === 'de' ? 'Verkaufswert Liegenschaft' : 'Expected Sale Price'}
                     </div>
-                    <div className="text-xl font-semibold text-neutral-400 font-mono tabular-nums line-through decoration-red-400/80">
-                      {formatChf(traditionalSalesFee)}
-                    </div>
-                    <p className="text-xs text-neutral-500 mt-2">
-                      {language === 'de' ? 'Übliche Schweizer Maklerprovision.' : 'Standard Swiss broker fee.'}
-                    </p>
+                    <motion.div
+                      key={propertyPrice}
+                      initial={{ scale: 0.95 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                      className="text-3xl font-semibold text-[#E6CA85] font-mono tabular-nums"
+                    >
+                      {formatChf(propertyPrice)}
+                    </motion.div>
                   </div>
-                </div>
 
-                <div className="bg-gradient-to-b from-neutral-800 to-neutral-900 p-5 rounded-xl border-2 border-[#C5A059] flex flex-col justify-between relative shadow-lg">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-[#E6CA85] mb-1">
-                    {language === 'de' ? 'Veracy (Nur 0.7%)' : 'Veracy (Only 0.7%)'}
-                  </div>
-                  <div className="text-xl font-bold text-white font-mono tabular-nums">
-                    {formatChf(veracySalesFee)}
-                  </div>
-                  <div className="mt-3 pt-3 border-t border-neutral-700/80">
-                    <div className="text-[11px] text-neutral-300">
-                      {language === 'de' ? 'Ihre Ersparnis:' : 'Your Savings:'}
-                    </div>
-                    <div className="text-lg font-bold text-[#E6CA85] font-mono tabular-nums">
-                      +{formatChf(salesSavings)}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* Rental Calculator */
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              <div className="lg:col-span-6 space-y-5">
-                <div>
-                  <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium mb-1">
-                    {language === 'de' ? 'Monatlicher Mietzins (netto)' : 'Monthly Net Rent'}
-                  </div>
-                  <div className="text-3xl font-semibold text-[#E6CA85] font-mono tabular-nums">
-                    {formatChf(monthlyRent)} / Mt.
-                  </div>
-                </div>
-
-                <div>
-                  <input
-                    type="range"
-                    min={1200}
-                    max={6000}
-                    step={100}
-                    value={monthlyRent}
-                    onChange={(e) => setMonthlyRent(Number(e.target.value))}
-                    className="w-full h-2 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-[#C5A059]"
-                  />
-                  <div className="flex justify-between text-[11px] text-neutral-500 mt-2 font-mono">
-                    <span>CHF 1'200</span>
-                    <span>CHF 3'500</span>
-                    <span>CHF 6'000</span>
-                  </div>
-                </div>
-
-                <div className="space-y-1.5 text-xs text-neutral-400 pt-2">
-                  <div className="flex items-center gap-2 text-neutral-300">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                    <span>{language === 'de' ? 'Traditionell: 1 bis 2 Monatsmieten Provision' : 'Traditional: 1 to 2 months rent'}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-neutral-300">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                    <span>{language === 'de' ? 'Veracy: Nur 15 Tage Miete (halbe Monatsmiete)' : 'Veracy: Only 15 days rent (0.5 month)'}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-[#E6CA85]">
-                    <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
-                    <span>{language === 'de' ? 'Inklusive Profi-Fotos, interaktive 3D Tour & Video-Walkthrough' : 'Includes pro photos, interactive 3D tour & video walkthrough'}</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Calculated Comparison */}
-              <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-neutral-900/90 p-5 rounded-xl border border-neutral-800 flex flex-col justify-between">
                   <div>
-                    <div className="text-[11px] text-neutral-400 uppercase tracking-wider mb-1">
-                      {language === 'de' ? 'Marktstandard (1 Monatsmiete)' : 'Market standard (1 mo. rent)'}
+                    <input
+                      type="range"
+                      min={500000}
+                      max={3500000}
+                      step={50000}
+                      value={propertyPrice}
+                      onChange={(e) => setPropertyPrice(Number(e.target.value))}
+                      className="w-full h-2 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-[#C5A059]"
+                    />
+                    <div className="flex justify-between text-[11px] text-neutral-500 mt-2 font-mono">
+                      <span>CHF 500'000</span>
+                      <span>CHF 1'800'000</span>
+                      <span>CHF 3'500'000</span>
                     </div>
-                    <div className="text-xl font-semibold text-neutral-400 font-mono tabular-nums line-through decoration-red-400/80">
-                      {formatChf(traditionalRentFee)}
+                  </div>
+
+                  <div className="space-y-1.5 text-xs text-neutral-400 pt-2">
+                    <div className="flex items-center gap-2 text-neutral-300">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
+                      <span>{language === 'de' ? 'Traditionell: 2.5% Provision fällig' : 'Traditional: 2.5% commission'}</span>
                     </div>
-                    <p className="text-xs text-neutral-500 mt-2">
-                      {language === 'de' ? 'Oft 1–2 Monatskaltmieten.' : 'Typically 1–2 full months.'}
-                    </p>
+                    <div className="flex items-center gap-2 text-neutral-300">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
+                      <span>{language === 'de' ? 'Veracy: Nur 0.7% Erfolgshonorar bei Beurkundung' : 'Veracy: Only 0.7% success fee upon notarization'}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[#E6CA85]">
+                      <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
+                      <span>{language === 'de' ? 'Inklusive Profi-Fotos, interaktive 3D Tour & Video-Walkthrough' : 'Includes pro photos, interactive 3D tour & video walkthrough'}</span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-b from-neutral-800 to-neutral-900 p-5 rounded-xl border-2 border-[#C5A059] flex flex-col justify-between relative shadow-lg">
-                  <div className="text-[10px] font-bold uppercase tracking-wider text-[#E6CA85] mb-1">
-                    {language === 'de' ? 'Veracy (Nur 15 Tage Miete)' : 'Veracy (Only 15 Days Rent)'}
-                  </div>
-                  <div className="text-xl font-bold text-white font-mono tabular-nums">
-                    {formatChf(veracyRentFee)}
-                  </div>
-                  <div className="mt-3 pt-3 border-t border-neutral-700/80">
-                    <div className="text-[11px] text-neutral-300">
-                      {language === 'de' ? 'Ihre Ersparnis:' : 'Your Savings:'}
+                {/* Calculated Comparison */}
+                <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <motion.div
+                    whileHover={{ y: -3 }}
+                    className="bg-neutral-900/90 p-5 rounded-xl border border-neutral-800 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="text-[11px] text-neutral-400 uppercase tracking-wider mb-1">
+                        {language === 'de' ? 'Marktstandard (2.5%)' : 'Market standard (2.5%)'}
+                      </div>
+                      <div className="text-xl font-semibold text-neutral-400 font-mono tabular-nums line-through decoration-red-400/80">
+                        {formatChf(traditionalSalesFee)}
+                      </div>
+                      <p className="text-xs text-neutral-500 mt-2">
+                        {language === 'de' ? 'Übliche Schweizer Maklerprovision.' : 'Standard Swiss broker fee.'}
+                      </p>
                     </div>
-                    <div className="text-lg font-bold text-[#E6CA85] font-mono tabular-nums">
-                      +{formatChf(rentSavings)}
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ y: -4, scale: 1.02 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    className="bg-gradient-to-b from-neutral-800 to-neutral-900 p-5 rounded-xl border-2 border-[#C5A059] flex flex-col justify-between relative shadow-lg"
+                  >
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-[#E6CA85] mb-1">
+                      {language === 'de' ? 'Veracy (Nur 0.7%)' : 'Veracy (Only 0.7%)'}
+                    </div>
+                    <div className="text-xl font-bold text-white font-mono tabular-nums">
+                      {formatChf(veracySalesFee)}
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-neutral-700/80">
+                      <div className="text-[11px] text-neutral-300">
+                        {language === 'de' ? 'Ihre Ersparnis:' : 'Your Savings:'}
+                      </div>
+                      <motion.div
+                        key={`sales-save-${salesSavings}`}
+                        initial={{ scale: 0.9 }}
+                        animate={{ scale: 1 }}
+                        className="text-lg font-bold text-[#E6CA85] font-mono tabular-nums"
+                      >
+                        +{formatChf(salesSavings)}
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            ) : (
+              /* Rental Calculator */
+              <motion.div
+                key="tab-rent"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
+              >
+                <div className="lg:col-span-6 space-y-5">
+                  <div>
+                    <div className="text-xs uppercase tracking-wider text-neutral-400 font-medium mb-1">
+                      {language === 'de' ? 'Monatlicher Mietzins (netto)' : 'Monthly Net Rent'}
+                    </div>
+                    <motion.div
+                      key={monthlyRent}
+                      initial={{ scale: 0.95 }}
+                      animate={{ scale: 1 }}
+                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                      className="text-3xl font-semibold text-[#E6CA85] font-mono tabular-nums"
+                    >
+                      {formatChf(monthlyRent)} / Mt.
+                    </motion.div>
+                  </div>
+
+                  <div>
+                    <input
+                      type="range"
+                      min={1200}
+                      max={6000}
+                      step={100}
+                      value={monthlyRent}
+                      onChange={(e) => setMonthlyRent(Number(e.target.value))}
+                      className="w-full h-2 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-[#C5A059]"
+                    />
+                    <div className="flex justify-between text-[11px] text-neutral-500 mt-2 font-mono">
+                      <span>CHF 1'200</span>
+                      <span>CHF 3'500</span>
+                      <span>CHF 6'000</span>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5 text-xs text-neutral-400 pt-2">
+                    <div className="flex items-center gap-2 text-neutral-300">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
+                      <span>{language === 'de' ? 'Traditionell: 1 bis 2 Monatsmieten Provision' : 'Traditional: 1 to 2 months rent'}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-neutral-300">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
+                      <span>{language === 'de' ? 'Veracy: Nur 15 Tage Miete (halbe Monatsmiete)' : 'Veracy: Only 15 days rent (0.5 month)'}</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[#E6CA85]">
+                      <Sparkles className="w-3.5 h-3.5 text-[#DFB76C] shrink-0" />
+                      <span>{language === 'de' ? 'Inklusive Profi-Fotos, interaktive 3D Tour & Video-Walkthrough' : 'Includes pro photos, interactive 3D tour & video walkthrough'}</span>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          )}
+
+                {/* Calculated Comparison */}
+                <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <motion.div
+                    whileHover={{ y: -3 }}
+                    className="bg-neutral-900/90 p-5 rounded-xl border border-neutral-800 flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="text-[11px] text-neutral-400 uppercase tracking-wider mb-1">
+                        {language === 'de' ? 'Marktstandard (1 Monatsmiete)' : 'Market standard (1 mo. rent)'}
+                      </div>
+                      <div className="text-xl font-semibold text-neutral-400 font-mono tabular-nums line-through decoration-red-400/80">
+                        {formatChf(traditionalRentFee)}
+                      </div>
+                      <p className="text-xs text-neutral-500 mt-2">
+                        {language === 'de' ? 'Oft 1–2 Monatskaltmieten.' : 'Typically 1–2 full months.'}
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    whileHover={{ y: -4, scale: 1.02 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                    className="bg-gradient-to-b from-neutral-800 to-neutral-900 p-5 rounded-xl border-2 border-[#C5A059] flex flex-col justify-between relative shadow-lg"
+                  >
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-[#E6CA85] mb-1">
+                      {language === 'de' ? 'Veracy (Nur 15 Tage Miete)' : 'Veracy (Only 15 Days Rent)'}
+                    </div>
+                    <div className="text-xl font-bold text-white font-mono tabular-nums">
+                      {formatChf(veracyRentFee)}
+                    </div>
+                    <div className="mt-3 pt-3 border-t border-neutral-700/80">
+                      <div className="text-[11px] text-neutral-300">
+                        {language === 'de' ? 'Ihre Ersparnis:' : 'Your Savings:'}
+                      </div>
+                      <motion.div
+                        key={`rent-save-${rentSavings}`}
+                        initial={{ scale: 0.9 }}
+                        animate={{ scale: 1 }}
+                        className="text-lg font-bold text-[#E6CA85] font-mono tabular-nums"
+                      >
+                        +{formatChf(rentSavings)}
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Unified Action */}
           <div className="mt-8 pt-6 border-t border-neutral-800 text-center">
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.025, y: -2 }}
               whileTap={{ scale: 0.98 }}
               onClick={onOpenConsultation}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] text-neutral-950 font-semibold text-xs uppercase tracking-wider rounded-lg transition-all shadow-md cursor-pointer border border-[#C5A059]/40"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 font-bold text-xs sm:text-sm uppercase tracking-wider rounded-xl transition-all shadow-md hover:shadow-xl cursor-pointer border border-[#C5A059]/40"
             >
               <span>{language === 'de' ? 'Kostenlose Beratung anfordern' : 'Request Free Consultation'}</span>
               <ArrowRight className="w-4 h-4" />

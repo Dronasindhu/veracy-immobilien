@@ -80,21 +80,24 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <a
+            <motion.a
               href="tel:+41765886989"
-              className="text-neutral-800 hover:text-neutral-950 transition-colors flex items-center gap-1.5 font-mono tracking-tight font-semibold text-xs sm:text-sm"
+              whileHover={{ scale: 1.02 }}
+              className="text-neutral-800 hover:text-neutral-950 transition-colors flex items-center gap-1.5 font-mono tracking-tight font-semibold text-xs sm:text-sm group"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-[#C5A059]" />
+              <PhoneCall className="w-3.5 h-3.5 text-[#C5A059] group-hover:rotate-12 transition-transform duration-200" />
               <span>+41 76 588 69 89</span>
-            </a>
+            </motion.a>
             <span className="text-neutral-300">|</span>
-            <button
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
               onClick={onToggleLanguage}
-              className="font-bold text-[#8C6D1F] hover:text-[#6E5516] transition-colors cursor-pointer uppercase tracking-wider text-xs sm:text-sm"
+              className="font-bold text-[#8C6D1F] hover:text-[#6E5516] transition-colors cursor-pointer uppercase tracking-wider text-xs sm:text-sm px-1"
               aria-label="Language switch"
             >
               {language === 'de' ? 'EN' : 'DE'}
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>

@@ -32,13 +32,17 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 md:pt-24 md:pb-28 text-center">
-        {/* Trust Kicker */}
+        {/* Trust Kicker with animated live indicator */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-[#E6CA85] font-semibold mb-4"
+          className="inline-flex items-center gap-2 text-xs sm:text-sm uppercase tracking-[0.18em] text-[#E6CA85] font-semibold mb-4 px-3.5 py-1.5 rounded-full bg-neutral-900/80 border border-[#C5A059]/30 backdrop-blur-xs"
         >
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E6CA85] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#C5A059]"></span>
+          </span>
           <span>Schweizer Maklerstandard</span>
           <span aria-hidden="true" className="text-neutral-500">·</span>
           <span>Zürich & Aargau</span>
@@ -82,22 +86,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
             : 'Veracy provides elite Swiss brokerage for property owners across Zurich & Aargau: Only 0.7% sales commission and only 15 days of rent upon successful tenancy placement. Zero upfront fees, zero risk.'}
         </motion.p>
 
-        {/* Standalone Primary Action: Free Consultation (Purely Advisory / Consultation) */}
+        {/* Standalone Primary Action: Free Consultation with pulsating luxury aura */}
         {onOpenConsultation && (
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="mt-8 max-w-lg mx-auto"
+            className="mt-8 max-w-lg mx-auto relative group"
           >
+            {/* Ambient golden glow behind primary button */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-[#DFB76C] to-[#C5A059] rounded-xl blur-sm opacity-40 group-hover:opacity-80 transition duration-500 group-hover:duration-200 animate-pulse" />
+
             <motion.button
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ scale: 1.025 }}
               whileTap={{ scale: 0.98 }}
               onClick={onOpenConsultation}
-              className="w-full py-4 px-6 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 rounded-xl font-bold text-sm sm:text-base tracking-wide flex items-center justify-between gap-4 transition-all cursor-pointer shadow-xl shadow-[#C5A059]/20 border border-[#C5A059]/50 group"
+              className="relative w-full py-4 px-6 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 rounded-xl font-bold text-sm sm:text-base tracking-wide flex items-center justify-between gap-4 transition-all cursor-pointer shadow-xl shadow-[#C5A059]/25 border border-[#C5A059]/60"
             >
               <div className="flex items-center gap-3.5 min-w-0">
-                <div className="w-10 h-10 rounded-lg bg-neutral-950/10 flex items-center justify-center shrink-0 text-neutral-950">
+                <div className="w-10 h-10 rounded-lg bg-neutral-950/15 flex items-center justify-center shrink-0 text-neutral-950 group-hover:rotate-6 transition-transform">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div className="text-left min-w-0">
@@ -109,7 +116,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                   </div>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-neutral-950 shrink-0 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-5 h-5 text-neutral-950 shrink-0 transition-transform group-hover:translate-x-1.5" />
             </motion.button>
           </motion.div>
         )}
@@ -122,21 +129,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto text-left"
         >
           {/* Card 1: Sell Property - 0.7% Commission */}
-          <div
+          <motion.div
             onClick={() => onNavigate('sell')}
-            className="group p-7 rounded-2xl border border-neutral-800 bg-neutral-900/90 hover:bg-neutral-900 hover:border-[#C5A059] transition-all cursor-pointer flex flex-col justify-between shadow-xl relative"
+            whileHover={{ y: -8, transition: { duration: 0.25, ease: 'easeOut' } }}
+            whileTap={{ scale: 0.985 }}
+            className="group p-7 rounded-2xl border border-neutral-800 bg-neutral-900/90 hover:bg-neutral-900 hover:border-[#DFB76C] hover:shadow-[0_20px_45px_rgba(197,160,89,0.18)] transition-all cursor-pointer flex flex-col justify-between shadow-xl relative overflow-hidden"
           >
+            {/* Radial glow background on hover */}
+            <div className="absolute -top-20 -right-20 w-44 h-44 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#C5A059]/20 transition-all duration-500" />
+
             <div>
               <div className="flex items-center justify-between gap-2 mb-4">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2.5 rounded-lg bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors">
+                  <div className="p-2.5 rounded-lg bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors group-hover:scale-110 transform duration-300">
                     <Tag className="w-5 h-5" />
                   </div>
-                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-300">
+                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-300 group-hover:text-[#E6CA85] transition-colors">
                     {language === 'de' ? 'Verkaufen' : 'Sell'}
                   </span>
                 </div>
-                <span className="text-xs font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-3 py-1 rounded shadow-xs">
+                <span className="text-xs font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-3 py-1 rounded shadow-xs group-hover:scale-105 transition-transform">
                   {language === 'de' ? 'Nur 0.7% Provision' : 'Only 0.7% Commission'}
                 </span>
               </div>
@@ -147,23 +159,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               {/* Bullet Points */}
               <ul className="mt-4 space-y-3 text-sm sm:text-[15px] text-neutral-200 font-normal leading-snug">
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Schweizer Makler-Vollservice vor Ort' : 'Full Swiss on-site brokerage'}</span>
                 </li>
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200 delay-[40ms]">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Profi-Fotos, 3D Tour & Video-Walkthrough' : 'Pro photos, 3D tour & video walkthrough'}</span>
                 </li>
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200 delay-[80ms]">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Top-Listing auf Homegate & ImmoScout24' : 'Top listing on Homegate & ImmoScout24'}</span>
                 </li>
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200 delay-[120ms]">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Bonitätsprüfung & Notariatskoordination' : 'Solvency vetting & notary coordination'}</span>
                 </li>
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200 delay-[160ms]">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span className="text-[#E6CA85] font-semibold">{language === 'de' ? 'Erfolgshonorar (0.7%) erst bei Beurkundung' : 'Success fee (0.7%) only upon notarization'}</span>
                 </li>
@@ -172,26 +184,31 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             <div className="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-sm sm:text-base font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
               <span>{language === 'de' ? 'Verkauf anfragen (0.7%)' : 'Inquire Sale (0.7%)'}</span>
-              <ArrowRight className="w-4.5 h-4.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-4.5 h-4.5 transition-transform group-hover:translate-x-2" />
             </div>
-          </div>
+          </motion.div>
 
           {/* Card 2: Rent Out Property - 15 Days of Rent Commission */}
-          <div
+          <motion.div
             onClick={() => onNavigate('rent-out')}
-            className="group p-7 rounded-2xl border border-neutral-800 bg-neutral-900/90 hover:bg-neutral-900 hover:border-[#C5A059] transition-all cursor-pointer flex flex-col justify-between shadow-xl relative"
+            whileHover={{ y: -8, transition: { duration: 0.25, ease: 'easeOut' } }}
+            whileTap={{ scale: 0.985 }}
+            className="group p-7 rounded-2xl border border-neutral-800 bg-neutral-900/90 hover:bg-neutral-900 hover:border-[#DFB76C] hover:shadow-[0_20px_45px_rgba(197,160,89,0.18)] transition-all cursor-pointer flex flex-col justify-between shadow-xl relative overflow-hidden"
           >
+            {/* Radial glow background on hover */}
+            <div className="absolute -top-20 -right-20 w-44 h-44 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none group-hover:bg-[#C5A059]/20 transition-all duration-500" />
+
             <div>
               <div className="flex items-center justify-between gap-2 mb-4">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2.5 rounded-lg bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors">
+                  <div className="p-2.5 rounded-lg bg-neutral-800 text-[#DFB76C] group-hover:bg-[#C5A059] group-hover:text-neutral-950 transition-colors group-hover:scale-110 transform duration-300">
                     <KeyRound className="w-5 h-5" />
                   </div>
-                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-300">
+                  <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-neutral-300 group-hover:text-[#E6CA85] transition-colors">
                     {language === 'de' ? 'Vermieten' : 'Rent Out'}
                   </span>
                 </div>
-                <span className="text-xs font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-3 py-1 rounded shadow-xs">
+                <span className="text-xs font-bold uppercase tracking-wider bg-[#FAF6EE] text-[#8C6D1F] border border-[#C5A059] px-3 py-1 rounded shadow-xs group-hover:scale-105 transition-transform">
                   {language === 'de' ? 'Nur 15 Tage Miete Provision' : 'Only 15 Days Rent Commission'}
                 </span>
               </div>
@@ -202,23 +219,23 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
               {/* Bullet Points */}
               <ul className="mt-4 space-y-3 text-sm sm:text-[15px] text-neutral-200 font-normal leading-snug">
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Kompletter Vermieter-Rundumservice vor Ort' : 'Full turnkey landlord service on-site'}</span>
                 </li>
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200 delay-[40ms]">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Profi-Fotos, 3D Tour & Video-Walkthrough' : 'Pro photos, 3D tour & video walkthrough'}</span>
                 </li>
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200 delay-[80ms]">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Strenge Bonitätsprüfung & Mieterselektion' : 'Strict solvency screening & tenant vetting'}</span>
                 </li>
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200 delay-[120ms]">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span>{language === 'de' ? 'Rechtssicherer Schweizer Mietvertrag nach OR' : 'Legally compliant Swiss lease contract (OR)'}</span>
                 </li>
-                <li className="flex items-start gap-2.5">
+                <li className="flex items-start gap-2.5 group-hover:translate-x-1 transition-transform duration-200 delay-[160ms]">
                   <CheckCircle2 className="w-4.5 h-4.5 text-[#DFB76C] shrink-0 mt-0.5" />
                   <span className="text-[#E6CA85] font-semibold">{language === 'de' ? 'Provision nur 15 Tage Miete bei Abschluss' : 'Fee strictly 15 days rent upon signing'}</span>
                 </li>
@@ -227,42 +244,59 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
             <div className="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-sm sm:text-base font-semibold text-[#DFB76C] group-hover:text-white transition-colors">
               <span>{language === 'de' ? 'Vermietung anfragen (15 Tage Miete)' : 'Inquire Rental Placement (15 Days Rent)'}</span>
-              <ArrowRight className="w-4.5 h-4.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-4.5 h-4.5 transition-transform group-hover:translate-x-2" />
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
-        {/* Minimalist Trust & Proof Metrics */}
+        {/* Minimalist Trust & Proof Metrics with interactive micro-animations */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="mt-14 pt-8 border-t border-neutral-800/80 max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-5 text-center"
+          className="mt-14 pt-8 border-t border-neutral-800/80 max-w-3xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 text-center"
         >
-          <div>
+          <motion.div
+            whileHover={{ y: -4, scale: 1.04 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            className="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-[#DFB76C]/60 hover:bg-neutral-900 transition-colors shadow-sm"
+          >
             <div className="text-2xl sm:text-3xl font-bold text-[#E6CA85] tabular-nums font-mono">0.7%</div>
             <div className="text-xs sm:text-sm text-neutral-300 mt-1 font-medium">
               {language === 'de' ? 'Verkaufsprovision' : 'Sales Commission'}
             </div>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div
+            whileHover={{ y: -4, scale: 1.04 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            className="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-[#DFB76C]/60 hover:bg-neutral-900 transition-colors shadow-sm"
+          >
             <div className="text-2xl sm:text-3xl font-bold text-white tabular-nums font-mono">15 Tage</div>
             <div className="text-xs sm:text-sm text-neutral-300 mt-1 font-medium">
               {language === 'de' ? 'Miete bei Vermietung' : 'Rent as Commission'}
             </div>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div
+            whileHover={{ y: -4, scale: 1.04 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            className="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-[#DFB76C]/60 hover:bg-neutral-900 transition-colors shadow-sm"
+          >
             <div className="text-2xl sm:text-3xl font-bold text-white tabular-nums font-mono">0 CHF</div>
             <div className="text-xs sm:text-sm text-neutral-300 mt-1 font-medium">
               {language === 'de' ? 'Vorabkosten / Risiko' : 'Upfront Fee / Risk'}
             </div>
-          </div>
-          <div>
+          </motion.div>
+          <motion.div
+            whileHover={{ y: -4, scale: 1.04 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            className="p-3.5 rounded-xl bg-neutral-900/60 border border-neutral-800 hover:border-[#DFB76C]/60 hover:bg-neutral-900 transition-colors shadow-sm"
+          >
             <div className="text-2xl sm:text-3xl font-bold text-[#E6CA85] tabular-nums font-mono">&lt; 24h</div>
             <div className="text-xs sm:text-sm text-neutral-300 mt-1 font-medium">
               {language === 'de' ? 'Antwortgarantie' : 'Response Guarantee'}
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

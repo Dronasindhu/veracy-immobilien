@@ -189,7 +189,7 @@ export const SellPage: React.FC<SellPageProps> = ({
               </div>
             </div>
 
-            {/* Everything Included 2-column checklist */}
+              {/* Everything Included 2-column checklist */}
             <div className="mt-8">
               <div className="text-sm font-bold uppercase tracking-wider text-neutral-900 mb-4">
                 {language === 'de' ? 'In der 0.7% Provision lückenlos inbegriffen:' : 'Fully included in the 0.7% commission:'}
@@ -209,10 +209,15 @@ export const SellPage: React.FC<SellPageProps> = ({
                   { de: 'Steuerliche Ersteinschätzung der Grundstückgewinnsteuer', en: 'Initial tax calculation for Swiss capital gains tax' },
                   { de: 'Rechtssichere Kaufvertragsprüfung & protokollierte Übergabe', en: 'Contract legal verification & documented handover' },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-3 text-sm text-neutral-700 font-normal leading-snug">
+                  <motion.div
+                    key={i}
+                    whileHover={{ x: 4 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                    className="flex items-start gap-3 text-sm text-neutral-700 font-normal leading-snug p-1 rounded hover:bg-neutral-50 transition-colors"
+                  >
                     <Check className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                     <span>{item[language]}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -224,10 +229,10 @@ export const SellPage: React.FC<SellPageProps> = ({
                 <span>{language === 'de' ? 'Antwort innert 24h garantiert · 100% unverbindlich' : 'Guaranteed response < 24h · 100% non-binding'}</span>
               </div>
               <motion.button
-                whileHover={{ scale: 1.02 }}
+                whileHover={{ scale: 1.025 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={onOpenConsultation}
-                className="px-8 py-4 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 font-bold rounded-xl text-sm sm:text-base tracking-wide flex items-center justify-center gap-2.5 cursor-pointer shadow-md border border-[#C5A059]/40"
+                className="px-8 py-4 bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] hover:from-[#E8C785] hover:to-[#C5A059] text-neutral-950 font-bold rounded-xl text-sm sm:text-base tracking-wide flex items-center justify-center gap-2.5 cursor-pointer shadow-md hover:shadow-xl transition-all border border-[#C5A059]/40"
               >
                 <span>{language === 'de' ? 'Verkauf anfragen (0.7% Provision)' : 'Inquire Sale (0.7% Commission)'}</span>
                 <ArrowRight className="w-5 h-5" />
@@ -269,9 +274,15 @@ export const SellPage: React.FC<SellPageProps> = ({
                   <span className="text-sm text-neutral-300">
                     {language === 'de' ? 'Verkaufspreis Liegenschaft:' : 'Property Sale Price:'}
                   </span>
-                  <span className="text-2xl font-bold font-mono text-[#E6CA85] tabular-nums">
+                  <motion.span
+                    key={salesPrice}
+                    initial={{ scale: 0.95, opacity: 0.8 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                    className="text-2xl font-bold font-mono text-[#E6CA85] tabular-nums"
+                  >
                     {formatChf(salesPrice)}
-                  </span>
+                  </motion.span>
                 </div>
                 <input
                   type="range"
@@ -290,34 +301,57 @@ export const SellPage: React.FC<SellPageProps> = ({
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-neutral-800">
-                <div className="bg-neutral-800/80 p-4 rounded-lg">
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  className="bg-neutral-800/80 p-4 rounded-lg transition-colors"
+                >
                   <div className="text-xs text-neutral-400 mb-1">
                     {language === 'de' ? 'Klassische Provision (2.5%)' : 'Classic Broker (2.5%)'}
                   </div>
-                  <div className="text-xl font-bold text-neutral-300 font-mono tabular-nums line-through decoration-red-400">
+                  <motion.div
+                    key={`trad-${salesPrice}`}
+                    initial={{ opacity: 0.7 }}
+                    animate={{ opacity: 1 }}
+                    className="text-xl font-bold text-neutral-300 font-mono tabular-nums line-through decoration-red-400"
+                  >
                     {formatChf(traditionalCommission)}
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
 
-                <div className="bg-neutral-800/80 p-4 rounded-lg">
+                <motion.div
+                  whileHover={{ y: -2 }}
+                  className="bg-neutral-800/80 p-4 rounded-lg transition-colors"
+                >
                   <div className="text-xs text-[#E6CA85] mb-1 font-medium">
                     {language === 'de' ? 'Veracy Makler (Nur 0.7%)' : 'Veracy Broker (Only 0.7%)'}
                   </div>
-                  <div className="text-xl font-bold text-white font-mono tabular-nums">
+                  <motion.div
+                    key={`veracy-${salesPrice}`}
+                    initial={{ opacity: 0.7 }}
+                    animate={{ opacity: 1 }}
+                    className="text-xl font-bold text-white font-mono tabular-nums"
+                  >
                     {formatChf(veracyCommission)}
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
 
                 <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] text-neutral-950 p-4 rounded-lg flex flex-col justify-between shadow border border-[#C5A059]/40"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                  className="bg-gradient-to-r from-[#DFB76C] via-[#C5A059] to-[#B38E3E] text-neutral-950 p-4 rounded-lg flex flex-col justify-between shadow-lg border border-[#C5A059]/40"
                 >
                   <div className="text-xs uppercase tracking-wider font-bold text-neutral-950">
                     {language === 'de' ? 'Ihre Netto-Ersparnis' : 'Your Net Savings'}
                   </div>
-                  <div className="text-2xl font-extrabold font-mono tabular-nums">
+                  <motion.div
+                    key={`savings-${salesPrice}`}
+                    initial={{ scale: 0.9, opacity: 0.7 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 450, damping: 25 }}
+                    className="text-2xl font-extrabold font-mono tabular-nums"
+                  >
                     +{formatChf(netSavings)}
-                  </div>
+                  </motion.div>
                 </motion.div>
               </div>
             </div>
@@ -350,7 +384,7 @@ export const SellPage: React.FC<SellPageProps> = ({
             {/* Standalone Primary Action Button moved to Top */}
             <div className="mt-8 flex flex-col items-center gap-3">
               <motion.button
-                whileHover={{ scale: 1.02, y: -1 }}
+                whileHover={{ scale: 1.025, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={onOpenConsultation}
                 className="px-8 py-3.5 bg-neutral-950 hover:bg-neutral-900 text-white text-xs font-semibold uppercase tracking-wider rounded-lg transition-all shadow-md hover:shadow-xl cursor-pointer inline-flex items-center gap-2.5 border border-neutral-900 group"
@@ -380,12 +414,18 @@ export const SellPage: React.FC<SellPageProps> = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                whileHover={{ y: -6, transition: { duration: 0.2 } }}
-                className="group p-6 sm:p-7 rounded-xl bg-neutral-50 border border-neutral-200 hover:border-neutral-300 hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
+                whileHover={{ y: -8, scale: 1.015, transition: { duration: 0.22, ease: 'easeOut' } }}
+                className="group p-6 sm:p-7 rounded-xl bg-neutral-50 hover:bg-white border border-neutral-200 hover:border-[#C5A059] shadow-sm hover:shadow-[0_16px_36px_rgba(197,160,89,0.14)] transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
               >
+                {/* Subtle top golden accent bar on card hover */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#DFB76C] to-[#C5A059] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
                 <div>
-                  <div className="text-3xl font-mono font-bold text-[#C5A059] mb-3">
-                    {step.step}
+                  <div className="text-3xl font-mono font-bold text-[#C5A059] group-hover:text-[#8C6D1F] mb-3 transition-colors flex items-center justify-between">
+                    <span>{step.step}</span>
+                    <span className="text-xs uppercase tracking-wider text-neutral-400 group-hover:text-[#8C6D1F] font-sans font-semibold transition-colors">
+                      {language === 'de' ? `Schritt ${idx + 1}` : `Step ${idx + 1}`}
+                    </span>
                   </div>
                   <h3 className="text-base sm:text-lg font-bold text-neutral-900 mb-2 group-hover:text-[#8C6D1F] transition-colors leading-snug">
                     {step.title[language]}
@@ -394,7 +434,7 @@ export const SellPage: React.FC<SellPageProps> = ({
                     {step.desc[language]}
                   </p>
                 </div>
-                <div className="mt-5 pt-3.5 border-t border-neutral-200 text-xs text-neutral-600 flex items-center gap-1.5 font-medium">
+                <div className="mt-5 pt-3.5 border-t border-neutral-200 text-xs text-neutral-600 flex items-center gap-1.5 font-medium group-hover:text-[#8C6D1F] transition-colors">
                   <Clock className="w-3.5 h-3.5 text-[#C5A059]" />
                   <span>{language === 'de' ? 'Reaktion innert 24h' : 'Response in 24h'}</span>
                 </div>
