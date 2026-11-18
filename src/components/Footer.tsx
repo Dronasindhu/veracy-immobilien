@@ -2,6 +2,7 @@ import React from 'react';
 import { MainCategory, Language } from '../types';
 import { ShieldCheck, Phone, Mail, MapPin, ArrowUpRight } from 'lucide-react';
 import { motion } from 'motion/react';
+import { VeracyLogo } from './VeracyLogo';
 
 interface FooterProps {
   language: Language;
@@ -26,13 +27,7 @@ export const Footer: React.FC<FooterProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           {/* Brand info (Col 1-5) */}
           <div className="lg:col-span-5 space-y-4">
-            <img
-              src="/veracy-logo-light.png"
-              alt="Veracy"
-              width={815}
-              height={377}
-              className="h-10 sm:h-12 w-auto object-contain"
-            />
+            <VeracyLogo variant="light" className="h-11 sm:h-13 w-auto" />
             <p className="text-neutral-300 font-normal leading-relaxed max-w-sm text-sm">
               {language === 'de'
                 ? 'Schweizer Immobilienmakler für transparente Festpreise, verlässliche Marktwertschätzungen und persönliche Betreuung vor Ort in den Kantonen Zürich und Aargau.'

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MainCategory, Language } from '../types';
 import { Menu, X, PhoneCall, ArrowRight, ShieldCheck, Clock } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { VeracyLogo } from './VeracyLogo';
 
 interface NavbarProps {
   currentCategory: MainCategory;
@@ -108,14 +109,11 @@ export const Navbar: React.FC<NavbarProps> = ({
         <button
           onClick={() => handleNavClick('home')}
           aria-label="Veracy Immobilien – Startseite"
-          className="shrink-0 text-left group cursor-pointer focus:outline-none flex items-center py-2"
+          className="shrink-0 text-left group cursor-pointer focus:outline-none flex items-center py-1.5"
         >
-          <img
-            src="/veracy-logo-main.png"
-            alt="Veracy"
-            width={815}
-            height={377}
-            className="h-11 sm:h-12 md:h-13 w-auto object-contain transition-opacity group-hover:opacity-85"
+          <VeracyLogo
+            variant="dark"
+            className="h-12 sm:h-13 md:h-14 w-auto transition-opacity group-hover:opacity-85"
           />
         </button>
 
@@ -183,13 +181,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <div className="flex flex-col space-y-3">
               <div className="pb-2 border-b border-neutral-100 flex items-center">
-                <img
-                  src="/veracy-logo-main.png"
-                  alt="Veracy"
-                  width={815}
-                  height={377}
-                  className="h-8 w-auto object-contain"
-                />
+                <VeracyLogo variant="dark" className="h-9 w-auto" />
               </div>
               {navItems.map((item) => (
                 <button
